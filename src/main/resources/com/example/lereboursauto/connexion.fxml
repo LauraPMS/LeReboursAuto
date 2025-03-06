@@ -1,16 +1,217 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.VBox?>
-
 <?import javafx.scene.control.Button?>
-<VBox alignment="CENTER" spacing="20.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.lereboursauto.HelloController">
-    <padding>
-        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0"/>
-    </padding>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
-    <Label fx:id="welcomeText"/>
-    <Button text="Hello!" onAction="#onHelloButtonClick"/>
-</VBox>
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" style="-fx-background-color: #4F95FFFF;" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lereboursauto.controllers.ConnexionController">
+   <children>
+      <BorderPane layoutX="-3.0" prefHeight="116.0" prefWidth="1000.0" style="-fx-background-color: white;" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <right>
+            <BorderPane prefHeight="116.0" prefWidth="339.0" BorderPane.alignment="CENTER">
+               <left>
+                  <Button mnemonicParsing="false" onAction="#changeApConnexion" prefHeight="48.0" prefWidth="154.0" style="-fx-background-color: white; -fx-border-color: black; -fx-border-radius: 15; -fx-border-width: 2;" text="Connexion" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+               </left>
+               <center>
+                  <Button mnemonicParsing="false" onAction="#changeApInscription" prefHeight="46.0" prefWidth="146.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="Inscription" textFill="WHITE" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+               </center>
+            </BorderPane>
+         </right>
+         <left>
+            <ImageView fitHeight="75.0" fitWidth="239.0" onMousePressed="#changeApAccueil" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER">
+               <image>
+                  <Image url="@../../../img/logo.png" />
+               </image>
+            </ImageView>
+         </left></BorderPane>
+      <AnchorPane fx:id="apAccueil" layoutX="1.0" layoutY="116.0" prefHeight="484.0" prefWidth="1167.0" visible="false">
+         <children>
+            <Text fill="WHITE" layoutX="40.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PRENEZ LA ROUTE EN TOUTE CONFIANCE, AVEC NOTRE EXPERTISE A VOS COTÉS !" wrappingWidth="629.7366943359375">
+               <font>
+                  <Font name="Ebrima Bold" size="50.0" />
+               </font>
+            </Text>
+            <TableView layoutX="87.0" layoutY="294.0" prefHeight="169.0" prefWidth="432.0">
+              <columns>
+                <TableColumn fx:id="tcLibelleCategorie" prefWidth="150.0" text="Permis" />
+                  <TableColumn fx:id="tcPrixPermis" prefWidth="153.0" text="Prix" />
+                  <TableColumn fx:id="tcAction" prefWidth="128.0" text="Action" />
+              </columns>
+            </TableView>
+            <ImageView fitHeight="312.0" fitWidth="725.0" layoutX="490.0" layoutY="118.0" pickOnBounds="true" smooth="false">
+               <image>
+                  <Image url="@../../../img/voitureAccueil.png" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="apConnexion" layoutY="118.0" prefHeight="482.0" prefWidth="1000.0" style="-fx-background-color: white;" visible="false">
+         <children>
+            <TextField fx:id="txtConnexionLogin" alignment="CENTER" layoutX="371.0" layoutY="142.0" prefHeight="49.0" prefWidth="284.0" promptText="Login" style="-fx-background-radius: 20;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <TextField fx:id="txtConnexionPassword" alignment="CENTER" layoutX="371.0" layoutY="213.0" prefHeight="49.0" prefWidth="284.0" promptText="Password" style="-fx-background-radius: 20;">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </TextField>
+            <Button layoutX="445.0" layoutY="281.0" mnemonicParsing="false" onAction="#connexion" prefHeight="46.0" prefWidth="146.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="Connexion" textFill="WHITE">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Button>
+            <Line endX="100.0" layoutX="544.0" layoutY="84.0" startX="-169.0" />
+            <Line endX="100.0" layoutX="519.0" layoutY="371.0" startX="-100.0" />
+            <Text layoutX="351.0" layoutY="60.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Content de vous revoir !">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Text>
+            <Text layoutX="374.0" layoutY="409.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pas encore de compte ? " />
+            <Button layoutX="505.0" layoutY="391.0" mnemonicParsing="false" onAction="#changeApInscription" style="-fx-background-color: white;" text="Inscrivez vous en cliquant ici" underline="true" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="apInscription" layoutY="118.0" prefHeight="484.0" prefWidth="1001.0" style="-fx-background-color: white;">
+         <children>
+            <Text layoutX="309.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Première visite? " textAlignment="CENTER" wrappingWidth="380.0552673339844">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Text>
+            <Text layoutX="293.0" layoutY="83.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Veuillez remplir ce formulaire" textAlignment="CENTER" wrappingWidth="414.7219543457031">
+               <font>
+                  <Font size="30.0" />
+               </font>
+            </Text>
+            <ScrollPane layoutX="168.0" layoutY="115.0" prefHeight="263.0" prefWidth="682.0">
+               <content>
+                  <AnchorPane prefHeight="790.0" prefWidth="664.0" style="-fx-background-color: white;">
+                     <children>
+                        <TextField fx:id="txtInscriptionLogin" layoutX="316.0" layoutY="41.0" prefHeight="43.0" prefWidth="213.0" style="-fx-background-radius: 15;" />
+                        <Text layoutX="142.0" layoutY="68.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom d'utilisateur :">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="txtInscriptionPassword" layoutX="316.0" layoutY="103.0" prefHeight="43.0" prefWidth="213.0" style="-fx-background-radius: 15;" />
+                        <Text layoutX="175.0" layoutY="130.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Mot de passe :">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="225.0" layoutY="194.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Prenom :">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="250.0" layoutY="256.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom :">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="225.0" layoutY="318.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Adresse :">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="257.0" layoutY="384.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ville :">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="179.0" layoutY="446.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Code Postale :">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="txtInscriptionPrenom" layoutX="316.0" layoutY="166.0" prefHeight="43.0" prefWidth="213.0" style="-fx-background-radius: 15;" />
+                        <TextField fx:id="txtInscriptionNom" layoutX="316.0" layoutY="228.0" prefHeight="43.0" prefWidth="213.0" style="-fx-background-radius: 15;" />
+                        <TextField fx:id="txtInscriptionAdresse" layoutX="316.0" layoutY="291.0" prefHeight="43.0" prefWidth="213.0" style="-fx-background-radius: 15;" />
+                        <TextField fx:id="txtInscriptionVille" layoutX="316.0" layoutY="353.0" prefHeight="43.0" prefWidth="213.0" style="-fx-background-radius: 15;" />
+                        <TextField fx:id="txtInscriptionCP" layoutX="316.0" layoutY="416.0" prefHeight="43.0" prefWidth="213.0" style="-fx-background-radius: 15;" />
+                        <Text layoutX="200.0" layoutY="508.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Téléphone :">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <TextField fx:id="txtInscriptionTelephone" layoutX="316.0" layoutY="479.0" prefHeight="43.0" prefWidth="213.0" style="-fx-background-radius: 15;" />
+                        <Text layoutX="136.0" layoutY="571.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de naissance :">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <DatePicker fx:id="dpInscriptionDateNaissance" layoutX="317.0" layoutY="543.0" prefHeight="44.0" prefWidth="213.0" style="-fx-background-radius: 20; -fx-border-radius: 20;" />
+                        <Text layoutX="165.0" layoutY="645.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Genre :">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <RadioButton fx:id="rdoGenreHomme" layoutX="264.0" layoutY="623.0" mnemonicParsing="false" text="Homme">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="rdoGenre" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdoGenreFemme" layoutX="410.0" layoutY="623.0" mnemonicParsing="false" text="Femme" toggleGroup="$rdoGenre">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </RadioButton>
+                        <Text layoutX="165.0" layoutY="689.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Statut :">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Text>
+                        <RadioButton fx:id="rdoEleve" layoutX="264.0" layoutY="667.0" mnemonicParsing="false" text="Élève">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                           <toggleGroup>
+                              <ToggleGroup fx:id="rdoStaut" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="rdoMoniteur" layoutX="410.0" layoutY="667.0" mnemonicParsing="false" text="Moniteur" toggleGroup="$rdoStaut">
+                           <font>
+                              <Font size="21.0" />
+                           </font>
+                        </RadioButton>
+                        <Button layoutX="272.0" layoutY="735.0" mnemonicParsing="false" onAction="#inscription" prefHeight="46.0" prefWidth="146.0" style="-fx-background-color: black; -fx-background-radius: 15;" text="Inscription" textFill="WHITE">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Button>
+                     </children>
+                  </AnchorPane>
+               </content>
+            </ScrollPane>
+            <Line endX="100.0" layoutX="500.0" layoutY="408.0" startX="-100.0" />
+            <Text layoutX="359.0" layoutY="438.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vous possédez déja un compte ?" />
+            <Button layoutX="530.0" layoutY="421.0" mnemonicParsing="false" onAction="#changeApConnexion" style="-fx-background-color: white;" text="Connecter vous ici" underline="true" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

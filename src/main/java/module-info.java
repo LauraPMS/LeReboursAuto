@@ -10,6 +10,7 @@ module com.example.lereboursauto {
     requires org.kordamp.bootstrapfx.core;
     requires eu.hansolo.tilesfx;
     requires com.almasb.fxgl.all;
+    requires java.sql;
 
     opens com.example.lereboursauto to javafx.fxml;
     exports com.example.lereboursauto;
