@@ -65,7 +65,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="apConnexion" layoutY="118.0" prefHeight="482.0" prefWidth="1000.0" style="-fx-background-color: white;" visible="false">
+      <AnchorPane fx:id="apConnexion" layoutY="116.0" prefHeight="482.0" prefWidth="1000.0" style="-fx-background-color: white;">
          <children>
             <TextField fx:id="txtConnexionLogin" alignment="CENTER" layoutX="371.0" layoutY="142.0" prefHeight="49.0" prefWidth="284.0" promptText="Login" style="-fx-background-radius: 20;">
                <font>
@@ -93,7 +93,7 @@
             <Button layoutX="505.0" layoutY="391.0" mnemonicParsing="false" onAction="#changeApInscription" style="-fx-background-color: white;" text="Inscrivez vous en cliquant ici" underline="true" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="apInscription" layoutY="118.0" prefHeight="484.0" prefWidth="1001.0" style="-fx-background-color: white;">
+      <AnchorPane fx:id="apInscription" layoutY="116.0" prefHeight="484.0" prefWidth="1001.0" style="-fx-background-color: white;" visible="false">
          <children>
             <Text layoutX="309.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Première visite? " textAlignment="CENTER" wrappingWidth="380.0552673339844">
                <font>

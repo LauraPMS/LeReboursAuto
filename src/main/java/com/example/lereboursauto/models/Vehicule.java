@@ -1,13 +1,13 @@
 package com.example.lereboursauto.models;
 
 public class Vehicule {
-    private int immatriculation;
+    private String immatriculation;
     private String annee;
     private Permis permis;
     private String marque;
     private String modele;
 
-    public Vehicule(int immatriculation, String annee, Permis permis, String marque, String modele) {
+    public Vehicule(String immatriculation, String annee, Permis permis, String marque, String modele) {
         this.immatriculation = immatriculation;
         this.annee = annee;
         this.permis = permis;
@@ -15,11 +15,11 @@ public class Vehicule {
         this.modele = modele;
     }
 
-    public int getImmatriculation() {
+    public String getImmatriculation() {
         return immatriculation;
     }
 
-    public void setImmatriculation(int immatriculation) {
+    public void setImmatriculation(String immatriculation) {
         this.immatriculation = immatriculation;
     }
 

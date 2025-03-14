@@ -1,5 +1,10 @@
 package com.example.lereboursauto.controllers;
 
+import com.example.lereboursauto.models.Statut;
+import com.example.lereboursauto.models.Utilisateur;
+import com.example.lereboursauto.services.ConnexionServices;
+import com.example.lereboursauto.services.Session;
+import com.example.lereboursauto.services.StatutServices;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
@@ -10,71 +15,76 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import com.example.lereboursauto.controllers.*;
+import com.example.lereboursauto.repository.*;
 import com.example.lereboursauto.tools.ConnexionBDD;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
+
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.ResourceBundle;
+
+import static com.example.lereboursauto.services.Session.changeAp;
+import static com.example.lereboursauto.services.Session.setCodeEleveActif;
 
 public class ConnexionController implements Initializable {
 
 
     @FXML
-    private TableColumn tcAction;
+    private TableColumn tcAction,tcPrixPermis,tcLibelleCategorie;
     @FXML
-    private AnchorPane apInscription;
+    private AnchorPane apInscription, apConnexion,apAccueil;
     @FXML
-    private TextField txtInscriptionTelephone;
+    private TextField txtInscriptionTelephone, txtInscriptionNom,txtInscriptionAdresse, txtInscriptionLogin,txtInscriptionPassword, txtInscriptionVille,txtInscriptionPrenom, txtInscriptionCP;
     @FXML
-    private TextField txtInscriptionNom;
+    private TextField txtConnexionPassword, txtConnexionLogin;
     @FXML
-    private AnchorPane apConnexion;
+    private ToggleGroup rdoStaut, rdoGenre;
     @FXML
-    private ToggleGroup rdoStaut;
-    @FXML
-    private AnchorPane apAccueil;
-    @FXML
-    private TextField txtInscriptionAdresse;
-    @FXML
-    private RadioButton rdoGenreHomme;
-    @FXML
-    private TextField txtConnexionPassword;
-    @FXML
-    private TextField txtInscriptionLogin;
-    @FXML
-    private TextField txtInscriptionPassword;
-    @FXML
-    private RadioButton rdoEleve;
-    @FXML
-    private TextField txtInscriptionVille;
-    @FXML
-    private RadioButton rdoGenreFemme;
-    @FXML
-    private ToggleGroup rdoGenre;
-    @FXML
-    private TableColumn tcPrixPermis;
-    @FXML
-    private TextField txtInscriptionPrenom;
-    @FXML
-    private TextField txtInscriptionCP;
+    private RadioButton rdoEleve, rdoGenreFemme, rdoMoniteur, rdoGenreHomme;
     @FXML
     private DatePicker dpInscriptionDateNaissance;
-    @FXML
-    private RadioButton rdoMoniteur;
-    @FXML
-    private TableColumn tcLibelleCategorie;
-    @FXML
-    private TextField txtConnexionLogin;
+
 
     ConnexionBDD connexionBDD;
+    ConnexionServices connexionServices;
+    StatutServices statutServices;
 
+    ArrayList<AnchorPane> listeAp;
+    HashMap<Integer, Integer> nbLeconPermis;
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        try {
+
+            connexionBDD = new ConnexionBDD();
+            connexionServices = new ConnexionServices();
+            statutServices = new StatutServices();
+            nbLeconPermis = new HashMap<>();
+
+            listeAp = new ArrayList<>();
+            listeAp.add(apConnexion);
+            listeAp.add(apAccueil);
+            listeAp.add(apInscription);
+
+            changeAp(listeAp, apAccueil);
+
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
 
 
     @FXML
-    public void inscription(ActionEvent actionEvent) {
+    public void inscription(ActionEvent actionEvent) throws SQLException {
 
         /*
         *  Vérifié si le login existe deja dans la base de données
@@ -87,10 +97,56 @@ public class ConnexionController implements Initializable {
         *       On renvoie ensuite vers la page connexion
         */
 
+        if(txtInscriptionLogin.getText().isEmpty() || txtInscriptionPassword.getText().isEmpty()) {
+            Session.creerAlert(Alert.AlertType.ERROR, "Champs manquants", "Saisissez votre login et mot de passe");
+
+        } else if (txtInscriptionVille.getText().isEmpty() || txtInscriptionCP.getText().isEmpty() || txtInscriptionAdresse.getText().isEmpty()) {
+            Session.creerAlert(Alert.AlertType.ERROR, "Champs manquants", "Saisissez votre adresse bien séparé avec la ville et le code postal");
+
+        } else if (txtInscriptionNom.getText().isEmpty() || txtInscriptionPrenom.getText().isEmpty()) {
+            Session.creerAlert(Alert.AlertType.ERROR, "Champs manquants", "Saisissez votre nom et prénom correctement");
+
+        } else if (txtInscriptionTelephone.getText().isEmpty()) {
+            Session.creerAlert(Alert.AlertType.ERROR, "Champs manquants", "Saisissez votre numéro de téléphone");
+
+        } else if (!rdoGenreFemme.isSelected() && !rdoGenreHomme.isSelected()) {
+            Session.creerAlert(Alert.AlertType.ERROR, "Champs manquants", "Veuillez selectionner votre sexe");
+
+        } else if (!rdoEleve.isSelected() && !rdoMoniteur.isSelected()) {
+            Session.creerAlert(Alert.AlertType.ERROR, "Champs manquants", "Veuillez selectionner votre statut (eleve ou moniteur)");
+
+        } else if (dpInscriptionDateNaissance.getValue().toString().isEmpty()) {
+            Session.creerAlert(Alert.AlertType.ERROR, "Champs manquants", "Veuillez selectionner votre date de naissance");
+
+        } else{
+            // tt les champs sont remplis, on procède à l'inscription
+            int sexe;
+            
+            sexe = 0;
+
+            if (rdoGenreFemme.isSelected()) {
+                sexe = 1;
+            }
+            int statut = 1;
+
+            if (rdoMoniteur.isSelected()) {
+                statut = 2;
+            }
+            Statut s = statutServices.findById(statut);
+            System.out.println(s.getId());
+            Utilisateur u = new Utilisateur(0, txtInscriptionNom.getText(), txtInscriptionPrenom.getText(), Date.valueOf(dpInscriptionDateNaissance.getValue()), txtInscriptionTelephone.getText(), sexe, txtInscriptionAdresse.getText(), txtInscriptionVille.getText(), Integer.parseInt(txtInscriptionCP.getText()),txtConnexionLogin.getText(), txtInscriptionPassword.getText(),s);
+            System.out.println(Integer.toString(u.getStatut().getId()));
+
+            connexionServices.inscrireUtilisateur(u);
+
+            changeAp(listeAp, apConnexion);
+
+        }
+        changeAp(listeAp, apAccueil);
     }
 
     @FXML
-    public void connexion(ActionEvent actionEvent) {
+    public void connexion(ActionEvent actionEvent) throws SQLException, IOException {
 
         /*
         *  Si le login et le mot de passe ne correspondent pas :
@@ -109,41 +165,44 @@ public class ConnexionController implements Initializable {
         *
         */
 
-    }
+        if (txtConnexionLogin.getText().equals(null) || txtConnexionPassword.getText().equals(null))
+        {
+            Alert.AlertType alertType = Alert.AlertType.ERROR;
+            Alert alert = new Alert(alertType);
+            alert.initOwner(apAccueil.getScene().getWindow());
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Champs login et mot de passe requis !");
+        }
+        else {
+            String login = txtConnexionLogin.getText();
+            String password = txtConnexionPassword.getText();
+            Utilisateur u = connexionServices.verifUser(login, password);
 
+            if (u != null) {
+                setCodeEleveActif(u.getCode());
 
-    // fonction réccurrente
-    public void clearAll(){
-        apInscription.setVisible(false);
-        apConnexion.setVisible(false);
-    }
-
-    public void changeAp(AnchorPane ap){
-        clearAll();
-        ap.setVisible(true);
-    }
-
-    @FXML
-    public void changeApConnexion(ActionEvent actionEvent) {changeAp(apConnexion);}
-
-    @FXML
-    public void changeApInscription(ActionEvent actionEvent) {changeAp(apInscription);}
-
-    @FXML
-    public void changeApAccueil(Event event) {clearAll();}
-
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-        try {
-
-            connexionBDD = new ConnexionBDD();
-
-            changeAp(apAccueil);
-
-        } catch (ClassNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
+                // Redirection en fonction du statut
+                if (u.getStatut().getId() == 1) {
+                    Session.changerScene("profil.fxml", "Le ReboursAuto - Élève - ProfilController", actionEvent);
+                } else if (u.getStatut().getId() == 2) {
+                    Session.changerScene("profil.fxml", "Le ReboursAuto - Moniteur - ProfilController", actionEvent);
+                } else if (u.getStatut().getId() == 3) {
+                    Session.changerScene("profil.fxml", "Le ReboursAuto - Admin - ProfilController", actionEvent);
+                }
+            }
         }
     }
+
+    @FXML
+    public void changeApConnexion(ActionEvent actionEvent) {
+        changeAp(listeAp, apConnexion);}
+
+    @FXML
+    public void changeApInscription(ActionEvent actionEvent) {changeAp(listeAp, apInscription);}
+
+    @FXML
+    public void changeApAccueil(Event event) {Session.changeAp(listeAp, apAccueil);}
+
+
+
 }

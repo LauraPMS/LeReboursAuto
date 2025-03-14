@@ -10,8 +10,9 @@ public class Lecon {
     private Utilisateur eleve;
     private Utilisateur moniteur;
     private Permis permis;
+    private String heure;
 
-    public Lecon(int id, Date date, Vehicule immatriculation, int reglee, Utilisateur eleve, Utilisateur moniteur, Permis permis) {
+    public Lecon(int id, Date date, Vehicule immatriculation, int reglee, Utilisateur eleve, Utilisateur moniteur, Permis permis, String heure) {
         this.id = id;
         this.date = date;
         this.immatriculation = immatriculation;
@@ -19,6 +20,15 @@ public class Lecon {
         this.eleve = eleve;
         this.moniteur = moniteur;
         this.permis = permis;
+        this.heure = heure;
+    }
+
+    public String getHeure() {
+        return heure;
+    }
+
+    public void setHeure(String heure) {
+        this.heure = heure;
     }
 
     public int getId() {

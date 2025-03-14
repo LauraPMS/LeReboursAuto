@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.shape.Circle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lereboursauto.controllers.PermisController">
+   <children>
+      <Button layoutX="859.0" layoutY="16.0" mnemonicParsing="false" onAction="#seDeconnecter" prefHeight="38.0" prefWidth="125.0" style="-fx-background-color: black;" text="Deconnexion" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <HBox alignment="CENTER_RIGHT" layoutX="11.0" layoutY="14.0" prefHeight="44.0" prefWidth="794.0" spacing="20.0">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/logo.png" />
+               </image>
+            </ImageView>
+            <Button ellipsisString="" mnemonicParsing="false" prefHeight="35.0" prefWidth="145.0" style="-fx-background-color: transparent; -fx-background-radius: 0;" text="Tableau de bord">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#changeToApPermis" prefHeight="35.0" prefWidth="171.0" style="-fx-background-color: #d9fbff;" text="Permis">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#changeToApPlanning" prefHeight="35.0" prefWidth="86.0" style="-fx-background-color: transparent;" text="Planning">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#changeToApRéglement" prefHeight="35.0" prefWidth="101.0" style="-fx-background-color: transparent;" text="Reglement">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="38.0" fitWidth="45.0" onMouseClicked="#changeApToProfil" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/logo_fille.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <AnchorPane fx:id="apEleve" layoutY="68.0" prefHeight="534.0" prefWidth="999.0" visible="false">
+         <children>
+            <ListView fx:id="lvEleveToutPermis" layoutX="88.0" layoutY="64.0" prefHeight="174.0" prefWidth="200.0" />
+            <Text layoutX="42.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Tout les types de permis que nous proposons">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <BarChart fx:id="graphElevePermisObtenu" layoutX="28.0" layoutY="303.0" prefHeight="187.0" prefWidth="306.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </BarChart>
+            <Text layoutX="71.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Combien de fois ce permis a été réussi">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Circle fill="#dceeff" layoutX="512.0" layoutY="163.0" radius="134.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <ImageView fx:id="imgVehicule" fitHeight="201.0" fitWidth="546.0" layoutX="432.0" layoutY="62.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/p_voiture-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="424.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous passez actuellement ce permis, vous pouvez retrouver vos statistiques ici" />
+            <Text layoutX="418.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps passé : " />
+            <Text layoutX="420.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des véhicules utilisé :" />
+            <Text layoutX="650.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des moniteurs :" />
+            <TableView fx:id="tvEleveVehicule" layoutX="412.0" layoutY="402.0" prefHeight="99.0" prefWidth="200.0">
+              <columns>
+                <TableColumn fx:id="tcEleveMarque" prefWidth="99.73324584960938" text="Marque" />
+                <TableColumn fx:id="tcEleveModele" prefWidth="100.2667236328125" text="Modele" />
+              </columns>
+            </TableView>
+            <TableView fx:id="tvEleveMoniteur" layoutX="637.0" layoutY="403.0" prefHeight="99.0" prefWidth="329.0">
+               <columns>
+                  <TableColumn fx:id="tcEleveNomPrenom" prefWidth="154.13330078125" text="Nom Prenom" />
+                  <TableColumn fx:id="tcEleveNbLecon" prefWidth="176.2667236328125" text="nombre de lecon passé avec" />
+               </columns>
+            </TableView>
+            <Text fx:id="lblEleveTempsPermis" layoutX="501.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8h" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="apMoniteur" layoutY="68.0" prefHeight="534.0" prefWidth="999.0">
+         <children>
+            <ListView fx:id="tvMoniteurToutPermis" layoutX="36.0" layoutY="46.0" prefHeight="174.0" prefWidth="254.0" />
+            <Text layoutX="42.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voici toutes les licences que vous pouvez enseigner chez nous">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <BarChart fx:id="graphMoniteurObtentionPermis" layoutX="28.0" layoutY="303.0" prefHeight="214.0" prefWidth="306.0">
+               <xAxis>
+                  <CategoryAxis side="BOTTOM" />
+               </xAxis>
+               <yAxis>
+                  <NumberAxis side="LEFT" />
+               </yAxis>
+            </BarChart>
+            <Text layoutX="71.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Combien d'eleve ont obtenu leur permis">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Circle fill="#dceeff" layoutX="562.0" layoutY="149.0" radius="115.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
+            <ImageView fx:id="imgMoniteurVehicule" fitHeight="151.0" fitWidth="339.0" layoutX="511.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/p_voiture-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <Text layoutX="414.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous posséder cette licence, des données seront affichés :" />
+            <Text layoutX="418.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps passé : " />
+            <Text layoutX="420.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des véhicules utilisé :" />
+            <Text layoutX="650.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste de vos élèves :" />
+            <TableView fx:id="tvMoniteurVehicule" layoutX="412.0" layoutY="402.0" prefHeight="99.0" prefWidth="200.0">
+               <columns>
+                  <TableColumn fx:id="tcMoniteurMarque" prefWidth="99.73324584960938" text="Marque" />
+                  <TableColumn fx:id="tcMoniteurModele" prefWidth="100.2667236328125" text="Modele" />
+               </columns>
+            </TableView>
+            <TableView fx:id="tvMoniteurListeEleve" layoutX="637.0" layoutY="403.0" prefHeight="99.0" prefWidth="329.0">
+               <columns>
+                  <TableColumn fx:id="tcMoniteurNomPrenomEleve" prefWidth="154.13330078125" text="Nom Prenom" />
+                  <TableColumn fx:id="tcMoniteurNbLeconPasse" prefWidth="176.2667236328125" text="nombre de lecon passé avec" />
+               </columns>
+            </TableView>
+            <Text fx:id="lblMoniteurTempPasse" layoutX="501.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8h" />
+            <Button layoutX="308.0" layoutY="62.0" mnemonicParsing="false" onAction="#demandeLicence" text="Demander licence" />
+            <Button layoutX="73.0" layoutY="231.0" mnemonicParsing="false" onAction="#suggererLicence" text="Suggérer une nouvelle licence" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
