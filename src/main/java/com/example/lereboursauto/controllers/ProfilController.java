@@ -26,6 +26,13 @@ import java.util.HashMap;
 import java.util.ResourceBundle;
 
 public class ProfilController implements Initializable {
+    /*
+    * Le controller Profil doit satisfaire ces besoins :
+    * - Afficher les données personnel de l'utilisateur
+    * - Modifier ces données
+    * - Acceder afficher les stat des permis auquel on a pris des cours ces derniers jours
+    * - Affichage des prochaines lecon en bref (horraire, permis et moniteur/eleve)
+     */
 
 
     @javafx.fxml.FXML

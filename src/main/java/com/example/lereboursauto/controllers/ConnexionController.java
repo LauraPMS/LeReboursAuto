@@ -32,6 +32,12 @@ import static com.example.lereboursauto.services.Session.changeAp;
 import static com.example.lereboursauto.services.Session.setCodeEleveActif;
 
 public class ConnexionController implements Initializable {
+    /*
+    * La page connexion doit satisfaire ces besoins :
+    * - La connexion d'un utilisateur
+    * - L'inscription d'un nouvel utilisateur
+    * - Afficher la liste des permis et leur prix
+    * */
 
 
     @FXML

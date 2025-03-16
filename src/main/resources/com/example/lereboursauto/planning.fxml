@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lereboursauto.controllers.PlanningController">
+   <children>
+      <Button layoutX="864.0" layoutY="19.0" mnemonicParsing="false" onAction="#seDeconnecter" prefHeight="38.0" prefWidth="125.0" style="-fx-background-color: black;" text="Deconnexion" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <HBox alignment="CENTER_RIGHT" layoutX="16.0" layoutY="17.0" prefHeight="44.0" prefWidth="794.0" spacing="20.0">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/logo.png" />
+               </image>
+            </ImageView>
+            <Button ellipsisString="" mnemonicParsing="false" prefHeight="35.0" prefWidth="146.0" style="-fx-background-color: transparent; -fx-background-radius: 0;" text="Tableau de bord">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#changeToApPermis" prefHeight="35.0" prefWidth="71.0" style="-fx-background-color: transparent;" text="Permis">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#changeToApPlanning" prefHeight="35.0" prefWidth="188.0" style="-fx-background-color: #d9fbff;" text="Planning">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#changeToApRéglement" prefHeight="35.0" prefWidth="101.0" style="-fx-background-color: transparent;" text="Reglement">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="38.0" fitWidth="45.0" onMouseClicked="#changeApToProfil" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/logo_fille.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <AnchorPane fx:id="apEleve" layoutX="1.0" layoutY="76.0" prefHeight="526.0" prefWidth="998.0" visible="false">
+         <children>
+            <Text layoutX="755.0" layoutY="129.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Graphique ?">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <TableView fx:id="tvPlanningEleve" layoutX="30.0" layoutY="35.0" prefHeight="462.0" prefWidth="587.0">
+              <columns>
+                <TableColumn fx:id="tcPermisEleve" prefWidth="92.26664161682129" text="Permis"
+                             maxWidth="922.6664161682129" minWidth="30.0"/>
+                <TableColumn fx:id="tcDateEleve" prefWidth="64.79996490478516" text="Date" maxWidth="647.9996490478516"
+                             minWidth="30.0"/>
+                  <TableColumn fx:id="tcHorraireEleve" prefWidth="86.40007019042969" text="Horraire"
+                               maxWidth="864.0007019042969" minWidth="30.0"/>
+                  <TableColumn fx:id="tcMoniteurEleve" prefWidth="113.33340454101562" text="Moniteur"
+                               maxWidth="1133.3340454101562" minWidth="30.0"/>
+                  <TableColumn fx:id="tcModeleVehiculeEleve" prefWidth="102.66659545898438" text="Modele Vehicule"
+                               maxWidth="1026.6659545898438" minWidth="30.0"/>
+                  <TableColumn fx:id="tcRegleeEleve" prefWidth="129.066650390625" text="Réglée ?"
+                               maxWidth="1290.66650390625" minWidth="30.0"/>
+              </columns>
+            </TableView>
+            <Button layoutX="726.0" layoutY="40.0" mnemonicParsing="false" text="Prendre une nouvelle leçon" />
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="apMoniteur" layoutX="1.0" layoutY="76.0" prefHeight="523.0" prefWidth="998.0">
+         <children>
+            <TableView fx:id="tvPlanningMoniteur" layoutX="28.0" layoutY="59.0" prefHeight="412.0" prefWidth="581.0">
+              <columns>
+                <TableColumn fx:id="tcPermisMoniteur" prefWidth="99.73331832885742" text="Permis"
+                             maxWidth="997.3331832885742" minWidth="30.0"/>
+                <TableColumn fx:id="tcModeleVehiculeMoniteur" prefWidth="121.066650390625" text="Modèle Véhicule"
+                             maxWidth="1210.66650390625" minWidth="30.0"/>
+                  <TableColumn fx:id="tcNomEleveMoniteur" prefWidth="78.13330078125" text="Eleve"
+                               maxWidth="781.3330078125" minWidth="30.0"/>
+                  <TableColumn fx:id="tcDateMoniteur" prefWidth="75.0" text="Date" maxWidth="750.0" minWidth="30.0"/>
+                  <TableColumn fx:id="tcHeureMoniteur" prefWidth="75.0" text="Heure" maxWidth="750.0" minWidth="30.0"/>
+                  <TableColumn fx:id="tcImmatriculationMoniteur" prefWidth="130.39998779296877" text="Immatriculation"
+                               maxWidth="1303.9998779296877" minWidth="30.0"/>
+              </columns>
+            </TableView>
+            <Text layoutX="738.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Graphique ? ">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

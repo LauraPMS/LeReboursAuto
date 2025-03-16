@@ -53,9 +53,10 @@
             </Text>
             <TableView layoutX="87.0" layoutY="294.0" prefHeight="169.0" prefWidth="432.0">
               <columns>
-                <TableColumn fx:id="tcLibelleCategorie" prefWidth="150.0" text="Permis" />
-                  <TableColumn fx:id="tcPrixPermis" prefWidth="153.0" text="Prix" />
-                  <TableColumn fx:id="tcAction" prefWidth="128.0" text="Action" />
+                <TableColumn fx:id="tcLibelleCategorie" prefWidth="150.0" text="Permis" maxWidth="1500.0"
+                             minWidth="30.0"/>
+                  <TableColumn fx:id="tcPrixPermis" prefWidth="153.0" text="Prix" maxWidth="1530.0" minWidth="30.0"/>
+                  <TableColumn fx:id="tcAction" prefWidth="128.0" text="Action" maxWidth="1280.0" minWidth="30.0"/>
               </columns>
             </TableView>
             <ImageView fitHeight="312.0" fitWidth="725.0" layoutX="490.0" layoutY="118.0" pickOnBounds="true" smooth="false">

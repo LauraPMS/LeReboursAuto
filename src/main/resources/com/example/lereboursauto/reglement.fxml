@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lereboursauto.controllers.ReglementController">
+   <children>
+      <Button layoutX="860.0" layoutY="15.0" mnemonicParsing="false" onAction="#seDeconnecter" prefHeight="38.0" prefWidth="125.0" style="-fx-background-color: black;" text="Deconnexion" textFill="WHITE">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <HBox alignment="CENTER_RIGHT" layoutX="21.0" layoutY="15.0" prefHeight="44.0" prefWidth="794.0" spacing="20.0">
+         <children>
+            <ImageView fitHeight="50.0" fitWidth="148.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/logo.png" />
+               </image>
+            </ImageView>
+            <Button ellipsisString="" mnemonicParsing="false" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: transparent; -fx-background-radius: 0;" text="Tableau de bord">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#changeToApPermis" prefHeight="35.0" prefWidth="71.0" style="-fx-background-color: transparent;" text="Permis">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#changeToApPlanning" prefHeight="35.0" prefWidth="86.0" style="-fx-background-color: transparent;" text="Planning">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <Button mnemonicParsing="false" onAction="#changeToApRéglement" prefHeight="35.0" prefWidth="204.0" style="-fx-background-color: #d9fbff;" text="Reglement">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Button>
+            <ImageView fitHeight="38.0" fitWidth="45.0" onMouseClicked="#changeApToProfil" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../img/logo_fille.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <AnchorPane fx:id="apEleve" layoutX="2.0" layoutY="82.0" prefHeight="516.0" prefWidth="999.0" visible="false">
+         <children>
+            <ListView fx:id="lvResumeLecon" layoutX="93.0" layoutY="97.0" prefHeight="348.0" prefWidth="258.0" />
+            <Button fx:id="btnregleeLecon" layoutX="586.0" layoutY="388.0" mnemonicParsing="false" onAction="#reglerLecon" text="Regler la leçon" />
+            <VBox layoutX="468.0" layoutY="165.0" prefHeight="200.0" prefWidth="271.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Moniteur : ">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblNomPrenomMoniteur" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom et prénom du Moniteur">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Marque Véhicule : ">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblMarqueVéhicule" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom et prénom du Moniteur">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Modele Véhicule : ">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblModeleVehicule" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom et prénom du Moniteur">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A été réglée ?">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblReglee" strokeType="OUTSIDE" strokeWidth="0.0" text="Oui ou non">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Text layoutX="542.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Résumé de la leçon">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </AnchorPane>
+      <AnchorPane fx:id="apMoniteur" layoutX="2.0" layoutY="82.0" prefHeight="516.0" prefWidth="996.0">
+         <children>
+            <ListView fx:id="lvMoniteurResumeLecon" layoutX="65.0" layoutY="128.0" prefHeight="354.0" prefWidth="222.0" />
+            <Text layoutX="61.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Résumé des lecons réglée du mois">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <Text layoutX="362.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calcul du revenu total :" />
+            <Text layoutX="362.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calcul du revenu du mois :" />
+            <BarChart layoutX="308.0" layoutY="101.0" prefHeight="299.0" prefWidth="646.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </BarChart>
+            <Button fx:id="majRevenu" layoutX="733.0" layoutY="422.0" mnemonicParsing="false" text="Mettre a jour le graphique" />
+            <Text layoutX="334.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revenu par mois sur l'année">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text fx:id="lblRevenuAnnuel" layoutX="506.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="€€" />
+            <Text fx:id="lblRevenuParMois" layoutX="530.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" text="€€" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

@@ -17,6 +17,18 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class PermisController implements Initializable {
+
+    /*
+    *  La partie PermisController doit satisfaire ces différents besoins :
+    *  - Le remplissage de la liste view des permis
+    *  - affichage des stats (nb heure du permis si souscrit, graphique, progress bar jusqu'au nombre d'heure requis pour l'examen)
+    *  - permettre la souscription a un permis (ajout dans licence avec une date d'obtention null
+    *  - remplir la table view de l'eleve et du moniteur pour savoir avec qui et quel véhicule il a déja fait des leçons
+    *
+    */
+
+
+
     @javafx.fxml.FXML
     private BarChart graphElevePermisObtenu, graphMoniteurObtentionPermis;
 
