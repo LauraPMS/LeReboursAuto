@@ -2,15 +2,19 @@ package com.example.lereboursauto.controllers;
 
 import com.example.lereboursauto.models.Utilisateur;
 import com.example.lereboursauto.repository.ConnexionRepository;
+import com.example.lereboursauto.repository.LeconRepository;
 import com.example.lereboursauto.repository.UtilisateurRepository;
 import com.example.lereboursauto.services.ConnexionServices;
 import com.example.lereboursauto.services.Session;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
@@ -50,6 +54,9 @@ public class ProfilController implements Initializable {
     @javafx.fxml.FXML
     private TableColumn tcHorraireProchaine, tcCategorieProchaine, tcDateProchaine;
 
+    @javafx.fxml.FXML
+    private TableView tvProchaineLecon;
+
 
     // service utilisé ici
 
@@ -61,6 +68,9 @@ public class ProfilController implements Initializable {
     HashMap<Integer, Integer> nbLeconPermis;
     ConnexionServices connexionServices;
 
+    LeconRepository leconRepository;
+
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         System.out.println(numEleve);
@@ -69,13 +79,24 @@ public class ProfilController implements Initializable {
         listeAp.add(apModifier);
         connexionServices = new ConnexionServices();
         nbLeconPermis = new HashMap<>();
+        leconRepository = new LeconRepository();
 
         uRepo = new UtilisateurRepository();
+
+        tcCategorieProchaine.setCellValueFactory(new PropertyValueFactory<>("nomPermis"));
+        tcDateProchaine.setCellValueFactory(new PropertyValueFactory<>("date"));
+        tcHorraireProchaine.setCellValueFactory(new PropertyValueFactory<>("heure"));
 
         try {
             utilisateur = uRepo.findByCode(numEleve);
             majProfil(utilisateur);
             changeApToProfil(new Event(Event.ANY));
+            if(utilisateur.getStatut().getId() == 1){
+                tvProchaineLecon.setItems(FXCollections.observableList(leconRepository.getAllLeconForEleve(utilisateur.getCode())));
+            } else if (utilisateur.getStatut().getId() == 2) {
+                tvProchaineLecon.setItems(FXCollections.observableList(leconRepository.getAllLeconForMoniteur(utilisateur.getCode())));
+            }
+
 
 
 
@@ -198,6 +219,9 @@ public class ProfilController implements Initializable {
         Session.changerScene("permis.fxml", "Permis", actionEvent);
     }
 
+    // mettre en opacity 1 tout les permis que possede l'eleve (est souscrit)
+
+    // faire le graphique
 
 
 }

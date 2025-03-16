@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : jeu. 06 mars 2025 à 17:59
+-- Généré le : dim. 16 mars 2025 à 13:26
 -- Version du serveur : 8.3.0
 -- Version de PHP : 8.2.18
 
@@ -30,9 +30,9 @@ SET time_zone = "+00:00";
 DROP TABLE IF EXISTS `lecon`;
 CREATE TABLE IF NOT EXISTS `lecon` (
   `id` int NOT NULL AUTO_INCREMENT,
-  `date` int NOT NULL,
-  `heure` int NOT NULL,
-  `immatriculation` int NOT NULL,
+  `date` date NOT NULL,
+  `heure` text NOT NULL,
+  `immatriculation` varchar(20) NOT NULL,
   `reglee` int NOT NULL,
   `idEleve` int NOT NULL,
   `idMoniteur` int NOT NULL,
@@ -40,8 +40,19 @@ CREATE TABLE IF NOT EXISTS `lecon` (
   PRIMARY KEY (`id`),
   KEY `fk_lecon_utilisateur` (`idEleve`),
   KEY `fk_lecon_utilisateur_moniteur` (`idMoniteur`),
-  KEY `fk_lecon_permis` (`idPermis`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+  KEY `fk_lecon_permis` (`idPermis`),
+  KEY `immatriculation` (`immatriculation`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `lecon`
+--
+
+INSERT INTO `lecon` (`id`, `date`, `heure`, `immatriculation`, `reglee`, `idEleve`, `idMoniteur`, `idPermis`) VALUES
+(1, '2025-03-17', '08:00:00', '1001', 0, 1, 2, 1),
+(2, '2025-03-19', '10:30:00', '1002', 0, 1, 2, 1),
+(3, '2025-03-22', '14:00:00', '1003', 0, 1, 2, 1),
+(4, '2025-03-24', '16:00:00', '1001', 0, 1, 2, 1);
 
 -- --------------------------------------------------------
 
@@ -54,11 +65,18 @@ CREATE TABLE IF NOT EXISTS `licence` (
   `id` int NOT NULL AUTO_INCREMENT,
   `idUser` int NOT NULL,
   `codeCategorie` int NOT NULL,
-  `dateObtention` int NOT NULL,
+  `dateObtention` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_licence_permis` (`codeCategorie`),
   KEY `fk_licence_utilisateur` (`idUser`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `licence`
+--
+
+INSERT INTO `licence` (`id`, `idUser`, `codeCategorie`, `dateObtention`) VALUES
+(1, 1, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -128,9 +146,17 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `adresse` text NOT NULL,
   `ville` text CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL,
   PRIMARY KEY (`code`),
-  UNIQUE KEY `idStatut` (`idStatut`),
   KEY `idx_idStatut` (`idStatut`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `utilisateur`
+--
+
+INSERT INTO `utilisateur` (`code`, `nom`, `prenom`, `dateNaissance`, `telephone`, `sexe`, `codePostal`, `login`, `mdp`, `idStatut`, `adresse`, `ville`) VALUES
+(1, 'Jean', 'Jacques', '2001-03-08', '0698765432', 0, 92000, 'elelog', 'elepass', 1, 'toto', 'titi'),
+(2, 'Radhan', 'Prime', '2001-01-02', '0123456789', 1, 92000, 'monlog', 'monpass', 2, 'Chateau de caelid', 'Caelid'),
+(3, 'Marika', 'Radagon', '2001-03-08', '0123456789', 0, 92000, 'mrAdmin', 'pass', 3, 'L\'arbre monde', 'Entre-Terre');
 
 -- --------------------------------------------------------
 
@@ -140,14 +166,35 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
 
 DROP TABLE IF EXISTS `vehicule`;
 CREATE TABLE IF NOT EXISTS `vehicule` (
-  `immatriculation` int NOT NULL,
-  `annee` int NOT NULL,
+  `immatriculation` varchar(20) NOT NULL,
+  `annee` text NOT NULL,
   `codePermis` int NOT NULL,
-  `marque` int NOT NULL,
-  `modele` int NOT NULL,
+  `marque` text NOT NULL,
+  `modele` text NOT NULL,
   PRIMARY KEY (`immatriculation`),
-  UNIQUE KEY `codePermis` (`codePermis`)
+  KEY `fk_vehicule_permis` (`codePermis`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Déchargement des données de la table `vehicule`
+--
+
+INSERT INTO `vehicule` (`immatriculation`, `annee`, `codePermis`, `marque`, `modele`) VALUES
+('1001', '2020', 1, 'Peugeot', '208'),
+('1002', '2018', 1, 'Renault', 'Clio'),
+('1003', '2022', 1, 'Volkswagen', 'Golf'),
+('2001', '2019', 2, 'Yamaha', 'MT-07'),
+('2002', '2021', 2, 'Honda', 'CB500F'),
+('2003', '2017', 2, 'Kawasaki', 'Z650'),
+('3001', '2015', 3, 'Mercedes', 'Actros'),
+('3002', '2018', 3, 'Volvo', 'FH16'),
+('3003', '2020', 3, 'Scania', 'R450'),
+('4001', '2016', 4, 'Iveco', 'Urbanway'),
+('4002', '2019', 4, 'Mercedes', 'Citaro'),
+('4003', '2021', 4, 'MAN', 'Lion’s City'),
+('5001', '2012', 5, 'Beneteau', 'Antares 8'),
+('5002', '2015', 5, 'Jeanneau', 'Merry Fisher 895'),
+('5003', '2018', 5, 'Bayliner', 'Element E16');
 
 --
 -- Contraintes pour les tables déchargées
@@ -159,7 +206,8 @@ CREATE TABLE IF NOT EXISTS `vehicule` (
 ALTER TABLE `lecon`
   ADD CONSTRAINT `fk_lecon_permis` FOREIGN KEY (`idPermis`) REFERENCES `permis` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `fk_lecon_utilisateur` FOREIGN KEY (`idEleve`) REFERENCES `utilisateur` (`code`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `fk_lecon_utilisateur_moniteur` FOREIGN KEY (`idMoniteur`) REFERENCES `utilisateur` (`code`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `fk_lecon_utilisateur_moniteur` FOREIGN KEY (`idMoniteur`) REFERENCES `utilisateur` (`code`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `lecon_ibfk_1` FOREIGN KEY (`immatriculation`) REFERENCES `vehicule` (`immatriculation`);
 
 --
 -- Contraintes pour la table `licence`
@@ -178,8 +226,7 @@ ALTER TABLE `utilisateur`
 -- Contraintes pour la table `vehicule`
 --
 ALTER TABLE `vehicule`
-  ADD CONSTRAINT `fk_vehicule_permis` FOREIGN KEY (`codePermis`) REFERENCES `permis` (`id`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `vehicule_ibfk_1` FOREIGN KEY (`codePermis`) REFERENCES `permis` (`id`);
+  ADD CONSTRAINT `fk_vehicule_permis` FOREIGN KEY (`codePermis`) REFERENCES `permis` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

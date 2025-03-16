@@ -181,14 +181,11 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </AreaChart>
-            <TableView layoutX="48.0" layoutY="297.0" prefHeight="138.0" prefWidth="290.0">
+            <TableView fx:id="tvProchaineLecon" layoutX="48.0" layoutY="297.0" prefHeight="138.0" prefWidth="290.0">
               <columns>
-                <TableColumn fx:id="tcCategorieProchaine" prefWidth="92.0" text="Catégorie" maxWidth="920.0"
-                             minWidth="30.0"/>
-                <TableColumn fx:id="tcDateProchaine" prefWidth="119.20001220703125" text="Date"
-                             maxWidth="1192.0001220703125" minWidth="30.0"/>
-                  <TableColumn fx:id="tcHorraireProchaine" prefWidth="82.4000244140625" text="Horaire"
-                               maxWidth="824.000244140625" minWidth="30.0"/>
+                <TableColumn fx:id="tcCategorieProchaine" maxWidth="920.0" minWidth="30.0" prefWidth="92.0" text="Catégorie" />
+                <TableColumn fx:id="tcDateProchaine" maxWidth="1192.0001220703125" minWidth="30.0" prefWidth="119.20001220703125" text="Date" />
+                  <TableColumn fx:id="tcHorraireProchaine" maxWidth="824.000244140625" minWidth="30.0" prefWidth="82.4000244140625" text="Horaire" />
               </columns>
             </TableView>
             <Text layoutX="32.0" layoutY="236.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aperçu des prochaines leçons.">

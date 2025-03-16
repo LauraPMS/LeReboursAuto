@@ -78,7 +78,7 @@ public class ConnexionController implements Initializable {
             listeAp.add(apAccueil);
             listeAp.add(apInscription);
 
-            changeAp(listeAp, apAccueil);
+            changeAp(listeAp, apConnexion);
 
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
@@ -207,7 +207,7 @@ public class ConnexionController implements Initializable {
     public void changeApInscription(ActionEvent actionEvent) {changeAp(listeAp, apInscription);}
 
     @FXML
-    public void changeApAccueil(Event event) {Session.changeAp(listeAp, apAccueil);}
+    public void changeApAccueil(Event event) {Session.changeAp(listeAp, apConnexion);}
 
 
 

@@ -58,6 +58,19 @@ public class LeconController {
 
     @javafx.fxml.FXML
     public void prendreLecon(ActionEvent actionEvent) {
+        // récupérer permis souscrit puis afficher
+
+        // récuperer la date dans le dpDate
+
+        // faire une liste avec les horraire en enlevant les horraire s'il y a deja une lecon sur le créneau
+
+        // récupérer puis afficher les moniteurs et véhicule dispo a cette date (moniteur doit avoir la licence du permis et véhicule doit correspondre au permis et doit etre libre)
+
+        // Créer la leçons avec un insert dans le repo (fonction à créer).
+
+        // afficher une alert Session.creerAlert(....)
+
+        // reset tout les champs
     }
 
 
