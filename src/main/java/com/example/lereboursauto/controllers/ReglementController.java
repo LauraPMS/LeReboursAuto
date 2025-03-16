@@ -1,5 +1,15 @@
 package com.example.lereboursauto.controllers;
 
+import com.example.lereboursauto.services.Session;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.text.Text;
+
+import java.io.IOException;
+
 public class ReglementController {
     @javafx.fxml.FXML
     private Text lblMarqueVéhicule;
@@ -26,28 +36,34 @@ public class ReglementController {
     @javafx.fxml.FXML
     private AnchorPane apMoniteur;
 
-    @javafx.fxml.FXML
-    public void changeToApPlanning(ActionEvent actionEvent) {
-    }
 
     @javafx.fxml.FXML
     public void reglerLecon(ActionEvent actionEvent) {
     }
 
     @javafx.fxml.FXML
-    public void seDeconnecter(ActionEvent actionEvent) {
+    public void changeToApPlanning(ActionEvent actionEvent) throws IOException {
+        Session.changerScene("planning.fxml", "Le Rebours Auto - Planning", actionEvent);
     }
 
     @javafx.fxml.FXML
-    public void changeToApRéglement(ActionEvent actionEvent) {
+    public void seDeconnecter(ActionEvent actionEvent) throws IOException {
+        Session.changerScene("connexion.fxml", "Le Rebours Auto - Connexion", actionEvent);
     }
 
     @javafx.fxml.FXML
-    public void changeApToProfil(Event event) {
+    public void changeToApRéglement(ActionEvent actionEvent) throws IOException {
+        Session.changerScene("reglement.fxml", "Le Rebours Auto - Reglement", actionEvent);
     }
 
     @javafx.fxml.FXML
-    public void changeToApPermis(ActionEvent actionEvent) {
+    public void changeApToProfil(ActionEvent actionEvent) throws IOException {
+        Session.changerScene("profil.fxml", "Le Rebours Auto - Profil", actionEvent);
+    }
+
+    @javafx.fxml.FXML
+    public void changeToApPermis(ActionEvent actionEvent) throws IOException {
+        Session.changerScene("permis.fxml", "Le Rebours Auto - Permis", actionEvent);
     }
     /*
 

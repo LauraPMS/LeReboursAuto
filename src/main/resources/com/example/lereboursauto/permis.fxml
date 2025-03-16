@@ -29,7 +29,7 @@
                   <Image url="@../../../img/logo.png" />
                </image>
             </ImageView>
-            <Button ellipsisString="" mnemonicParsing="false" prefHeight="35.0" prefWidth="145.0" style="-fx-background-color: transparent; -fx-background-radius: 0;" text="Tableau de bord">
+            <Button ellipsisString="" mnemonicParsing="false" onAction="#changeApToProfil" prefHeight="35.0" prefWidth="145.0" style="-fx-background-color: transparent; -fx-background-radius: 0;" text="Tableau de bord">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -89,18 +89,14 @@
             <Text layoutX="650.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des moniteurs :" />
             <TableView fx:id="tvEleveVehicule" layoutX="412.0" layoutY="402.0" prefHeight="99.0" prefWidth="200.0">
               <columns>
-                <TableColumn fx:id="tcEleveMarque" prefWidth="99.73324584960938" text="Marque"
-                             maxWidth="997.3324584960938" minWidth="30.0"/>
-                <TableColumn fx:id="tcEleveModele" prefWidth="100.2667236328125" text="Modele"
-                             maxWidth="1002.667236328125" minWidth="30.0"/>
+                <TableColumn fx:id="tcEleveMarque" maxWidth="997.3324584960938" minWidth="30.0" prefWidth="99.73324584960938" text="Marque" />
+                <TableColumn fx:id="tcEleveModele" maxWidth="1002.667236328125" minWidth="30.0" prefWidth="100.2667236328125" text="Modele" />
               </columns>
             </TableView>
             <TableView fx:id="tvEleveMoniteur" layoutX="637.0" layoutY="403.0" prefHeight="99.0" prefWidth="329.0">
                <columns>
-                  <TableColumn fx:id="tcEleveNomPrenom" prefWidth="154.13330078125" text="Nom Prenom"
-                               maxWidth="1541.3330078125" minWidth="30.0"/>
-                  <TableColumn fx:id="tcEleveNbLecon" prefWidth="176.2667236328125" text="nombre de lecon passé avec"
-                               maxWidth="1762.667236328125" minWidth="30.0"/>
+                  <TableColumn fx:id="tcEleveNomPrenom" maxWidth="1541.3330078125" minWidth="30.0" prefWidth="154.13330078125" text="Nom Prenom" />
+                  <TableColumn fx:id="tcEleveNbLecon" maxWidth="1762.667236328125" minWidth="30.0" prefWidth="176.2667236328125" text="nombre de lecon passé avec" />
                </columns>
             </TableView>
             <Text fx:id="lblEleveTempsPermis" layoutX="501.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8h" />
@@ -139,18 +135,14 @@
             <Text layoutX="650.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste de vos élèves :" />
             <TableView fx:id="tvMoniteurVehicule" layoutX="412.0" layoutY="402.0" prefHeight="99.0" prefWidth="200.0">
                <columns>
-                  <TableColumn fx:id="tcMoniteurMarque" prefWidth="99.73324584960938" text="Marque"
-                               maxWidth="997.3324584960938" minWidth="30.0"/>
-                  <TableColumn fx:id="tcMoniteurModele" prefWidth="100.2667236328125" text="Modele"
-                               maxWidth="1002.667236328125" minWidth="30.0"/>
+                  <TableColumn fx:id="tcMoniteurMarque" maxWidth="997.3324584960938" minWidth="30.0" prefWidth="99.73324584960938" text="Marque" />
+                  <TableColumn fx:id="tcMoniteurModele" maxWidth="1002.667236328125" minWidth="30.0" prefWidth="100.2667236328125" text="Modele" />
                </columns>
             </TableView>
             <TableView fx:id="tvMoniteurListeEleve" layoutX="637.0" layoutY="403.0" prefHeight="99.0" prefWidth="329.0">
                <columns>
-                  <TableColumn fx:id="tcMoniteurNomPrenomEleve" prefWidth="154.13330078125" text="Nom Prenom"
-                               maxWidth="1541.3330078125" minWidth="30.0"/>
-                  <TableColumn fx:id="tcMoniteurNbLeconPasse" prefWidth="176.2667236328125" text="nombre de lecon passé avec"
-                               maxWidth="1762.667236328125" minWidth="30.0"/>
+                  <TableColumn fx:id="tcMoniteurNomPrenomEleve" maxWidth="1541.3330078125" minWidth="30.0" prefWidth="154.13330078125" text="Nom Prenom" />
+                  <TableColumn fx:id="tcMoniteurNbLeconPasse" maxWidth="1762.667236328125" minWidth="30.0" prefWidth="176.2667236328125" text="nombre de lecon passé avec" />
                </columns>
             </TableView>
             <Text fx:id="lblMoniteurTempPasse" layoutX="501.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8h" />
