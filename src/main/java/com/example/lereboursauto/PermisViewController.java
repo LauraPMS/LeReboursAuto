@@ -1,10 +1,19 @@
 package com.example.lereboursauto;
 
+import com.example.lereboursauto.controllers.LeconController;
+import com.example.lereboursauto.controllers.LicenceController;
+import com.example.lereboursauto.controllers.PermisController;
+import com.example.lereboursauto.controllers.VehiculeController;
+import com.example.lereboursauto.models.Utilisateur;
+import com.example.lereboursauto.repository.UtilisateurRepository;
 import com.example.lereboursauto.services.Session;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -14,6 +23,8 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class PermisViewController implements Initializable {
@@ -56,11 +67,73 @@ public class PermisViewController implements Initializable {
     @javafx.fxml.FXML
     private ImageView imgVehicule;
 
+    UtilisateurRepository uRepo;
+    PermisController permisController;
+    LeconController leconController;
+    VehiculeController vehiculeController;
+    Utilisateur u ;
+    ArrayList<AnchorPane> listeAp;
+    @javafx.fxml.FXML
+    private ListView lvMoniteurToutPermis;
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
+        // instancier les variable / services ici
+        uRepo = new UtilisateurRepository();
+        permisController = new PermisController();
+        leconController = new LeconController();
+        vehiculeController = new VehiculeController();
 
+        listeAp = new ArrayList<>();
+        listeAp.add(apEleve);
+        listeAp.add(apMoniteur);
+
+        try {
+            u = uRepo.findByCode(Session.getCodeEleveActif());
+            System.out.println(u.getStatut().getLibelle());
+            if(u.getStatut().getId() == 1){
+                Session.changeAp(listeAp, apEleve);
+
+                /**
+                 *
+                 * remplir la vue Permis eleve ici
+                 *
+                 */
+
+                /** initialisation de la listeView listePermisEleve au lancement de la session **/
+                lvEleveToutPermis.setItems(FXCollections.observableList(permisController.getLicence(Session.getCodeEleveActif())));
+                lvEleveToutPermis.getSelectionModel().selectFirst();
+
+                /** initialisation du label nombreHeuresTotal au lancement de la session **/
+
+                String libellePermis = lvEleveToutPermis.getSelectionModel().getSelectedItem().toString();
+
+                int numeroPermis = permisController.getIdPermisByLibelle(libellePermis);
+
+                int totalHorraire = leconController.getTotalHeuresByLicence(Session.getCodeEleveActif(), numeroPermis);
+
+                lblEleveTempsPermis.setText(String.valueOf(totalHorraire)+ " heures");
+
+                /** initialisation du treeView liste des véhicules utilisés au lancement de la session **/
+
+                for (String marques : vehiculeController.getVehiculesByPermis(Session.getCodeEleveActif(), numeroPermis).keySet())
+                {
+                    System.out.println(marques);
+                }
+
+
+
+
+            } else if (u.getStatut().getId() == 2) {
+                Session.changeAp(listeAp, apMoniteur);
+                // remplir les tableau listeview etc du moniteur ici
+                lvMoniteurToutPermis.setItems(FXCollections.observableList(permisController.getLicence(Session.getCodeEleveActif())));
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 

@@ -7,21 +7,54 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class PermisRepository {
-    Connection connection;
+    Connection connexion;
     public PermisRepository() {
-        connection = ConnexionBDD.getCnx();
+        connexion = ConnexionBDD.getCnx();
     }
 
     public Permis findByCode(int id) throws SQLException {
         Permis p = null;
-        PreparedStatement ps = connection.prepareStatement("Select id, libelle, prix FROM permis where id = ? ");
+        PreparedStatement ps = connexion.prepareStatement("Select id, libelle, prix FROM permis where id = ? ");
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
             p = new Permis(rs.getInt(id), rs.getString("libelle"), rs.getFloat("prix"));
         }
         return p;
+    }
+
+    public ArrayList<String> getLicence(int statutUser) throws SQLException {
+
+        /** Fonction qui va rechercher la liste des permis de l'utilisateur **/
+
+        ArrayList<String> libelleLicenceEleve = new ArrayList<>();
+        PreparedStatement ps;
+        ps = connexion.prepareStatement("SELECT permis.libelle\n" +
+                "FROM permis\n" +
+                "JOIN licence on permis.id = licence.codeCategorie\n" +
+                "WHERE idUser = ?;");
+        ps.setInt(1, statutUser);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            libelleLicenceEleve.add(rs.getString("libelle"));
+        }
+        return libelleLicenceEleve;
+    }
+
+    public int getIdPermisByLibelle(String licenceUser) throws SQLException {
+        /** Fonction qui va rechercher un permis selon son libelle **/
+        int numPermis = 0;
+        PreparedStatement ps;
+        ps = connexion.prepareStatement("Select id\n" +
+                "FROM permis\n" +
+                "WHERE libelle = ?;");
+        ps.setString(1, licenceUser);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        numPermis = rs.getInt("id");
+        return numPermis;
     }
 }

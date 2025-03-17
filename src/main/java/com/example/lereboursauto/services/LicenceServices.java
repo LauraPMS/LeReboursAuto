@@ -1,12 +1,16 @@
 package com.example.lereboursauto.services;
 
+import com.example.lereboursauto.repository.LicenceRepository;
+
 public class LicenceServices {
 
-    private LicenceServices licenceServices;
+    private LicenceRepository licenceRepository;
 
     public LicenceServices() {
-        licenceServices = new LicenceServices();
+        licenceRepository = new LicenceRepository();
     }
+
+
 
 
 }

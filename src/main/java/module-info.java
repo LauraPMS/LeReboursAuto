@@ -14,6 +14,7 @@ module com.example.lereboursauto {
     requires java.desktop;
 
     opens com.example.lereboursauto to javafx.fxml;
+    opens com.example.lereboursauto.models to javafx.base;
 
     exports com.example.lereboursauto;
 }

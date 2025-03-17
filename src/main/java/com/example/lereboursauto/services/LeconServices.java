@@ -21,4 +21,12 @@ public class LeconServices {
         return leconRepository.getAllLeconForMoniteur(codeEleveActif);
     }
 
+    public int getTotalHeuresByLicence(int statutCompte, int licenceUser) throws SQLException {
+        /**
+         * Fonction qui va rechercher la liste des permis de l'élève
+         **/
+
+        return leconRepository.getTotalHeuresByLicence(statutCompte, licenceUser);
+    }
+
 }

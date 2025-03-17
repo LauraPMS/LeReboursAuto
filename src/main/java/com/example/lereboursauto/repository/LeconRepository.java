@@ -85,4 +85,21 @@ public class LeconRepository {
         }
         return lecons;
     }
+
+    public int getTotalHeuresByLicence(int statutUser, int licenceUser) throws SQLException {
+        /** Fonction qui va rechercher la liste des permis de l'utilisateur **/
+        int totalHeures = 0;
+        PreparedStatement ps;
+        ps = connexion.prepareStatement("Select COUNT(lecon.heure) AS nbheures\n" +
+                "FROM lecon\n" +
+                "JOIN utilisateur ON lecon.idEleve = utilisateur.code\n" +
+                "WHERE utilisateur.idStatut = ?\n" +
+                "AND lecon.idPermis = ?");
+        ps.setInt(1, statutUser);
+        ps.setInt(2, licenceUser);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        totalHeures = rs.getInt("nbheures");
+        return totalHeures;
+    }
 }
