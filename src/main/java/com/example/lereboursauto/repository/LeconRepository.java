@@ -8,6 +8,7 @@ import com.example.lereboursauto.tools.ConnexionBDD;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class LeconRepository {
@@ -101,5 +102,21 @@ public class LeconRepository {
         rs.next();
         totalHeures = rs.getInt("nbheures");
         return totalHeures;
+    }
+
+    public HashMap<String,Integer> getDataGraphiquePermis() throws SQLException {
+        HashMap<String, Integer> data = new HashMap();
+        PreparedStatement preparedStatement = connexion.prepareStatement("SELECT vehicule.modele ,COUNT(lecon.heure) AS \"heures\"\n" +
+                "FROM lecon\n" +
+                "INNER JOIN vehicule on lecon.immatriculation = vehicule.immatriculation \n" +
+                "GROUP BY vehicule.modele;");
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while(resultSet.next())
+        {
+            data.put(resultSet.getString("modele"), resultSet.getInt("heures"));
+        }
+        preparedStatement.close();
+        resultSet.close();
+        return data;
     }
 }

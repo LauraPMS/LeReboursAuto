@@ -3,6 +3,7 @@ package com.example.lereboursauto.controllers;
 import com.example.lereboursauto.services.LeconServices;
 
 import java.sql.SQLException;
+import java.util.HashMap;
 
 public class LeconController {
 
@@ -18,5 +19,9 @@ public class LeconController {
          **/
 
         return leconServices.getTotalHeuresByLicence(statutCompte, licenceUser);
+    }
+
+    public HashMap<String,Integer> getDataGraphiquePermis() throws SQLException {
+        return leconServices.getDataGraphiquePermis();
     }
 }

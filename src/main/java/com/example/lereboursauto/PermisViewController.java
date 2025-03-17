@@ -13,10 +13,12 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
+import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -37,11 +39,8 @@ public class PermisViewController implements Initializable {
     *  - remplir la table view de l'eleve et du moniteur pour savoir avec qui et quel véhicule il a déja fait des leçons
     *
     */
-
-
-
     @javafx.fxml.FXML
-    private BarChart graphElevePermisObtenu, graphMoniteurObtentionPermis;
+    private BarChart graphMoniteurObtentionPermis;
 
     @javafx.fxml.FXML
     private TableView tvEleveVehicule,tvMoniteurVehicule;
@@ -74,7 +73,7 @@ public class PermisViewController implements Initializable {
     Utilisateur u ;
     ArrayList<AnchorPane> listeAp;
     @javafx.fxml.FXML
-    private ListView lvMoniteurToutPermis;
+    private BarChart graphEleveHeuresVehicules;
 
 
     @Override
@@ -118,10 +117,25 @@ public class PermisViewController implements Initializable {
 
                 /** initialisation du treeView liste des véhicules utilisés au lancement de la session **/
 
+                /**
                 for (String marques : vehiculeController.getVehiculesByPermis(Session.getCodeEleveActif(), numeroPermis).keySet())
                 {
-                    System.out.println(marques);
+                    tvEleveVehicule.setItems(FXCollections.observableList(vehiculeController.getVehiculesByPermis(Session.getCodeEleveActif(), numeroPermis)));
                 }
+                 **/
+
+                /** initialisation du treeView liste des véhicules utilisés au lancement de la session **/
+
+                graphEleveHeuresVehicules.getData().clear();
+
+                XYChart.Series<Object, Object> serieGraph = new XYChart.Series<>();
+                serieGraph.setName("Modèles");
+                for (String valeur : leconController.getDataGraphiquePermis().keySet())
+                {
+                    serieGraph.getData().add(new XYChart.Data<>(valeur,leconController.getDataGraphiquePermis().get(valeur)));
+                }
+
+                graphEleveHeuresVehicules.getData().add(serieGraph);
 
 
 
@@ -129,7 +143,7 @@ public class PermisViewController implements Initializable {
             } else if (u.getStatut().getId() == 2) {
                 Session.changeAp(listeAp, apMoniteur);
                 // remplir les tableau listeview etc du moniteur ici
-                lvMoniteurToutPermis.setItems(FXCollections.observableList(permisController.getLicence(Session.getCodeEleveActif())));
+                tvMoniteurToutPermis.setItems(FXCollections.observableList(permisController.getLicence(Session.getCodeEleveActif())));
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);

@@ -64,7 +64,7 @@
                   <Font size="15.0" />
                </font>
             </Text>
-            <BarChart fx:id="graphElevePermisObtenu" layoutX="38.0" layoutY="317.0" prefHeight="187.0" prefWidth="306.0">
+            <BarChart fx:id="graphEleveHeuresVehicules" layoutX="38.0" layoutY="317.0" prefHeight="187.0" prefWidth="306.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>

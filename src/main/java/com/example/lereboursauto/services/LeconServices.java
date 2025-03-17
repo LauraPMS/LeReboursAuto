@@ -5,6 +5,7 @@ import com.example.lereboursauto.repository.LeconRepository;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class LeconServices {
     LeconRepository leconRepository;
@@ -27,6 +28,9 @@ public class LeconServices {
          **/
 
         return leconRepository.getTotalHeuresByLicence(statutCompte, licenceUser);
+    }
+    public HashMap<String,Integer> getDataGraphiquePermis() throws SQLException {
+        return leconRepository.getDataGraphiquePermis();
     }
 
 }
