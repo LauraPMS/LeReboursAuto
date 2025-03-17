@@ -1,4 +1,4 @@
 package com.example.lereboursauto.services;
 
-public class GraphServices {
+public class VehiculeServices {
 }

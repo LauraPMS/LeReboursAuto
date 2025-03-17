@@ -1,4 +1,4 @@
-package com.example.lereboursauto.controllers;
+package com.example.lereboursauto;
 
 import com.example.lereboursauto.models.Utilisateur;
 import com.example.lereboursauto.repository.LeconRepository;
@@ -6,7 +6,6 @@ import com.example.lereboursauto.repository.UtilisateurRepository;
 import com.example.lereboursauto.services.Session;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -15,12 +14,11 @@ import javafx.scene.layout.AnchorPane;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class PlanningController implements Initializable {
+public class PlanningViewController implements Initializable {
 
     /*
      * Le controller Planning doit satisfaire ces besoins :

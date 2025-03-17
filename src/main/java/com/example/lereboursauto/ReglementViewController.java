@@ -1,10 +1,9 @@
-package com.example.lereboursauto.controllers;
+package com.example.lereboursauto;
 
 import com.example.lereboursauto.models.Utilisateur;
 import com.example.lereboursauto.repository.UtilisateurRepository;
 import com.example.lereboursauto.services.Session;
 import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -17,7 +16,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class ReglementController implements Initializable {
+public class ReglementViewController implements Initializable {
 
     /*
 

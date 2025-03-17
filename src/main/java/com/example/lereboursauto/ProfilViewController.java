@@ -1,7 +1,6 @@
-package com.example.lereboursauto.controllers;
+package com.example.lereboursauto;
 
 import com.example.lereboursauto.models.Utilisateur;
-import com.example.lereboursauto.repository.ConnexionRepository;
 import com.example.lereboursauto.repository.LeconRepository;
 import com.example.lereboursauto.repository.UtilisateurRepository;
 import com.example.lereboursauto.services.ConnexionServices;
@@ -21,7 +20,6 @@ import javafx.scene.text.Text;
 
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.Period;
@@ -29,7 +27,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.ResourceBundle;
 
-public class ProfilController implements Initializable {
+public class ProfilViewController implements Initializable {
     /*
     * Le controller Profil doit satisfaire ces besoins :
     * - Afficher les données personnel de l'utilisateur

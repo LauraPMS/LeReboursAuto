@@ -1,4 +1,4 @@
-package com.example.lereboursauto.controllers;
+package com.example.lereboursauto;
 
 import com.example.lereboursauto.models.Statut;
 import com.example.lereboursauto.models.Utilisateur;
@@ -8,16 +8,10 @@ import com.example.lereboursauto.services.StatutServices;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
-import com.example.lereboursauto.controllers.*;
-import com.example.lereboursauto.repository.*;
 import com.example.lereboursauto.tools.ConnexionBDD;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
@@ -31,7 +25,7 @@ import java.util.ResourceBundle;
 import static com.example.lereboursauto.services.Session.changeAp;
 import static com.example.lereboursauto.services.Session.setCodeEleveActif;
 
-public class ConnexionController implements Initializable {
+public class ConnexionViewController implements Initializable {
     /*
     * La page connexion doit satisfaire ces besoins :
     * - La connexion d'un utilisateur
@@ -127,12 +121,12 @@ public class ConnexionController implements Initializable {
         } else{
             // tt les champs sont remplis, on procède à l'inscription
             int sexe;
-            
             sexe = 0;
 
             if (rdoGenreFemme.isSelected()) {
                 sexe = 1;
             }
+
             int statut = 1;
 
             if (rdoMoniteur.isSelected()) {
@@ -148,7 +142,9 @@ public class ConnexionController implements Initializable {
             changeAp(listeAp, apConnexion);
 
         }
+
         changeAp(listeAp, apAccueil);
+
     }
 
     @FXML
@@ -189,11 +185,11 @@ public class ConnexionController implements Initializable {
 
                 // Redirection en fonction du statut
                 if (u.getStatut().getId() == 1) {
-                    Session.changerScene("profil.fxml", "Le ReboursAuto - Élève - ProfilController", actionEvent);
+                    Session.changerScene("profil.fxml", "Le ReboursAuto - Élève - ProfilViewController", actionEvent);
                 } else if (u.getStatut().getId() == 2) {
-                    Session.changerScene("profil.fxml", "Le ReboursAuto - Moniteur - ProfilController", actionEvent);
+                    Session.changerScene("profil.fxml", "Le ReboursAuto - Moniteur - ProfilViewController", actionEvent);
                 } else if (u.getStatut().getId() == 3) {
-                    Session.changerScene("profil.fxml", "Le ReboursAuto - Admin - ProfilController", actionEvent);
+                    Session.changerScene("profil.fxml", "Le ReboursAuto - Admin - ProfilViewController", actionEvent);
                 }
             }
         }
