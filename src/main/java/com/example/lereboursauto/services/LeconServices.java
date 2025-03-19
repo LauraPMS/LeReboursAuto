@@ -22,15 +22,23 @@ public class LeconServices {
         return leconRepository.getAllLeconForMoniteur(codeEleveActif);
     }
 
-    public int getTotalHeuresByLicence(int statutCompte, int licenceUser) throws SQLException {
+    public int getTotalHeuresByLicence(int idUser, int licenceUser) throws SQLException {
         /**
          * Fonction qui va rechercher la liste des permis de l'élève
          **/
 
-        return leconRepository.getTotalHeuresByLicence(statutCompte, licenceUser);
+        return leconRepository.getTotalHeuresByLicence(idUser, licenceUser);
     }
-    public HashMap<String,Integer> getDataGraphiquePermis() throws SQLException {
-        return leconRepository.getDataGraphiquePermis();
+    public HashMap<String,Integer> getDataGraphiquePermisVehicules(int idUser, int idPermis) throws SQLException {
+        return leconRepository.getDataGraphiquePermisVehicules(idUser, idPermis);
+    }
+
+    public HashMap<String, Integer> getHeuresByMoniteurs(int idUser, int idPermis) throws SQLException {
+        /**
+         * Fonction qui va rechercher la liste des permis de l'utilisateur
+         **/
+
+        return leconRepository.getHeuresByMoniteurs(idUser, idPermis);
     }
 
 }

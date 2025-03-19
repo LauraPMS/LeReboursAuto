@@ -96,8 +96,6 @@ public class ProfilViewController implements Initializable {
             }
 
 
-
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

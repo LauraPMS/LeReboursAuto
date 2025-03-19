@@ -57,4 +57,5 @@ public class PermisRepository {
         numPermis = rs.getInt("id");
         return numPermis;
     }
+
 }

@@ -2,6 +2,7 @@
 
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
@@ -58,7 +59,7 @@
       </HBox>
       <AnchorPane fx:id="apEleve" layoutY="68.0" prefHeight="534.0" prefWidth="999.0">
          <children>
-            <ListView fx:id="lvEleveToutPermis" layoutX="93.0" layoutY="50.0" prefHeight="174.0" prefWidth="200.0" />
+            <ListView fx:id="lvEleveToutPermis" layoutX="93.0" layoutY="50.0" onMouseClicked="#onLvPermisEleve" prefHeight="174.0" prefWidth="200.0" />
             <Text layoutX="63.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Listes des permis que vous avez chez nous">
                <font>
                   <Font size="15.0" />
@@ -86,21 +87,23 @@
             <Text layoutX="418.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous passez actuellement ce permis, vous pouvez retrouver vos statistiques ici" />
             <Text layoutX="418.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps passé : " />
             <Text layoutX="418.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des véhicules utilisés :" />
-            <Text layoutX="650.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des moniteurs :" />
+            <Text layoutX="690.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombres d'heures passées par moniteur :" />
             <TableView fx:id="tvEleveVehicule" layoutX="412.0" layoutY="402.0" prefHeight="99.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="tcEleveMarque" maxWidth="997.3324584960938" minWidth="30.0" prefWidth="99.73324584960938" text="Marque" />
                 <TableColumn fx:id="tcEleveModele" maxWidth="1002.667236328125" minWidth="30.0" prefWidth="100.2667236328125" text="Modele" />
               </columns>
             </TableView>
-            <TableView fx:id="tvEleveMoniteur" layoutX="637.0" layoutY="403.0" prefHeight="99.0" prefWidth="329.0">
-               <columns>
-                  <TableColumn fx:id="tcEleveNomPrenom" maxWidth="1541.3330078125" minWidth="30.0" prefWidth="154.13330078125" text="Nom Prenom" />
-                  <TableColumn fx:id="tcEleveNbLecon" maxWidth="1762.667236328125" minWidth="30.0" prefWidth="176.2667236328125" text="nombre de lecon passé avec" />
-               </columns>
-            </TableView>
             <Text fx:id="lblEleveTempsPermis" layoutX="501.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" />
             <Button layoutX="105.0" layoutY="237.0" mnemonicParsing="false" onAction="#suggererLicence" text="Demander un nouveau permis" />
+            <LineChart fx:id="graphEleveHeuresMoniteurs" layoutX="628.0" layoutY="370.0" prefHeight="151.0" prefWidth="343.0">
+              <xAxis>
+                <CategoryAxis side="BOTTOM" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis side="LEFT" />
+              </yAxis>
+            </LineChart>
          </children>
       </AnchorPane>
       <AnchorPane fx:id="apMoniteur" layoutY="68.0" prefHeight="534.0" prefWidth="999.0" visible="false">

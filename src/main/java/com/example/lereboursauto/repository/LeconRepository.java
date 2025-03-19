@@ -9,7 +9,6 @@ import com.example.lereboursauto.tools.ConnexionBDD;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
 public class LeconRepository {
 
@@ -87,7 +86,7 @@ public class LeconRepository {
         return lecons;
     }
 
-    public int getTotalHeuresByLicence(int statutUser, int licenceUser) throws SQLException {
+    public int getTotalHeuresByLicence(int idUser, int licenceUser) throws SQLException {
         /** Fonction qui va rechercher la liste des permis de l'utilisateur **/
         int totalHeures = 0;
         PreparedStatement ps;
@@ -96,7 +95,7 @@ public class LeconRepository {
                 "JOIN utilisateur ON lecon.idEleve = utilisateur.code\n" +
                 "WHERE utilisateur.idStatut = ?\n" +
                 "AND lecon.idPermis = ?");
-        ps.setInt(1, statutUser);
+        ps.setInt(1, idUser);
         ps.setInt(2, licenceUser);
         ResultSet rs = ps.executeQuery();
         rs.next();
@@ -104,12 +103,16 @@ public class LeconRepository {
         return totalHeures;
     }
 
-    public HashMap<String,Integer> getDataGraphiquePermis() throws SQLException {
+    public HashMap<String,Integer> getDataGraphiquePermisVehicules(int idUser, int licenceUser) throws SQLException {
         HashMap<String, Integer> data = new HashMap();
         PreparedStatement preparedStatement = connexion.prepareStatement("SELECT vehicule.modele ,COUNT(lecon.heure) AS \"heures\"\n" +
                 "FROM lecon\n" +
                 "INNER JOIN vehicule on lecon.immatriculation = vehicule.immatriculation \n" +
+                "WHERE lecon.idEleve = ? \n" +
+                "AND lecon.idPermis = ? \n" +
                 "GROUP BY vehicule.modele;");
+        preparedStatement.setInt(1, idUser);
+        preparedStatement.setInt(2, licenceUser);
         ResultSet resultSet = preparedStatement.executeQuery();
         while(resultSet.next())
         {
@@ -119,4 +122,29 @@ public class LeconRepository {
         resultSet.close();
         return data;
     }
+
+    public HashMap<String, Integer> getHeuresByMoniteurs(int idUser, int idPermis) throws SQLException {
+
+        /** Fonction qui va rechercher le nombres d'heures par moniteurs selon l'utilisateur **/
+
+        HashMap<String, Integer> heuresByMoniteur = new HashMap<>();
+        PreparedStatement ps;
+        ps = connexion.prepareStatement("SELECT distinct utilisateur.nom, utilisateur.prenom, COUNT(lecon.heure) AS heures\n" +
+                "FROM lecon\n" +
+                "JOIN utilisateur on lecon.idMoniteur = utilisateur.code\n" +
+                "WHERE lecon.idEleve = ?\n" +
+                "AND lecon.idPermis = ?\n" +
+                "GROUP BY  utilisateur.nom;");
+        ps.setInt(1, idUser);
+        ps.setInt(2, idPermis);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            String nomPrenomMoniteur = rs.getString("nom") + " " + rs.getString("prenom");
+            heuresByMoniteur.put(nomPrenomMoniteur, rs.getInt("heures"));
+
+        }
+        return heuresByMoniteur;
+    }
+
+
 }
