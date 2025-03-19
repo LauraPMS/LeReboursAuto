@@ -1,9 +1,6 @@
 package com.example.lereboursauto;
 
-import com.example.lereboursauto.controllers.LeconController;
-import com.example.lereboursauto.controllers.LicenceController;
-import com.example.lereboursauto.controllers.PermisController;
-import com.example.lereboursauto.controllers.VehiculeController;
+import com.example.lereboursauto.controllers.*;
 import com.example.lereboursauto.models.Utilisateur;
 import com.example.lereboursauto.repository.UtilisateurRepository;
 import com.example.lereboursauto.services.Session;
@@ -80,7 +77,7 @@ public class PermisViewController implements Initializable {
     private LineChart graphEleveHeuresMoniteurs;
 
 
-    UtilisateurRepository uRepo;
+    UtilisateurController utilisateurController;
     PermisController permisController;
     LeconController leconController;
     VehiculeController vehiculeController;
@@ -94,7 +91,7 @@ public class PermisViewController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         // instancier les variable / services ici
-        uRepo = new UtilisateurRepository();
+        utilisateurController = new UtilisateurController();
         permisController = new PermisController();
         leconController = new LeconController();
         vehiculeController = new VehiculeController();
@@ -104,7 +101,7 @@ public class PermisViewController implements Initializable {
         listeAp.add(apMoniteur);
 
         try {
-            u = uRepo.findByCode(Session.getCodeEleveActif());
+            u = utilisateurController.findByCode(Session.getCodeEleveActif());
             System.out.println(u.getStatut().getLibelle());
             if(u.getStatut().getId() == 1){
                 Session.changeAp(listeAp, apEleve);
@@ -183,6 +180,10 @@ public class PermisViewController implements Initializable {
 
     @javafx.fxml.FXML
     public void demandeLicence(ActionEvent actionEvent) {
+        // si c'est un moniteur
+            // on demande l'autorisation a l'admin (la date est a 01-01-2001 01:01 (sera afficher sur la page admin tt les licence avec cette date d'obtention pourquoi pas)
+        // si c'est un élève
+            // on ajoute sa licence avec un date d'obtention a null
     }
 
     @javafx.fxml.FXML

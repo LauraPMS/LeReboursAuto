@@ -1,5 +1,7 @@
 package com.example.lereboursauto;
 
+import com.example.lereboursauto.controllers.LeconController;
+import com.example.lereboursauto.controllers.UtilisateurController;
 import com.example.lereboursauto.models.Utilisateur;
 import com.example.lereboursauto.repository.LeconRepository;
 import com.example.lereboursauto.repository.UtilisateurRepository;
@@ -62,11 +64,11 @@ public class ProfilViewController implements Initializable {
     int numEleve = Session.getCodeEleveActif();
     Utilisateur utilisateur;
     ArrayList<AnchorPane> listeAp;
-    UtilisateurRepository uRepo;
+    UtilisateurController utilisateurController;
     HashMap<Integer, Integer> nbLeconPermis;
     ConnexionServices connexionServices;
 
-    LeconRepository leconRepository;
+    LeconController leconController;
 
 
     @Override
@@ -77,22 +79,22 @@ public class ProfilViewController implements Initializable {
         listeAp.add(apModifier);
         connexionServices = new ConnexionServices();
         nbLeconPermis = new HashMap<>();
-        leconRepository = new LeconRepository();
+        leconController = new LeconController();
 
-        uRepo = new UtilisateurRepository();
+        utilisateurController = new UtilisateurController();
 
         tcCategorieProchaine.setCellValueFactory(new PropertyValueFactory<>("nomPermis"));
         tcDateProchaine.setCellValueFactory(new PropertyValueFactory<>("date"));
         tcHorraireProchaine.setCellValueFactory(new PropertyValueFactory<>("heure"));
 
         try {
-            utilisateur = uRepo.findByCode(numEleve);
+            utilisateur = utilisateurController.findByCode(numEleve);
             majProfil(utilisateur);
             changeApToProfil(new Event(Event.ANY));
             if(utilisateur.getStatut().getId() == 1){
-                tvProchaineLecon.setItems(FXCollections.observableList(leconRepository.getAllLeconForEleve(utilisateur.getCode())));
+                tvProchaineLecon.setItems(FXCollections.observableList(leconController.getAllFuturLeconForEleve(utilisateur.getCode())));
             } else if (utilisateur.getStatut().getId() == 2) {
-                tvProchaineLecon.setItems(FXCollections.observableList(leconRepository.getAllLeconForMoniteur(utilisateur.getCode())));
+                tvProchaineLecon.setItems(FXCollections.observableList(leconController.getAllFuturLeconForMoniteur(utilisateur.getCode())));
             }
 
 
@@ -118,7 +120,7 @@ public class ProfilViewController implements Initializable {
         }
 
         // Mettre à jour la base de données
-        uRepo.update(utilisateur);
+        utilisateurController.update(utilisateur);
 
         // Mettre à jour les labels affichés
         majProfil(utilisateur);

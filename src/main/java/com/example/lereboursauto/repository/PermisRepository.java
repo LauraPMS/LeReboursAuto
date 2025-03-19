@@ -21,7 +21,7 @@ public class PermisRepository {
         ps.setInt(1, id);
         ResultSet rs = ps.executeQuery();
         if (rs.next()) {
-            p = new Permis(rs.getInt(id), rs.getString("libelle"), rs.getFloat("prix"));
+            p = new Permis(rs.getInt("id"), rs.getString("libelle"), rs.getFloat("prix"));
         }
         return p;
     }

@@ -14,13 +14,27 @@ public class LeconServices {
         leconRepository = new LeconRepository();
     }
 
+    // get des leçons de l'élève
+
     public ArrayList<Lecon> getAllLeconForEleve(int codeEleveActif) throws SQLException {
         return leconRepository.getAllLeconForEleve(codeEleveActif);
     }
 
+    public ArrayList<Lecon> getAllFuturLeconForEleve(int codeEleveActif) throws SQLException {
+        return leconRepository.getAllFuturLeconForEleve(codeEleveActif);
+    }
+
+    // get des leçons du moniteur
     public ArrayList<Lecon> getAllLeconForMoniteur(int codeEleveActif) throws SQLException {
         return leconRepository.getAllLeconForMoniteur(codeEleveActif);
     }
+
+    public ArrayList<Lecon> getAllFuturLeconForMoniteur(int codeEleveActif) throws SQLException {
+        return leconRepository.getAllFuturLeconForMoniteur(codeEleveActif);
+    }
+
+
+    // utilisé pour les stats
 
     public int getTotalHeuresByLicence(int idUser, int licenceUser) throws SQLException {
         /**

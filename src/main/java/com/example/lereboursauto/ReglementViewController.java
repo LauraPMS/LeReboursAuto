@@ -38,6 +38,7 @@ public class ReglementViewController implements Initializable {
         listeAp.add(apEleve);
         listeAp.add(apMoniteur);
         Session.changeAp(listeAp, apMoniteur);
+        utilRepo = new UtilisateurRepository();
         try {
             u = utilRepo.findByCode(Session.getCodeEleveActif());
             if (u.getStatut().equals(1)){

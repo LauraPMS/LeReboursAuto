@@ -55,9 +55,71 @@ public class LeconRepository {
         return lecons;
     }
 
+    public ArrayList<Lecon> getAllFuturLeconForEleve(int codeEleveActif) throws SQLException {
+        ArrayList<Lecon> lecons = new ArrayList<>();
+        PreparedStatement ps = connexion.prepareStatement("SELECT id, date, heure, immatriculation, reglee, idEleve, idMoniteur, idPermis FROM lecon where idEleve = ? and date >= NOW() ORDER BY(date) ASC");
+        ps.setInt(1, codeEleveActif);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            Date date = Date.valueOf(rs.getString("date"));
+            String heure = rs.getString("heure");
+            int reglee = rs.getInt("reglee");
+
+            String immatriculation = rs.getString("immatriculation");
+            int idEleve = rs.getInt("idEleve");
+            Utilisateur eleve = utilisateurRepository.findByCode(idEleve);
+            int idMoniteur = rs.getInt("idMoniteur");
+            Utilisateur moniteur = utilisateurRepository.findByCode(idMoniteur);
+            int idPermis = rs.getInt("idPermis");
+            Permis permis = permisRepository.findByCode(idPermis);
+            Vehicule vehicule = vehiculeRepository.findByCode(rs.getString("immatriculation"));
+
+            String nomPrenomEleve = eleve.getNom() + eleve.getPrenom();
+            String nomPrenomMoniteur = moniteur.getNom() + moniteur.getPrenom();
+            String nomPermis = permis.getLibelle();
+            String modeleVehicule = vehicule.getModele();
+
+            Lecon l = new Lecon(id, date, immatriculation, reglee, eleve, moniteur, permis, heure, nomPermis, modeleVehicule, nomPrenomMoniteur, nomPrenomEleve);
+            lecons.add(l);
+        }
+        return lecons;
+    }
+
     public ArrayList<Lecon> getAllLeconForMoniteur(int codeEleveActif) throws SQLException {
         ArrayList<Lecon> lecons = new ArrayList<>();
         PreparedStatement ps = connexion.prepareStatement("SELECT id, date, heure, immatriculation, reglee, idEleve, idMoniteur, idPermis FROM lecon where idMoniteur = ? AND date BETWEEN CURDATE() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY) ORDER BY(date) ASC");
+        ps.setInt(1, codeEleveActif);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            int id = rs.getInt("id");
+            Date date = Date.valueOf(rs.getString("date"));
+            String heure = rs.getString("heure");
+            int reglee = rs.getInt("reglee");
+
+            String immatriculation = rs.getString("immatriculation");
+            int idEleve = rs.getInt("idEleve");
+            Utilisateur eleve = utilisateurRepository.findByCode(idEleve);
+            int idMoniteur = rs.getInt("idMoniteur");
+            Utilisateur moniteur = utilisateurRepository.findByCode(idMoniteur);
+            int idPermis = rs.getInt("idPermis");
+            Permis permis = permisRepository.findByCode(idPermis);
+            Vehicule vehicule = vehiculeRepository.findByCode(rs.getString("immatriculation"));
+
+            String nomPrenomEleve = eleve.getNom() + eleve.getPrenom();
+            String nomPrenomMoniteur = moniteur.getNom() + moniteur.getPrenom();
+            String nomPermis = permis.getLibelle();
+            String modeleVehicule = vehicule.getModele();
+
+            Lecon l = new Lecon(id, date, immatriculation, reglee, eleve, moniteur, permis, heure, nomPermis, modeleVehicule, nomPrenomMoniteur, nomPrenomEleve);
+            lecons.add(l);
+        }
+        return lecons;
+    }
+
+    public ArrayList<Lecon> getAllFuturLeconForMoniteur(int codeEleveActif) throws SQLException {
+        ArrayList<Lecon> lecons = new ArrayList<>();
+        PreparedStatement ps = connexion.prepareStatement("SELECT id, date, heure, immatriculation, reglee, idEleve, idMoniteur, idPermis FROM lecon where idMoniteur = ? AND date BETWEEN NOW() AND DATE_ADD(CURDATE(), INTERVAL 7 DAY) ORDER BY(date) ASC");
         ps.setInt(1, codeEleveActif);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
@@ -144,6 +206,18 @@ public class LeconRepository {
 
         }
         return heuresByMoniteur;
+    }
+
+    public void create (Lecon l) throws SQLException {
+        PreparedStatement ps = connexion.prepareStatement("INSERT INTO (date, heure, immatriculation, reglee, idEleve, idMoniteur, idPermis) VALUES (?,?,?,?,?,?,?)");
+        ps.setDate(1, l.getDate());
+        ps.setString(2, l.getHeure());
+        ps.setString(3, l.getImmatriculation());
+        ps.setInt(4, l.getReglee());
+        ps.setInt(5, l.getEleve().getCode());
+        ps.setInt(6, l.getMoniteur().getCode());
+        ps.setInt(7, l.getPermis().getId());
+        ps.executeUpdate();
     }
 
 
