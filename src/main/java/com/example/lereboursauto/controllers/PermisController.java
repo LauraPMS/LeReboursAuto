@@ -13,17 +13,14 @@ public class PermisController {
     }
 
     public ArrayList<String> getLicence(int statutCompte) throws SQLException {
-        /**
-         * Fonction qui va rechercher la liste des permis de l'élève
-         **/
         return permisServices.getLicence(statutCompte);
     }
 
     public int getIdPermisByLibelle(String licenceUser) throws SQLException {
-        /**
-         * Fonction qui va renvoyer l'id du permis selon son libelle
-         **/
-
         return permisServices.getIdPermisByLibelle(licenceUser);
+    }
+
+    public int getIdByName(String name) throws SQLException {
+        return permisServices.getIdByName(name);
     }
 }

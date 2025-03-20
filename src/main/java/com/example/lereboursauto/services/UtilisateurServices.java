@@ -4,6 +4,7 @@ import com.example.lereboursauto.models.Utilisateur;
 import com.example.lereboursauto.repository.UtilisateurRepository;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class UtilisateurServices {
     UtilisateurRepository utilisateurRepository;
@@ -27,5 +28,9 @@ public class UtilisateurServices {
 
     public void delete(Utilisateur utilisateuru) throws SQLException {
         utilisateurRepository.delete(utilisateuru);
+    }
+
+    public ArrayList<Utilisateur> getALlMoniteurAvecLicence(int idPremis) throws SQLException {
+        return utilisateurRepository.getALlMoniteurAvecLicence(idPremis);
     }
 }

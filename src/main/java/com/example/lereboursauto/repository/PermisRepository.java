@@ -58,4 +58,12 @@ public class PermisRepository {
         return numPermis;
     }
 
+    public int getIdByNom (String nom) throws SQLException{
+        PreparedStatement ps = connexion.prepareStatement("SELECT id FROM permis where libelle = ?;");
+        ps.setString(1, nom);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        return rs.getInt("id");
+    }
+
 }

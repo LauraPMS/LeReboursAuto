@@ -221,4 +221,38 @@ public class LeconRepository {
     }
 
 
+    // récupérer les horaires pour une date donnée
+    public ArrayList<String> getHorrairesNonDispo(int idPermis, String date) throws SQLException {
+        ArrayList<String> horrairesNonDispo = new ArrayList<>();
+        PreparedStatement ps = connexion.prepareStatement("SELECT heure \n" +
+                "FROM lecon \n" +
+                "WHERE idPermis = ? AND date = ?;");
+
+        ps.setInt(1, idPermis);
+        ps.setString(2, date);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            horrairesNonDispo.add(rs.getString("heure"));
+        }
+        return horrairesNonDispo;
+    }
+
+    public ArrayList<Utilisateur> getMoniteursNonDispo( String date, String horraire) throws SQLException {
+        ArrayList<Utilisateur> moniteursNonDispo = new ArrayList<>();
+        PreparedStatement ps = connexion.prepareStatement("SELECT idUser \n"+
+                "FROM lecon \n" +
+                "WHERE date = ? AND horraire = ?;");
+
+        ps.setString(1, date);
+        ps.setString(2, date);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            moniteursNonDispo.add(utilisateurRepository.findByCode(rs.getInt("idUser")));
+        }
+        return moniteursNonDispo;
+    }
+
+
+
+
 }

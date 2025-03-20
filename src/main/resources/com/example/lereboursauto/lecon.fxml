@@ -10,7 +10,6 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lereboursauto.LeconViewController">
    <children>
       <HBox alignment="CENTER_RIGHT" layoutX="16.0" layoutY="17.0" prefHeight="44.0" prefWidth="794.0" spacing="20.0">
@@ -59,10 +58,11 @@
       </Text>
       <ListView fx:id="lvPermis" layoutX="52.0" layoutY="160.0" prefHeight="145.0" prefWidth="200.0" />
       <DatePicker fx:id="dpDate" layoutX="50.0" layoutY="342.0" prefHeight="34.0" prefWidth="205.0" />
-      <ListView fx:id="lvHorraire" layoutX="53.0" layoutY="406.0" prefHeight="145.0" prefWidth="198.0" />
-      <ListView fx:id="lvMoniteurDispo" layoutX="328.0" layoutY="159.0" prefHeight="392.0" prefWidth="200.0" />
-      <ListView fx:id="lvVehiculeDispo" layoutX="587.0" layoutY="161.0" prefHeight="389.0" prefWidth="200.0" />
-      <Button layoutX="844.0" layoutY="305.0" mnemonicParsing="false" onAction="#prendreLecon" prefHeight="42.0" prefWidth="131.0" text="Prendre Leçon" />
+      <ListView fx:id="lvHorraire" layoutX="301.0" layoutY="160.0" onMouseClicked="#updateMoniteur_Vehicule" prefHeight="334.0" prefWidth="198.0" />
+      <ListView fx:id="lvMoniteurDispo" layoutX="528.0" layoutY="159.0" prefHeight="334.0" prefWidth="200.0" />
+      <ListView fx:id="lvVehiculeDispo" layoutX="753.0" layoutY="159.0" prefHeight="334.0" prefWidth="200.0" />
+      <Button layoutX="826.0" layoutY="508.0" mnemonicParsing="false" onAction="#prendreLecon" prefHeight="42.0" prefWidth="131.0" text="Prendre Leçon" />
       <Button layoutX="62.0" layoutY="90.0" mnemonicParsing="false" onAction="#changeToApPlanning" text="Retour au planning" />
+      <Button layoutX="37.0" layoutY="422.0" mnemonicParsing="false" onAction="#updateHoraire" text="Afficher les horraire restantes disponible" />
    </children>
 </AnchorPane>

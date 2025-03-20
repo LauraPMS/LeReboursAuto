@@ -5,6 +5,7 @@ import com.example.lereboursauto.models.Utilisateur;
 import com.example.lereboursauto.tools.ConnexionBDD;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class UtilisateurRepository {
     private Connection connexion;
@@ -106,6 +107,23 @@ public class UtilisateurRepository {
         PreparedStatement ps = connexion.prepareStatement("DELETE FROM utilisateur WHERE code = ? ");
         ps.setInt(1, u.getCode());
         ps.executeUpdate();
+    }
+
+
+    // findBy
+    public ArrayList<Utilisateur> getALlMoniteurAvecLicence(int idPremis) throws SQLException {
+        PreparedStatement ps = connexion.prepareStatement("SELECT code FROM utilisateur " +
+                "JOIN licence ON licence.idUser = utilisateur.code " +
+                "WHERE statut = ? AND licence.codeCategorie = ? ");
+        ps.setInt(1, 2);
+        ps.setInt(2, idPremis);
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Utilisateur> utilisateurs = new ArrayList<>();
+        while (rs.next()) {
+            utilisateurs.add(findByCode(rs.getInt("code")));
+        }
+        return utilisateurs;
+
     }
 
 }

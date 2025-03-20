@@ -1,13 +1,26 @@
 package com.example.lereboursauto;
 
+import com.example.lereboursauto.controllers.*;
+import com.example.lereboursauto.models.Licence;
+import com.example.lereboursauto.models.Permis;
+import com.example.lereboursauto.models.Utilisateur;
 import com.example.lereboursauto.services.Session;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.fxml.Initializable;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 
 import java.io.IOException;
+import java.net.URL;
+import java.sql.Date;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
 
-public class LeconViewController {
+public class LeconViewController implements Initializable {
 
 
     /*
@@ -21,15 +34,60 @@ public class LeconViewController {
 
 
     @javafx.fxml.FXML
-    private ListView lvVehiculeDispo;
-    @javafx.fxml.FXML
-    private ListView lvMoniteurDispo;
-    @javafx.fxml.FXML
-    private ListView lvPermis;
+    private ListView lvVehiculeDispo, lvMoniteurDispo, lvPermis, lvHorraire;
+
     @javafx.fxml.FXML
     private DatePicker dpDate;
+
+    LicenceController licenceController;
+    LeconController leconController;
+    UtilisateurController utilisateurController;
+    VehiculeController vehiculeController;
+    PermisController permisController;
+
+    ArrayList<Licence> licences;
+    int idPermisConcernee = 0;
+
+
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        licenceController = new LicenceController();
+        utilisateurController = new UtilisateurController();
+        vehiculeController = new VehiculeController();
+        leconController = new LeconController();
+        permisController = new PermisController();
+        licences = new ArrayList<>();
+
+        // Récupérer tt les licences auquels l'utilisateur a souscrit
+        try {
+            licences = licenceController.getAllLicencesEleve(Session.getCodeEleveActif());
+            ArrayList<String> nomLicence = new ArrayList<>();
+            nomLicence = permisController.getLicence(Session.getCodeEleveActif());
+
+            lvPermis.setItems(FXCollections.observableList(nomLicence));
+            dpDate.setValue(LocalDate.now());
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
+    }
+
     @javafx.fxml.FXML
-    private ListView lvHorraire;
+    public void prendreLecon(ActionEvent actionEvent) {
+        int idPermis = 0;
+        int idEleve = Session.getCodeEleveActif();
+        int idMoniteur = 0;
+        Date date = null;
+        String heure = null;
+        int reglee = 0;
+        String immatriculation = null;
+
+    }
+
+
 
     @javafx.fxml.FXML
     public void changeToApPlanning(ActionEvent actionEvent) throws IOException {
@@ -56,23 +114,32 @@ public class LeconViewController {
         Session.changerScene("permis.fxml", "Le Rebours Auto - Permis", actionEvent);
     }
 
+
     @javafx.fxml.FXML
-    public void prendreLecon(ActionEvent actionEvent) {
-        // récupérer permis souscrit puis afficher
+    public void updateMoniteur_Vehicule(Event event) throws SQLException {
+        System.out.println(lvHorraire.getSelectionModel().getSelectedItem());
+        ArrayList<Utilisateur> moniteurs = utilisateurController.getALlMoniteurAvecLicence(idPermisConcernee);
 
-        // récuperer la date dans le dpDate
 
-        // faire une liste avec les horraire en enlevant les horraire s'il y a deja une lecon sur le créneau
 
-        // récupérer puis afficher les moniteurs et véhicule dispo a cette date (moniteur doit avoir la licence du permis et véhicule doit correspondre au permis et doit etre libre)
-
-        // Créer la leçons avec un insert dans le repo (fonction à créer).
-
-        // afficher une alert Session.creerAlert(....)
-
-        // reset tout les champs
     }
 
+    @javafx.fxml.FXML
+    public void updateHoraire(ActionEvent actionEvent) throws SQLException {
 
+        ArrayList<String> horraires = new ArrayList<>();
 
+        for (int heure = 9; heure <= 17; heure++) {
+            String h = String.format("%02d:00:00", heure);
+            horraires.add(h);
+        }
+
+        String date = dpDate.getValue().toString();
+        int idPermis = permisController.getIdPermisByLibelle(lvPermis.getSelectionModel().getSelectedItem().toString());
+        idPermisConcernee = idPermis;
+
+        horraires.removeAll(leconController.getHorrairesNonDispo(idPermis, date));
+        lvHorraire.setItems(FXCollections.observableList(horraires));
+
+    }
 }

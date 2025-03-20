@@ -28,4 +28,8 @@ public class PermisServices {
 
         return permisRepository.getIdPermisByLibelle(licenceUser);
     }
+
+    public int getIdByName(String nom) throws SQLException {
+        return permisRepository.getIdByNom(nom);
+    }
 }

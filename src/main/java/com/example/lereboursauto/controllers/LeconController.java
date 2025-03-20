@@ -64,4 +64,8 @@ public class LeconController {
         return leconServices.getHeuresByMoniteurs(statutCompte, idPermis);
     }
 
+    public ArrayList<String> getHorrairesNonDispo(int idPermis, String date) throws SQLException {
+        return leconServices.getHorrairesNonDispo(idPermis, date);
+    }
+
 }
