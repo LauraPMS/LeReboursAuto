@@ -286,7 +286,10 @@ public class LeconRepository {
         return datePermis;
     }
 
-
-
+    public void update(String idLecon) throws SQLException {
+        PreparedStatement ps = connexion.prepareStatement("UPDATE lecon SET reglee = 1 WHERE id = ?;");
+        ps.setString(1, idLecon);
+        ps.executeUpdate();
+    }
 
 }

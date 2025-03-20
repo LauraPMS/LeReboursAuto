@@ -3,6 +3,7 @@ package com.example.lereboursauto.services;
 import com.example.lereboursauto.models.Lecon;
 import com.example.lereboursauto.repository.LeconRepository;
 
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,5 +70,8 @@ public class LeconServices {
 
     public String getHeureLecon(String idLecon) throws SQLException {
         return leconRepository.getHeureLecon(idLecon);
+    }
+    public void update(String idLecon) throws SQLException {
+        leconRepository.update(idLecon);
     }
 }

@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.AnchorPane;
@@ -199,7 +200,24 @@ public class ReglementViewController implements Initializable {
     }
 
     @javafx.fxml.FXML
-    public void onBtnReglerLeconClicked(Event event) {
+    public void onBtnReglerLeconClicked(Event event) throws SQLException {
+        if (lvResumeLecon.getSelectionModel().getSelectedItem() == null){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Erreur");
+            alert.setHeaderText("Veuillez selectionner une lecon !");
+            alert.showAndWait();
+        }
+
+        else
+        {
+            String idLecon = lvResumeLecon.getSelectionModel().getSelectedItem().toString();
+            leconController.update(idLecon);
+            lvResumeLecon.setItems(FXCollections.observableList(leconController.getLeconNR(Session.getCodeEleveActif())));
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("INFORMATION");
+            alert.setHeaderText("Votre paiement à bien été accepté !");
+            alert.showAndWait();
+        }
     }
 
 }
