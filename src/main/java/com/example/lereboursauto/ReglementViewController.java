@@ -50,7 +50,7 @@ public class ReglementViewController implements Initializable {
     @javafx.fxml.FXML
     private Text lblNomPrenomMoniteurLecon;
     @javafx.fxml.FXML
-    private Text lblRevenuAnnuel, lblReglee;
+    private Text lblRevenuAnnuel;
     @javafx.fxml.FXML
     private Button majRevenu;
     @javafx.fxml.FXML
@@ -65,6 +65,8 @@ public class ReglementViewController implements Initializable {
     UtilisateurController utilisateurController;
     VehiculeController vehiculeController;
     Utilisateur u ;
+    @javafx.fxml.FXML
+    private Text lblPrixLecon;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -123,6 +125,9 @@ public class ReglementViewController implements Initializable {
 
                 lblModeleVehiculeLecon.setText(vehiculeController.getModeleVehiculeLecon(idPermisByLecon));
 
+                /** initialisation du label modele vehicule **/
+                String prix = String.valueOf(permisController.getPrixLeconByIdLecon(idPermisByLecon)) + " euros";
+                lblPrixLecon.setText(prix);
 
             }
 
@@ -185,6 +190,11 @@ public class ReglementViewController implements Initializable {
         lblMarqueVehiculeLecon.setText(vehiculeController.getMarqueVehiculeLecon(idLvLecon));
 
         lblModeleVehiculeLecon.setText(vehiculeController.getModeleVehiculeLecon(idLvLecon));
+
+        String prixLecon = String.valueOf(permisController.getPrixLeconByIdLecon(idLvLecon)) + " euros";
+        lblPrixLecon.setText(prixLecon);
+
+
 
     }
 

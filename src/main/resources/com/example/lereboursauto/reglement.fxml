@@ -57,7 +57,7 @@
       <AnchorPane fx:id="apEleve" layoutX="2.0" layoutY="82.0" prefHeight="516.0" prefWidth="999.0">
          <children>
             <ListView fx:id="lvResumeLecon" layoutX="93.0" layoutY="97.0" onMouseClicked="#onLvLeconNRClicked" prefHeight="348.0" prefWidth="258.0" />
-            <Button fx:id="btnReglerLecon" layoutX="567.0" layoutY="423.0" mnemonicParsing="false" onMouseClicked="#onBtnReglerLeconClicked" prefHeight="44.0" prefWidth="146.0" text="Regler la leçon" />
+            <Button fx:id="btnReglerLecon" layoutX="567.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#onBtnReglerLeconClicked" prefHeight="44.0" prefWidth="146.0" text="Regler la leçon" />
             <VBox layoutX="484.0" layoutY="99.0" prefHeight="266.0" prefWidth="311.0">
                <children>
                   <HBox alignment="CENTER" layoutX="10.0" layoutY="90.0" prefHeight="40.0" prefWidth="100.0" spacing="10.0">

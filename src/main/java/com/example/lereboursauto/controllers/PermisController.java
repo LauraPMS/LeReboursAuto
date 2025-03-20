@@ -27,4 +27,8 @@ public class PermisController {
     public String getPermisByIdLecon(String idLecon) throws SQLException {
         return permisServices.getPermisByIdLecon(idLecon);
     }
+
+    public int getPrixLeconByIdLecon(String idLecon) throws SQLException {
+        return permisServices.getPrixLeconByIdLecon(idLecon);
+    }
 }
