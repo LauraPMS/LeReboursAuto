@@ -33,4 +33,8 @@ public class UtilisateurServices {
     public ArrayList<Utilisateur> getALlMoniteurAvecLicence(int idPremis) throws SQLException {
         return utilisateurRepository.getALlMoniteurAvecLicence(idPremis);
     }
+
+    public String getMoniteurLecon(String idLecon) throws SQLException {
+        return utilisateurRepository.getMoniteurLecon(idLecon);
+    }
 }

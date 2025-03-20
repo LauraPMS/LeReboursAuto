@@ -32,4 +32,8 @@ public class PermisServices {
     public int getIdByName(String nom) throws SQLException {
         return permisRepository.getIdByNom(nom);
     }
+
+    public String getPermisByIdLecon(String idLecon) throws SQLException {
+        return permisRepository.getPermisByIdLecon(idLecon);
+    }
 }

@@ -1,9 +1,15 @@
 package com.example.lereboursauto;
 
+import com.example.lereboursauto.controllers.LeconController;
+import com.example.lereboursauto.controllers.PermisController;
+import com.example.lereboursauto.controllers.UtilisateurController;
+import com.example.lereboursauto.controllers.VehiculeController;
 import com.example.lereboursauto.models.Utilisateur;
 import com.example.lereboursauto.repository.UtilisateurRepository;
 import com.example.lereboursauto.services.Session;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
@@ -23,28 +29,105 @@ public class ReglementViewController implements Initializable {
      * Le controlleur Reglement doit satisfaire ces besoins :
      * - Faire un recap de toute les leçons.
      * - coût de chaque permis
-     * - payer les lecons non payé
+     * - payer les lecons non payées
      * - pour le moniteur il doit pouvoir visualiser son salaire en fonction des lecon que l'élève a déja réglée
 
      */
+    @javafx.fxml.FXML
+    private Text lblDateLecon;
+    @javafx.fxml.FXML
+    private Text lblMarqueVehiculeLecon;
+    @javafx.fxml.FXML
+    private Text lblHeureLecon;
+    @javafx.fxml.FXML
+    private Text lblRevenuParMois;
+    @javafx.fxml.FXML
+    private Text lblModeleVehiculeLecon;
+    @javafx.fxml.FXML
+    private Button btnReglerLecon;
+    @javafx.fxml.FXML
+    private Text lblPermisLecon;
+    @javafx.fxml.FXML
+    private Text lblNomPrenomMoniteurLecon;
+    @javafx.fxml.FXML
+    private Text lblRevenuAnnuel, lblReglee;
+    @javafx.fxml.FXML
+    private Button majRevenu;
+    @javafx.fxml.FXML
+    private AnchorPane apEleve, apMoniteur;
+    @javafx.fxml.FXML
+    private ListView lvMoniteurResumeLecon, lvResumeLecon;
 
     ArrayList<AnchorPane> listeAp ;
     UtilisateurRepository utilRepo;
+    LeconController leconController;
+    PermisController permisController;
+    UtilisateurController utilisateurController;
+    VehiculeController vehiculeController;
     Utilisateur u ;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        // instancier les variable / services ici
+        utilRepo = new UtilisateurRepository();
+        leconController = new LeconController();
+        permisController = new PermisController();
+        utilisateurController = new UtilisateurController();
+        vehiculeController = new VehiculeController();
+
         listeAp = new ArrayList<>();
         listeAp.add(apEleve);
         listeAp.add(apMoniteur);
-        Session.changeAp(listeAp, apMoniteur);
-        utilRepo = new UtilisateurRepository();
+
         try {
+
             u = utilRepo.findByCode(Session.getCodeEleveActif());
-            if (u.getStatut().equals(1)){
+
+            if (u.getStatut().getId() == 1)
+            {
                 Session.changeAp(listeAp, apEleve);
-                // remplir les liste view appartenant a la vue eleve
-            } else if (u.getStatut().equals(2)) {
+
+                /**
+                 *
+                 * remplir la vue Permis eleve ici
+                 *
+                 */
+
+                /** initialisation de la listeView listePermisEleve au lancement de la session **/
+                lvResumeLecon.setItems(FXCollections.observableList(leconController.getLeconNR(Session.getCodeEleveActif())));
+                lvResumeLecon.getSelectionModel().selectFirst();
+
+                String idPermisByLecon = lvResumeLecon.getSelectionModel().getSelectedItem().toString();
+
+                /** initialisation du label permis **/
+
+                lblPermisLecon.setText(permisController.getPermisByIdLecon(idPermisByLecon));
+
+                /** initialisation du label date **/
+
+                lblDateLecon.setText(leconController.getDateLecon(idPermisByLecon));
+
+                /** initialisation du label heure **/
+
+                lblHeureLecon.setText(leconController.getHeureLecon(idPermisByLecon));
+
+                /** initialisation du label moniteur **/
+
+                lblNomPrenomMoniteurLecon.setText(utilisateurController.getMoniteurLecon(idPermisByLecon));
+
+                /** initialisation du label marque vehicule **/
+
+                lblMarqueVehiculeLecon.setText(vehiculeController.getMarqueVehiculeLecon(idPermisByLecon));
+
+                /** initialisation du label modele vehicule **/
+
+                lblModeleVehiculeLecon.setText(vehiculeController.getModeleVehiculeLecon(idPermisByLecon));
+
+
+            }
+
+            else if (u.getStatut().getId() == 2)
+            {
                 Session.changeAp(listeAp, apMoniteur);
                 // remplir les liste view et graphique a la vue moniteur
             }
@@ -53,21 +136,11 @@ public class ReglementViewController implements Initializable {
         }
     }
 
-    @javafx.fxml.FXML
-    private Text lblMarqueVéhicule, lblModeleVehicule, lblRevenuAnnuel, lblNomPrenomMoniteur, lblRevenuParMois, lblReglee;
-
-    @javafx.fxml.FXML
-    private Button majRevenu, btnregleeLecon;
-
-    @javafx.fxml.FXML
-    private AnchorPane apEleve, apMoniteur;
-
-    @javafx.fxml.FXML
-    private ListView lvMoniteurResumeLecon, lvResumeLecon;
 
 
 
-    @javafx.fxml.FXML
+
+    @Deprecated
     public void reglerLecon(ActionEvent actionEvent) {
     }
 
@@ -82,7 +155,7 @@ public class ReglementViewController implements Initializable {
     }
 
     @javafx.fxml.FXML
-    public void changeToApRéglement(ActionEvent actionEvent) throws IOException {
+    public void changeToApReglement(ActionEvent actionEvent) throws IOException {
         Session.changerScene("reglement.fxml", "Le Rebours Auto - Reglement", actionEvent);
     }
 
@@ -96,8 +169,27 @@ public class ReglementViewController implements Initializable {
         Session.changerScene("permis.fxml", "Le Rebours Auto - Permis", actionEvent);
     }
 
+    @javafx.fxml.FXML
+    public void onLvLeconNRClicked(Event event) throws SQLException {
 
+        String idLvLecon = lvResumeLecon.getSelectionModel().getSelectedItem().toString();
 
+        lblPermisLecon.setText(permisController.getPermisByIdLecon(idLvLecon));
 
+        lblDateLecon.setText(leconController.getDateLecon(idLvLecon));
+
+        lblHeureLecon.setText((leconController.getHeureLecon(idLvLecon)));
+
+        lblNomPrenomMoniteurLecon.setText(utilisateurController.getMoniteurLecon(idLvLecon));
+
+        lblMarqueVehiculeLecon.setText(vehiculeController.getMarqueVehiculeLecon(idLvLecon));
+
+        lblModeleVehiculeLecon.setText(vehiculeController.getModeleVehiculeLecon(idLvLecon));
+
+    }
+
+    @javafx.fxml.FXML
+    public void onBtnReglerLeconClicked(Event event) {
+    }
 
 }

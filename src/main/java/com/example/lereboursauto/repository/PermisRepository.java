@@ -66,4 +66,19 @@ public class PermisRepository {
         return rs.getInt("id");
     }
 
+    public String getPermisByIdLecon(String idLecon) throws SQLException {
+        /** Fonction qui va rechercher un permis selon son libelle **/
+        PreparedStatement ps;
+        ps = connexion.prepareStatement("SELECT libelle\n" +
+                "FROM permis\n" +
+                "JOIN lecon on permis.id = lecon.idPermis\n" +
+                "WHERE lecon.id = ?");
+        ps.setString(1, idLecon);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        String libellePermis = rs.getString("libelle");
+        return libellePermis;
+    }
+
+
 }

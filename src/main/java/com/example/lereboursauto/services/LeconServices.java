@@ -59,4 +59,15 @@ public class LeconServices {
         return leconRepository.getHorrairesNonDispo(idPermis, date);
     }
 
+    public ArrayList<Integer> getLeconNR(int idEleve) throws SQLException {
+        return leconRepository.getLeconNR(idEleve);
+    }
+
+    public String getDateLecon(String idLecon) throws SQLException {
+        return leconRepository.getDateLecon(idLecon);
+    }
+
+    public String getHeureLecon(String idLecon) throws SQLException {
+        return leconRepository.getHeureLecon(idLecon);
+    }
 }

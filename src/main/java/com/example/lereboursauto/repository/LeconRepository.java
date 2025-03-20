@@ -252,6 +252,40 @@ public class LeconRepository {
         return moniteursNonDispo;
     }
 
+    public ArrayList<Integer> getLeconNR(int idEleve) throws SQLException {
+        ArrayList<Integer> leconsNR = new ArrayList<>();
+        PreparedStatement ps;
+        ps = connexion.prepareStatement("SELECT id FROM Lecon WHERE idEleve = ? AND Reglee = 0;");
+        ps.setInt(1, idEleve);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            leconsNR.add(rs.getInt("id"));
+        }
+        return leconsNR;
+    }
+
+    public String getDateLecon(String idLecon) throws SQLException {
+        /** Fonction qui va rechercher la date d'une lecon selon l'idLecon **/
+        PreparedStatement ps;
+        ps = connexion.prepareStatement("SELECT date FROM lecon WHERE lecon.id = ?;");
+        ps.setString(1, idLecon);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        String datePermis = rs.getString("date");
+        return datePermis;
+    }
+
+    public String getHeureLecon(String idLecon) throws SQLException {
+        /** Fonction qui va rechercher l'heure d'une lecon selon l'idLecon **/
+        PreparedStatement ps;
+        ps = connexion.prepareStatement("SELECT heure FROM lecon WHERE lecon.id = ?;");
+        ps.setString(1, idLecon);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        String datePermis = rs.getString("heure");
+        return datePermis;
+    }
+
 
 
 

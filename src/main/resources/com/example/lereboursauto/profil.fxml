@@ -100,7 +100,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#changeToApRéglement" prefHeight="35.0" prefWidth="101.0" style="-fx-background-color: transparent;" text="Reglement">
+            <Button mnemonicParsing="false" onAction="#changeToApReglement" prefHeight="35.0" prefWidth="101.0" style="-fx-background-color: transparent;" text="Reglement">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

@@ -7,26 +7,30 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class UtilisateurController {
-    UtilisateurServices service = new UtilisateurServices();
+    UtilisateurServices utilisateurService = new UtilisateurServices();
 
     public UtilisateurController() {
-        service = new UtilisateurServices();
+        utilisateurService = new UtilisateurServices();
     }
 
     public Utilisateur findByCode(int id) throws SQLException {
-        return service.findByCode(id);
+        return utilisateurService.findByCode(id);
     }
     public void create(Utilisateur utilisateur) throws SQLException {
-        service.create(utilisateur);
+        utilisateurService.create(utilisateur);
     }
     public void update(Utilisateur utilisateur) throws SQLException {
-        service.update(utilisateur);
+        utilisateurService.update(utilisateur);
     }
     public void delete(Utilisateur utilisateur) throws SQLException {
-        service.delete(utilisateur);
+        utilisateurService.delete(utilisateur);
     }
 
     public ArrayList<Utilisateur> getALlMoniteurAvecLicence(int idPremis) throws SQLException {
-        return service.getALlMoniteurAvecLicence(idPremis);
+        return utilisateurService.getALlMoniteurAvecLicence(idPremis);
+    }
+
+    public String getMoniteurLecon(String idLecon) throws SQLException {
+        return utilisateurService.getMoniteurLecon(idLecon);
     }
 }

@@ -130,6 +130,7 @@ public class PermisViewController implements Initializable {
                 }
                  **/
 
+
                 /** initialisation du graphique des heures par véhicules au lancement de la session **/
                 majGraphique1(Session.getCodeEleveActif(), permisController.getIdPermisByLibelle(lvEleveToutPermis.getSelectionModel().getSelectedItem().toString()));
 
@@ -137,8 +138,6 @@ public class PermisViewController implements Initializable {
                 /** initialisation du graphique des heures par moniteurs au lancement de la session **/
 
                 majGraphique2(permisController.getIdPermisByLibelle(lvEleveToutPermis.getSelectionModel().getSelectedItem().toString()));
-
-
 
 
             } else if (u.getStatut().getId() == 2) {
@@ -205,13 +204,11 @@ public class PermisViewController implements Initializable {
 
         majGraphique2(numeroPermis);
 
-
-
     }
 
     public void majLabelHeuresByPermis(int numPermisEleve) throws SQLException {
 
-        /** mise à jour du label nombreHeuresTotal au lancement de la session **/
+        /** mise à jour du label nombreHeuresTotal**/
 
         int totalHorraire = leconController.getTotalHeuresByLicence(Session.getCodeEleveActif(), numPermisEleve);
 
@@ -222,7 +219,7 @@ public class PermisViewController implements Initializable {
     }
 
     public void majGraphique1(int idUser, int idPermis) throws SQLException {
-        /** initialisation du graphique des heures par véhicules au lancement de la session **/
+        /** mise a jour du graphique des heures par véhicules **/
 
         graphEleveHeuresVehicules.getData().clear();
 
@@ -238,7 +235,7 @@ public class PermisViewController implements Initializable {
     }
 
     public void majGraphique2(int numPermisEleve) throws SQLException {
-        /** initialisation du graphique des heures par moniteurs au lancement de la session **/
+        /** mise a jour du graphique des heures par moniteurs **/
 
         // initialisation des colonnes ELeve
 

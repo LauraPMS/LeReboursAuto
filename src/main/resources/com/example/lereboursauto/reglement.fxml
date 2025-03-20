@@ -42,7 +42,7 @@
                   <Font name="System Bold" size="15.0" />
                </font>
             </Button>
-            <Button mnemonicParsing="false" onAction="#changeToApRéglement" prefHeight="35.0" prefWidth="204.0" style="-fx-background-color: #d9fbff;" text="Reglement">
+            <Button mnemonicParsing="false" onAction="#changeToApReglement" prefHeight="35.0" prefWidth="204.0" style="-fx-background-color: #d9fbff;" text="Reglement">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -54,12 +54,54 @@
             </ImageView>
          </children>
       </HBox>
-      <AnchorPane fx:id="apEleve" layoutX="2.0" layoutY="82.0" prefHeight="516.0" prefWidth="999.0" visible="false">
+      <AnchorPane fx:id="apEleve" layoutX="2.0" layoutY="82.0" prefHeight="516.0" prefWidth="999.0">
          <children>
-            <ListView fx:id="lvResumeLecon" layoutX="93.0" layoutY="97.0" prefHeight="348.0" prefWidth="258.0" />
-            <Button fx:id="btnregleeLecon" layoutX="586.0" layoutY="388.0" mnemonicParsing="false" onAction="#reglerLecon" text="Regler la leçon" />
-            <VBox layoutX="468.0" layoutY="165.0" prefHeight="200.0" prefWidth="271.0">
+            <ListView fx:id="lvResumeLecon" layoutX="93.0" layoutY="97.0" onMouseClicked="#onLvLeconNRClicked" prefHeight="348.0" prefWidth="258.0" />
+            <Button fx:id="btnReglerLecon" layoutX="567.0" layoutY="423.0" mnemonicParsing="false" onMouseClicked="#onBtnReglerLeconClicked" prefHeight="44.0" prefWidth="146.0" text="Regler la leçon" />
+            <VBox layoutX="484.0" layoutY="99.0" prefHeight="266.0" prefWidth="311.0">
                <children>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="90.0" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Permis : ">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblPermisLecon" strokeType="OUTSIDE" strokeWidth="0.0" text="PermisLecon">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date : ">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblDateLecon" strokeType="OUTSIDE" strokeWidth="0.0" text="DateLecon">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Heure : ">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblHeureLecon" strokeType="OUTSIDE" strokeWidth="0.0" text="HeureLecon">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
                   <HBox alignment="CENTER" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
                      <children>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Moniteur : ">
@@ -67,7 +109,7 @@
                               <Font size="15.0" />
                            </font>
                         </Text>
-                        <Text fx:id="lblNomPrenomMoniteur" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom et prénom du Moniteur">
+                        <Text fx:id="lblNomPrenomMoniteurLecon" strokeType="OUTSIDE" strokeWidth="0.0" text="NomPrenomMoniteurLecon">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -81,7 +123,7 @@
                               <Font size="15.0" />
                            </font>
                         </Text>
-                        <Text fx:id="lblMarqueVéhicule" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom et prénom du Moniteur">
+                        <Text fx:id="lblMarqueVehiculeLecon" strokeType="OUTSIDE" strokeWidth="0.0" text="MarqueVehiculeLecon">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -95,21 +137,21 @@
                               <Font size="15.0" />
                            </font>
                         </Text>
-                        <Text fx:id="lblModeleVehicule" strokeType="OUTSIDE" strokeWidth="0.0" text="Nom et prénom du Moniteur">
+                        <Text fx:id="lblModeleVehiculeLecon" strokeType="OUTSIDE" strokeWidth="0.0" text="ModeleVehiculeLecon">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
                      </children>
                   </HBox>
-                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="210.0" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="A été réglée ?">
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prix :">
                            <font>
                               <Font size="15.0" />
                            </font>
                         </Text>
-                        <Text fx:id="lblReglee" strokeType="OUTSIDE" strokeWidth="0.0" text="Oui ou non">
+                        <Text fx:id="lblPrixLecon" strokeType="OUTSIDE" strokeWidth="0.0" text="PrixLecon">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -118,17 +160,22 @@
                   </HBox>
                </children>
             </VBox>
-            <Text layoutX="542.0" layoutY="131.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Résumé de la leçon">
+            <Text layoutX="495.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Informations concernant la leçon :">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+            <Text layoutX="93.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des lecons non réglées :">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="apMoniteur" layoutX="2.0" layoutY="82.0" prefHeight="516.0" prefWidth="996.0">
+      <AnchorPane fx:id="apMoniteur" layoutX="2.0" layoutY="82.0" prefHeight="516.0" prefWidth="996.0" visible="false">
          <children>
-            <ListView fx:id="lvMoniteurResumeLecon" layoutX="65.0" layoutY="128.0" prefHeight="354.0" prefWidth="222.0" />
-            <Text layoutX="61.0" layoutY="97.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Résumé des lecons réglée du mois">
+            <ListView fx:id="lvMoniteurResumeLecon" layoutX="65.0" layoutY="101.0" prefHeight="299.0" prefWidth="222.0" />
+            <Text layoutX="62.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Résumé des lecons réglée du mois">
                <font>
                   <Font size="15.0" />
                </font>

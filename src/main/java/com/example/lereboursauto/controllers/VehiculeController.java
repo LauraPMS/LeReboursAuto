@@ -21,4 +21,12 @@ public class VehiculeController {
 
         return vehiculeServices.getVehiculesByPermis(statutCompte, licenceUser);
     }
+
+    public String getMarqueVehiculeLecon(String idLecon) throws SQLException {
+        return vehiculeServices.getMarqueVehiculeLecon(idLecon);
+    }
+
+    public String getModeleVehiculeLecon(String idLecon) throws SQLException {
+        return vehiculeServices.getModeleVehiculeLecon(idLecon);
+    }
 }

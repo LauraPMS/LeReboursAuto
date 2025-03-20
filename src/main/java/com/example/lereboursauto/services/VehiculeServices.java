@@ -19,4 +19,12 @@ public class VehiculeServices {
 
         return vehiculeRepository.getVehiculesByPermis(statutCompte, licenceUser);
     }
+
+    public String getMarqueVehiculeLecon(String idLecon) throws SQLException {
+        return vehiculeRepository.getMarqueVehiculeLecon(idLecon);
+    }
+
+    public String getModeleVehiculeLecon(String idLecon) throws SQLException {
+        return vehiculeRepository.getModeleVehiculeLecon(idLecon);
+    }
 }

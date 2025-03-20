@@ -3,8 +3,6 @@ package com.example.lereboursauto;
 import com.example.lereboursauto.controllers.LeconController;
 import com.example.lereboursauto.controllers.UtilisateurController;
 import com.example.lereboursauto.models.Utilisateur;
-import com.example.lereboursauto.repository.LeconRepository;
-import com.example.lereboursauto.repository.UtilisateurRepository;
 import com.example.lereboursauto.services.ConnexionServices;
 import com.example.lereboursauto.services.Session;
 import javafx.collections.FXCollections;
@@ -195,8 +193,8 @@ public class ProfilViewController implements Initializable {
 
 
     @javafx.fxml.FXML
-    public void changeToApRéglement(ActionEvent actionEvent) throws IOException {
-        Session.changerScene("lecon.fxml", "Prendre une Lecon", actionEvent);
+    public void changeToApReglement(ActionEvent actionEvent) throws IOException {
+        Session.changerScene("reglement.fxml", "Prendre une Lecon", actionEvent);
     }
 
 

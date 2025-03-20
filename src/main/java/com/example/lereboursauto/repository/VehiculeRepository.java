@@ -48,4 +48,26 @@ public class VehiculeRepository {
         }
         return vehiculesPermisEleve;
     }
+
+    public String getMarqueVehiculeLecon(String idLecon) throws SQLException {
+        /** Fonction qui va rechercher la marque d'un vehicule selon l'idLecon **/
+        PreparedStatement ps;
+        ps = connexion.prepareStatement("SELECT marque FROM vehicule JOIN lecon on vehicule.immatriculation = lecon.immatriculation WHERE lecon.id = ?;");
+        ps.setString(1, idLecon);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        String marqueVehicule = rs.getString("marque");
+        return marqueVehicule;
+    }
+
+    public String getModeleVehiculeLecon(String idLecon) throws SQLException {
+        /** Fonction qui va rechercher le modele d'un vehicule selon l'idLecon **/
+        PreparedStatement ps;
+        ps = connexion.prepareStatement("SELECT modele FROM vehicule JOIN lecon on vehicule.immatriculation = lecon.immatriculation WHERE lecon.id = ?;");
+        ps.setString(1, idLecon);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        String modeleVehicule = rs.getString("modele");
+        return modeleVehicule;
+    }
 }

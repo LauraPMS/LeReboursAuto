@@ -68,4 +68,16 @@ public class LeconController {
         return leconServices.getHorrairesNonDispo(idPermis, date);
     }
 
+    public ArrayList<Integer> getLeconNR(int idEleve) throws SQLException {
+        return leconServices.getLeconNR(idEleve);
+    }
+
+    public String getDateLecon(String idLecon) throws SQLException {
+        return leconServices.getDateLecon(idLecon);
+    }
+
+    public String getHeureLecon(String idLecon) throws SQLException {
+        return leconServices.getHeureLecon(idLecon);
+    }
+
 }
