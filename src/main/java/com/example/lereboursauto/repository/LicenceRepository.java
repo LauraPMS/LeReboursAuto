@@ -58,4 +58,12 @@ public class LicenceRepository {
         return licences;
     }
 
+    public void createLicence(Licence licence) throws SQLException {
+        PreparedStatement ps = connexion.prepareStatement("INSERT INTO licence (idUser, codeCategorie, dateObtention) VALUES (?, ?, ?)");
+        ps.setInt(1, licence.getIdUtilisateur().getCode());
+        ps.setInt(2, licence.getIdCategorie().getId());
+        ps.setDate(3, licence.getDateObtention());
+        ps.executeUpdate();
+    }
+
 }

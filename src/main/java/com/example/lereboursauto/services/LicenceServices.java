@@ -22,6 +22,10 @@ public class LicenceServices {
         return licenceRepository.getAllLicencesMoniteur(code);
     }
 
+    public void createLicence(Licence licence) throws SQLException {
+        licenceRepository.createLicence(licence);
+    }
 
 
-}
+
+    }

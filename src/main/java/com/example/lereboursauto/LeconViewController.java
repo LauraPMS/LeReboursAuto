@@ -80,16 +80,25 @@ public class LeconViewController implements Initializable {
     public void prendreLecon(ActionEvent actionEvent) throws SQLException {
         Date date = Date.valueOf(dpDate.getValue().toString());
         String heure = lvHorraire.getSelectionModel().getSelectedItem().toString();
-        String immatriculation = vehiculeController.getIdByModele(lvVehiculeDispo.getSelectionModel().getSelectedItem().toString());
+        String immatriculation = immatriculationConcernee;
         int reglee = 0;
         int idEleve = Session.getCodeEleveActif();
-        int idMoniteur = utilisateurController.findIdByName(lvMoniteurDispo.getSelectionModel().getSelectedItem().toString());
-        int idPermis = Session.getCodeEleveActif();
+        int idMoniteur = idMoniteurConcernee;
+        int idPermis = idPermisConcernee;
 
-        //leconController.create();
+        leconController.create(date, heure, immatriculation, reglee, idEleve, idMoniteur, idPermis);
+        Session.creerAlert(Alert.AlertType.INFORMATION, "Information", "La lecon a bien été prise en compte");
+        viderChampsLecon();
 
     }
 
+    private void viderChampsLecon() {
+        dpDate.setValue(LocalDate.now());
+        lvPermis.getSelectionModel().clearSelection();
+        lvVehiculeDispo.getSelectionModel().clearSelection();
+        lvMoniteurDispo.getSelectionModel().clearSelection();
+        lvHorraire.getSelectionModel().clearSelection();
+    }
 
 
     @javafx.fxml.FXML
@@ -168,14 +177,12 @@ public class LeconViewController implements Initializable {
 
     @javafx.fxml.FXML
     public void updateMoniteurConcernee(Event event) throws SQLException {
-        immatriculationConcernee = vehiculeController.getIdByModele(lvVehiculeDispo.getSelectionModel().getSelectedItem().toString());
+        idMoniteurConcernee = utilisateurController.findIdByName(lvMoniteurDispo.getSelectionModel().getSelectedItem().toString());
     }
 
     @javafx.fxml.FXML
     public void updateVehiculeConcernee(Event event) throws SQLException {
-        idMoniteurConcernee = utilisateurController.findIdByName(lvMoniteurDispo.getSelectionModel().getSelectedItem().toString());
+        immatriculationConcernee = vehiculeController.getIdByModele(lvVehiculeDispo.getSelectionModel().getSelectedItem().toString());
     }
-
-
 
 }

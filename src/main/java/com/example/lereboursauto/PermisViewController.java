@@ -28,14 +28,6 @@ import java.util.ResourceBundle;
 public class PermisViewController implements Initializable {
 
     @javafx.fxml.FXML
-    private TableView tvEleveVehicule;
-    @javafx.fxml.FXML
-    private TableColumn tcEleveMarque, tcEleveModele;
-
-    @javafx.fxml.FXML
-    private TableView tvMoniteurListeEleve;
-
-    @javafx.fxml.FXML
     private Text lblEleveTempsPermis;
 
     @javafx.fxml.FXML
@@ -45,13 +37,7 @@ public class PermisViewController implements Initializable {
     private ListView lvEleveToutPermis;
 
     @javafx.fxml.FXML
-    private ImageView imgMoniteurVehicule;
-    @javafx.fxml.FXML
     private ImageView imgVehicule;
-    @javafx.fxml.FXML
-    private TableColumn tcMoniteurNbLeconPasse;
-    @javafx.fxml.FXML
-    private TableColumn tcMoniteurNomPrenomEleve;
 
     @javafx.fxml.FXML
     private BarChart graphEleveHeuresVehicules;
@@ -76,6 +62,18 @@ public class PermisViewController implements Initializable {
     private Text lblMoniteurTempsPasse;
     @javafx.fxml.FXML
     private AnchorPane apSouscrirePermis;
+    @javafx.fxml.FXML
+    private ImageView imgMoniteurTrain;
+    @javafx.fxml.FXML
+    private ImageView imgMoniteurCamion1;
+    @javafx.fxml.FXML
+    private ImageView imgMoniteurMoto;
+    @javafx.fxml.FXML
+    private ImageView imgMoniteurBateau;
+    @javafx.fxml.FXML
+    private ImageView imgMoniteurCamion;
+    @javafx.fxml.FXML
+    private ImageView imgMoniteurTrain1;
 
 
     @Override

@@ -7,8 +7,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -176,7 +174,7 @@
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="apEleve" layoutY="68.0" prefHeight="534.0" prefWidth="999.0" visible="false">
+      <AnchorPane fx:id="apEleve" layoutY="68.0" prefHeight="534.0" prefWidth="999.0">
          <children>
             <ListView fx:id="lvEleveToutPermis" layoutX="93.0" layoutY="50.0" onMouseClicked="#onLvPermisEleve" prefHeight="174.0" prefWidth="200.0" />
             <Text layoutX="50.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des permis que vous possédez chez nous">
@@ -204,18 +202,11 @@
                </image>
             </ImageView>
             <Text layoutX="418.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous êtes en train de passer ce permis, vous pouvez consulter vos statistiques ici :" />
-            <Text layoutX="418.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps passé : " />
-            <Text layoutX="418.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des véhicules utilisés :" />
-            <Text layoutX="670.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre d'heures passées par moniteur :" />
-            <TableView fx:id="tvEleveVehicule" layoutX="412.0" layoutY="402.0" prefHeight="99.0" prefWidth="200.0">
-              <columns>
-                <TableColumn fx:id="tcEleveMarque" maxWidth="997.3324584960938" minWidth="30.0" prefWidth="99.73324584960938" text="Marque" />
-                <TableColumn fx:id="tcEleveModele" maxWidth="1002.667236328125" minWidth="30.0" prefWidth="100.2667236328125" text="Modele" />
-              </columns>
-            </TableView>
-            <Text fx:id="lblEleveTempsPermis" layoutX="501.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Button layoutX="105.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#onNvPermisClicked" text="Demander un nouveau permis" />
-            <LineChart fx:id="graphEleveHeuresMoniteurs" layoutX="628.0" layoutY="370.0" prefHeight="151.0" prefWidth="343.0">
+            <Text layoutX="821.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps passé : " />
+            <Text layoutX="420.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre d'heures passées par moniteur :" />
+            <Text fx:id="lblEleveTempsPermis" layoutX="898.0" layoutY="415.0" strokeType="OUTSIDE" strokeWidth="0.0" />
+            <Button layoutX="105.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#onNvPermisClicked" text="Souscrire à un nouveau permis" />
+            <LineChart fx:id="graphEleveHeuresMoniteurs" layoutX="401.0" layoutY="368.0" prefHeight="151.0" prefWidth="343.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -223,9 +214,29 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </LineChart>
+            <ImageView fx:id="imgMoniteurMoto1" fitHeight="230.0" fitWidth="230.0" layoutX="452.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../img/p_moto-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgMoniteurCamion1" fitHeight="201.0" fitWidth="300.0" layoutX="447.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../img/p_camion-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgMoniteurBateau1" fitHeight="214.0" fitWidth="292.0" layoutX="447.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../img/p_bateau-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgMoniteurTrain1" fitHeight="187.0" fitWidth="461.0" layoutX="452.0" layoutY="66.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../img/p_train-removebg-preview.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="apMoniteur" layoutY="68.0" prefHeight="534.0" prefWidth="999.0">
+      <AnchorPane fx:id="apMoniteur" layoutY="68.0" prefHeight="534.0" prefWidth="999.0" visible="false">
          <children>
             <ListView fx:id="lvMoniteurToutPermis" layoutX="116.0" layoutY="34.0" onMouseClicked="#onLvPermisMoniteurClicked" prefHeight="187.0" prefWidth="220.0" />
             <Text layoutX="17.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voici la liste des licences que vous pouvez enseigner chez nous">
@@ -247,22 +258,35 @@
                </font>
             </Text>
             <Circle fill="#dceeff" layoutX="562.0" layoutY="149.0" radius="115.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" />
-            <ImageView fx:id="imgMoniteurVehicule" fitHeight="151.0" fitWidth="339.0" layoutX="511.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgMoniteurAuto" fitHeight="151.0" fitWidth="339.0" layoutX="511.0" layoutY="75.0" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@../../../img/p_voiture-removebg-preview.png" />
                </image>
             </ImageView>
-            <Text layoutX="643.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous possédez cette licence, des données seront affichées :" />
-            <Text layoutX="643.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps passé : " />
-            <Text layoutX="643.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste de vos élèves :" />
-            <TableView fx:id="tvMoniteurListeEleve" layoutX="637.0" layoutY="403.0" prefHeight="99.0" prefWidth="329.0">
-               <columns>
-                  <TableColumn fx:id="tcMoniteurNomPrenomEleve" maxWidth="1541.3330078125" minWidth="30.0" prefWidth="154.13330078125" text="Nom Prenom" />
-                  <TableColumn fx:id="tcMoniteurNbLeconPasse" maxWidth="1762.667236328125" minWidth="30.0" prefWidth="176.2667236328125" text="nombre de lecon passé avec" />
-               </columns>
-            </TableView>
-            <Text fx:id="lblMoniteurTempsPasse" layoutX="720.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8h" />
+            <Text layoutX="643.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous possédez cette licence, des données seront affichées :" />
+            <Text layoutX="643.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps passé : " />
+            <Text fx:id="lblMoniteurTempsPasse" layoutX="722.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8h" />
             <Button layoutX="159.0" layoutY="241.0" mnemonicParsing="false" onAction="#demandeLicence" text="Demander une licence" />
+            <ImageView fx:id="imgMoniteurMoto" fitHeight="230.0" fitWidth="230.0" layoutX="511.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../img/p_moto-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgMoniteurCamion" fitHeight="201.0" fitWidth="300.0" layoutX="506.0" layoutY="34.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../img/p_camion-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgMoniteurBateau" fitHeight="214.0" fitWidth="292.0" layoutX="506.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../img/p_bateau-removebg-preview.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgMoniteurTrain" fitHeight="187.0" fitWidth="461.0" layoutX="511.0" layoutY="56.0" pickOnBounds="true" preserveRatio="true" visible="false">
+               <image>
+                  <Image url="@../../../img/p_train-removebg-preview.png" />
+               </image>
+            </ImageView>
          </children>
       </AnchorPane>
    </children>

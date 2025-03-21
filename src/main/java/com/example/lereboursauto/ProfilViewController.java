@@ -255,7 +255,27 @@ public class ProfilViewController implements Initializable {
 
             }
 
+        } else if (idStatut == 2) {
+            ArrayList<Licence> licencesMoniteurs = licenceController.getAllLicencesMoniteur(utilisateur.getCode());
+            System.out.println(licencesMoniteurs.toString());
+            for (Licence licence : licencesMoniteurs) {
+                System.out.println(licence.getIdCategorie().getId());
+
+                if (licence.getIdCategorie().getId() == 1){
+                    empVoiture.setStyle("-fx-opacity: 1;");
+                } else if (licence.getIdCategorie().getId() == 2) {
+                    empMoto.setStyle("-fx-opacity: 1;");
+                } else if (licence.getIdCategorie().getId() == 3) {
+                    empCamion.setStyle("-fx-opacity: 1;");
+                } else if (licence.getIdCategorie().getId() == 4) {
+                    empTrain.setStyle("-fx-opacity: 1;");
+                } else if (licence.getIdCategorie().getId() == 5) {
+                    empBateau.setStyle("-fx-opacity: 1;");
+                }
+
+            }
         }
+
 
         // récupèrer toutes les licences du moniteur
     }

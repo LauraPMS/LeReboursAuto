@@ -97,11 +97,11 @@ public class VehiculeRepository {
     }
 
     public String getIdByModele (String modele) throws SQLException {
-        PreparedStatement ps = connexion.prepareStatement("SELECT id FROM vehicule WHERE modele = ?");
+        PreparedStatement ps = connexion.prepareStatement("SELECT immatriculation FROM vehicule WHERE modele = ?");
         ps.setString(1, modele);
         ResultSet rs = ps.executeQuery();
         rs.next();
-        String id = rs.getString("id");
-        return id;
+        String immatriculation = rs.getString("immatriculation");
+        return immatriculation;
     }
 }
