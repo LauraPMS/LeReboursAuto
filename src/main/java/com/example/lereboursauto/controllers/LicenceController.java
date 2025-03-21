@@ -1,6 +1,7 @@
 package com.example.lereboursauto.controllers;
 
 import com.example.lereboursauto.models.Licence;
+import com.example.lereboursauto.models.Permis;
 import com.example.lereboursauto.services.LicenceServices;
 
 import java.sql.SQLException;
@@ -21,5 +22,6 @@ public class LicenceController {
     public ArrayList<Licence> getAllLicencesMoniteur(int code) throws SQLException {
         return licenceServices.getAllLicencesMoniteur(code);
     }
+
 
 }

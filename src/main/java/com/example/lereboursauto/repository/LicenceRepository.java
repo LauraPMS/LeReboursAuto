@@ -22,7 +22,7 @@ public class LicenceRepository {
 
     public ArrayList<Licence> getAllLicencesEleve(int code) throws SQLException {
         ArrayList<Licence> licences = new ArrayList<>();
-        String sql = "SELECT id, idUser, codeCategorie, dateObtention FROM licence WHERE idUser = ? AND dateObtention = null";
+        String sql = "SELECT id, idUser, codeCategorie, dateObtention FROM licence WHERE idUser = ?";
         PreparedStatement ps = connexion.prepareStatement(sql);
         ps.setInt(1, code);
         ResultSet rs = ps.executeQuery();

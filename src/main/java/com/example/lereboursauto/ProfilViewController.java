@@ -1,7 +1,10 @@
 package com.example.lereboursauto;
 
 import com.example.lereboursauto.controllers.LeconController;
+import com.example.lereboursauto.controllers.LicenceController;
 import com.example.lereboursauto.controllers.UtilisateurController;
+import com.example.lereboursauto.models.Licence;
+import com.example.lereboursauto.models.Permis;
 import com.example.lereboursauto.models.Utilisateur;
 import com.example.lereboursauto.services.ConnexionServices;
 import com.example.lereboursauto.services.Session;
@@ -67,6 +70,7 @@ public class ProfilViewController implements Initializable {
     ConnexionServices connexionServices;
 
     LeconController leconController;
+    LicenceController licenceController;
 
 
     @Override
@@ -78,6 +82,7 @@ public class ProfilViewController implements Initializable {
         connexionServices = new ConnexionServices();
         nbLeconPermis = new HashMap<>();
         leconController = new LeconController();
+        licenceController = new LicenceController();
 
         utilisateurController = new UtilisateurController();
 
@@ -95,6 +100,7 @@ public class ProfilViewController implements Initializable {
                 tvProchaineLecon.setItems(FXCollections.observableList(leconController.getAllFuturLeconForMoniteur(utilisateur.getCode())));
             }
 
+            afficherLogoLicence(utilisateur.getStatut().getId());
 
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -122,6 +128,7 @@ public class ProfilViewController implements Initializable {
 
         // Mettre à jour les labels affichés
         majProfil(utilisateur);
+        changeApToModifier(actionEvent);
     }
 
     public void majProfil(Utilisateur u){
@@ -200,7 +207,14 @@ public class ProfilViewController implements Initializable {
 
     @javafx.fxml.FXML
     public void changeApToModifier(ActionEvent actionEvent) {
+
         Session.changeAp(listeAp, apModifier);
+
+        txtAdresse.setPromptText(utilisateur.getAdresse());
+        txtTelephone.setPromptText(utilisateur.getTelephone());
+        txtVille.setPromptText(utilisateur.getVille());
+        txtCodePostal.setPromptText(String.valueOf(utilisateur.getCodePostal()));
+
     }
 
 
@@ -219,5 +233,31 @@ public class ProfilViewController implements Initializable {
 
     // faire le graphique
 
+    public void afficherLogoLicence (int idStatut) throws SQLException {
+
+        if (idStatut == 1){
+            ArrayList<Licence> licencesEleve = licenceController.getAllLicencesEleve(utilisateur.getCode());
+            System.out.println(licencesEleve.toString());
+            for (Licence licence : licencesEleve) {
+                System.out.println(licence.getIdCategorie().getId());
+
+                if (licence.getIdCategorie().getId() == 1){
+                    empVoiture.setStyle("-fx-opacity: 1;");
+                } else if (licence.getIdCategorie().getId() == 2) {
+                    empMoto.setStyle("-fx-opacity: 1;");
+                } else if (licence.getIdCategorie().getId() == 3) {
+                    empCamion.setStyle("-fx-opacity: 1;");
+                } else if (licence.getIdCategorie().getId() == 4) {
+                    empTrain.setStyle("-fx-opacity: 1;");
+                } else if (licence.getIdCategorie().getId() == 5) {
+                    empBateau.setStyle("-fx-opacity: 1;");
+                }
+
+            }
+
+        }
+
+        // récupèrer toutes les licences du moniteur
+    }
 
 }

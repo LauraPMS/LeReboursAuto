@@ -28,7 +28,7 @@
                   <Image url="@../../../img/logo.png" />
                </image>
             </ImageView>
-            <Button ellipsisString="" mnemonicParsing="false" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: transparent; -fx-background-radius: 0;" text="Tableau de bord">
+            <Button ellipsisString="" mnemonicParsing="false" onAction="#changeApToProfil" prefHeight="35.0" prefWidth="144.0" style="-fx-background-color: transparent; -fx-background-radius: 0;" text="Tableau de bord">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>

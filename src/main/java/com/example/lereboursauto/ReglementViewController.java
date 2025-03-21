@@ -245,15 +245,10 @@ public class ReglementViewController implements Initializable {
         String idLvLecon = lvResumeLecon.getSelectionModel().getSelectedItem().toString();
 
         lblPermisLecon.setText(permisController.getPermisByIdLecon(idLvLecon));
-
         lblDateLecon.setText(leconController.getDateLecon(idLvLecon));
-
         lblHeureLecon.setText((leconController.getHeureLecon(idLvLecon)));
-
         lblNomPrenomMoniteurLecon.setText(utilisateurController.getMoniteurLecon(idLvLecon));
-
         lblMarqueVehiculeLecon.setText(vehiculeController.getMarqueVehiculeLecon(idLvLecon));
-
         lblModeleVehiculeLecon.setText(vehiculeController.getModeleVehiculeLecon(idLvLecon));
 
         String prixLecon = String.valueOf(permisController.getPrixLeconByIdLecon(idLvLecon)) + " euros";
@@ -279,10 +274,22 @@ public class ReglementViewController implements Initializable {
             alert.setTitle("INFORMATION");
             alert.setHeaderText("Votre paiement à bien été accepté !");
             alert.showAndWait();
+
+            lblDateLecon.setText("");
+            lblHeureLecon.setText("");
+            lblNomPrenomMoniteurLecon.setText("");
+            lblMarqueVehiculeLecon.setText("");
+            lblModeleVehiculeLecon.setText("");
+            lblPrixLecon.setText("");
+            lblPermisLecon.setText("");
+
         }
     }
 
     /** FIN PARTIE ELEVE **/
+
+
+
 
     /** PARTIE MONITEUR **/
 
