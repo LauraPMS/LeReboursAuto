@@ -79,7 +79,16 @@ public class LeconController {
     public String getHeureLecon(String idLecon) throws SQLException {
         return leconServices.getHeureLecon(idLecon);
     }
+
     public void update(String idLecon) throws SQLException {
         leconServices.update(idLecon);
+    }
+
+    public ArrayList<Integer> getLeconR(int idMoniteur) throws SQLException {
+        return leconServices.getLeconR(idMoniteur);
+    }
+
+    public HashMap<String, Integer> getDataGraphiqueLeconRNR(int idmoniteur) throws SQLException {
+        return leconServices.getDataGraphiqueLeconRNR(idmoniteur);
     }
 }

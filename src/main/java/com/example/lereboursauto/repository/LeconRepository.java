@@ -292,4 +292,31 @@ public class LeconRepository {
         ps.executeUpdate();
     }
 
+    public ArrayList<Integer> getLeconR(int idMoniteur) throws SQLException {
+        ArrayList<Integer> leconsR = new ArrayList<>();
+        PreparedStatement ps;
+        ps = connexion.prepareStatement("SELECT id FROM Lecon WHERE idMoniteur = ? AND Reglee = 1;");
+        ps.setInt(1, idMoniteur);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            leconsR.add(rs.getInt("id"));
+        }
+        return leconsR;
+    }
+
+    public HashMap<String,Integer> getDataGraphiqueLeconRNR(int idMoniteur) throws SQLException {
+        HashMap<String, Integer> datas = new HashMap();
+
+        PreparedStatement preparedStatement = connexion.prepareStatement("SELECT reglee, COUNT(id) as nblecon FROM Lecon WHERE idMoniteur = ? GROUP BY reglee;");
+        preparedStatement.setInt(1, idMoniteur);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while(resultSet.next())
+        {
+            datas.put(resultSet.getString("reglee"), resultSet.getInt("nblecon"));
+        }
+        preparedStatement.close();
+        resultSet.close();
+        return datas;
+    }
+
 }

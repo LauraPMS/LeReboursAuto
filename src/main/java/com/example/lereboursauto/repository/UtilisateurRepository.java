@@ -123,7 +123,6 @@ public class UtilisateurRepository {
             utilisateurs.add(findByCode(rs.getInt("code")));
         }
         return utilisateurs;
-
     }
 
     public String getMoniteurLecon(String idLecon) throws SQLException {
@@ -135,6 +134,17 @@ public class UtilisateurRepository {
         rs.next();
         String nomPrenomMoniteur = rs.getString("nom") + " " + rs.getString("prenom");
         return nomPrenomMoniteur;
+    }
+
+    public String getEleveLecon(String idLecon) throws SQLException {
+        /** Fonction qui va rechercher le moniteur d'une lecon selon l'idLecon **/
+        PreparedStatement ps;
+        ps = connexion.prepareStatement("SELECT nom, prenom FROM utilisateur JOIN lecon on utilisateur.code = lecon.idEleve WHERE lecon.id = ?;");
+        ps.setString(1, idLecon);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        String nomPrenomEleve = rs.getString("nom") + " " + rs.getString("prenom");
+        return nomPrenomEleve;
     }
 
 }

@@ -11,9 +11,12 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.control.Tooltip;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
 
@@ -21,6 +24,8 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Objects;
 import java.util.ResourceBundle;
 
 public class ReglementViewController implements Initializable {
@@ -66,8 +71,26 @@ public class ReglementViewController implements Initializable {
     UtilisateurController utilisateurController;
     VehiculeController vehiculeController;
     Utilisateur u ;
+    HashMap<String,Integer> dataGraphiqueLeconRNR;
+
     @javafx.fxml.FXML
     private Text lblPrixLecon;
+    @javafx.fxml.FXML
+    private Text lblMoniPrixLecon;
+    @javafx.fxml.FXML
+    private Text lblNomPrenomEleveLecon;
+    @javafx.fxml.FXML
+    private Text lblMoniModeleVehiculeLecon;
+    @javafx.fxml.FXML
+    private Text lblMoniPermisLecon;
+    @javafx.fxml.FXML
+    private Text lblMoniHeureLecon;
+    @javafx.fxml.FXML
+    private Text lblMoniDateLecon;
+    @javafx.fxml.FXML
+    private Text lblMoniMarqueVehiculeLecon;
+    @javafx.fxml.FXML
+    private PieChart graphLeconRNR;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -96,7 +119,7 @@ public class ReglementViewController implements Initializable {
                  *
                  */
 
-                /** initialisation de la listeView listePermisEleve au lancement de la session **/
+                /** initialisation de la listeView listeLeconEleve au lancement de la session **/
                 lvResumeLecon.setItems(FXCollections.observableList(leconController.getLeconNR(Session.getCodeEleveActif())));
                 lvResumeLecon.getSelectionModel().selectFirst();
 
@@ -135,7 +158,50 @@ public class ReglementViewController implements Initializable {
             else if (u.getStatut().getId() == 2)
             {
                 Session.changeAp(listeAp, apMoniteur);
-                // remplir les liste view et graphique a la vue moniteur
+
+                /**
+                 *
+                 * remplir la vue Permis moniteur ici
+                 *
+                 */
+
+                /** initialisation de la listeView listeLeconMoniteur au lancement de la session **/
+                lvMoniteurResumeLecon.setItems(FXCollections.observableList(leconController.getLeconR(Session.getCodeEleveActif())));
+                lvMoniteurResumeLecon.getSelectionModel().selectFirst();
+
+                String idPermisByLecon = lvMoniteurResumeLecon.getSelectionModel().getSelectedItem().toString();
+
+                /** initialisation du label permis **/
+
+                lblMoniPermisLecon.setText(permisController.getPermisByIdLecon(idPermisByLecon));
+
+                /** initialisation du label date **/
+
+                lblMoniDateLecon.setText(leconController.getDateLecon(idPermisByLecon));
+
+                /** initialisation du label heure **/
+
+                lblMoniHeureLecon.setText(leconController.getHeureLecon(idPermisByLecon));
+
+                /** initialisation du label moniteur **/
+
+                lblNomPrenomEleveLecon.setText(utilisateurController.getMoniteurLecon(idPermisByLecon));
+
+                /** initialisation du label marque vehicule **/
+
+                lblMoniMarqueVehiculeLecon.setText(vehiculeController.getMarqueVehiculeLecon(idPermisByLecon));
+
+                /** initialisation du label modele vehicule **/
+
+                lblMoniModeleVehiculeLecon.setText(vehiculeController.getModeleVehiculeLecon(idPermisByLecon));
+
+                /** initialisation du label modele vehicule **/
+                String prix = String.valueOf(permisController.getPrixLeconByIdLecon(idPermisByLecon)) + " euros";
+                lblMoniPrixLecon.setText(prix);
+
+                /** initialisation du graphique pourcentage de leçons réglées / non réglées **/
+
+                majGraphiqueLeconMoniteur(Session.getCodeEleveActif());
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -143,12 +209,6 @@ public class ReglementViewController implements Initializable {
     }
 
 
-
-
-
-    @Deprecated
-    public void reglerLecon(ActionEvent actionEvent) {
-    }
 
     @javafx.fxml.FXML
     public void changeToApPlanning(ActionEvent actionEvent) throws IOException {
@@ -175,6 +235,8 @@ public class ReglementViewController implements Initializable {
         Session.changerScene("permis.fxml", "Le Rebours Auto - Permis", actionEvent);
     }
 
+    /** PARTIE ELEVE **/
+
     @javafx.fxml.FXML
     public void onLvLeconNRClicked(Event event) throws SQLException {
 
@@ -194,8 +256,6 @@ public class ReglementViewController implements Initializable {
 
         String prixLecon = String.valueOf(permisController.getPrixLeconByIdLecon(idLvLecon)) + " euros";
         lblPrixLecon.setText(prixLecon);
-
-
 
     }
 
@@ -219,5 +279,58 @@ public class ReglementViewController implements Initializable {
             alert.showAndWait();
         }
     }
+
+    /** FIN PARTIE ELEVE **/
+
+    /** PARTIE MONITEUR **/
+
+    @javafx.fxml.FXML
+    public void onLvLeconRClicked(Event event) throws SQLException {
+
+        String idLvLecon = lvMoniteurResumeLecon.getSelectionModel().getSelectedItem().toString();
+
+        lblMoniPermisLecon.setText(permisController.getPermisByIdLecon(idLvLecon));
+
+        lblMoniDateLecon.setText(leconController.getDateLecon(idLvLecon));
+
+        lblMoniHeureLecon.setText((leconController.getHeureLecon(idLvLecon)));
+
+        lblNomPrenomEleveLecon.setText(utilisateurController.getEleveLecon(idLvLecon));
+
+        lblMoniMarqueVehiculeLecon.setText(vehiculeController.getMarqueVehiculeLecon(idLvLecon));
+
+        lblMoniModeleVehiculeLecon.setText(vehiculeController.getModeleVehiculeLecon(idLvLecon));
+
+        String prixLecon = String.valueOf(permisController.getPrixLeconByIdLecon(idLvLecon)) + " euros";
+        lblMoniPrixLecon.setText(prixLecon);
+
+    }
+
+    public void majGraphiqueLeconMoniteur(int idMoniteur) throws SQLException {
+        /** mise a jour du graphique des lecons réglées/non réglées **/
+
+        graphLeconRNR.getData().clear();
+
+        dataGraphiqueLeconRNR = leconController.getDataGraphiqueLeconRNR(idMoniteur);
+
+        for (String reglee : dataGraphiqueLeconRNR.keySet())
+        {
+            if (Objects.equals(reglee, "0"))
+            {
+                graphLeconRNR.getData().add(new PieChart.Data("non réglées", dataGraphiqueLeconRNR.get(reglee)));
+            }
+            else {
+                graphLeconRNR.getData().add(new PieChart.Data("réglées", dataGraphiqueLeconRNR.get(reglee)));
+            }
+        }
+        for (PieChart.Data entry : graphLeconRNR.getData()) {
+            Tooltip t = new Tooltip(entry.getPieValue()+ " : "+entry.getName());
+            t.setStyle("-fx-background-color:#3D9ADA");
+            Tooltip.install(entry.getNode(), t);
+        }
+
+    }
+
+    /** FIN PARTIE MONITEUR **/
 
 }

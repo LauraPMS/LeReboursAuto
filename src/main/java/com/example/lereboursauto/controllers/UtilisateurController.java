@@ -33,4 +33,8 @@ public class UtilisateurController {
     public String getMoniteurLecon(String idLecon) throws SQLException {
         return utilisateurService.getMoniteurLecon(idLecon);
     }
+
+    public String getEleveLecon(String idLecon) throws SQLException {
+        return utilisateurService.getEleveLecon(idLecon);
+    }
 }

@@ -3,6 +3,7 @@
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.chart.PieChart?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.image.Image?>
@@ -54,7 +55,7 @@
             </ImageView>
          </children>
       </HBox>
-      <AnchorPane fx:id="apEleve" layoutX="2.0" layoutY="82.0" prefHeight="516.0" prefWidth="999.0">
+      <AnchorPane fx:id="apEleve" layoutX="2.0" layoutY="82.0" prefHeight="516.0" prefWidth="999.0" visible="false">
          <children>
             <ListView fx:id="lvResumeLecon" layoutX="93.0" layoutY="97.0" onMouseClicked="#onLvLeconNRClicked" prefHeight="348.0" prefWidth="258.0" />
             <Button fx:id="btnReglerLecon" layoutX="567.0" layoutY="379.0" mnemonicParsing="false" onMouseClicked="#onBtnReglerLeconClicked" prefHeight="44.0" prefWidth="146.0" text="Regler la leçon" />
@@ -172,17 +173,17 @@
             </Text>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="apMoniteur" layoutX="2.0" layoutY="82.0" prefHeight="516.0" prefWidth="996.0" visible="false">
+      <AnchorPane fx:id="apMoniteur" layoutX="2.0" layoutY="82.0" prefHeight="516.0" prefWidth="996.0">
          <children>
-            <ListView fx:id="lvMoniteurResumeLecon" layoutX="65.0" layoutY="101.0" prefHeight="299.0" prefWidth="222.0" />
-            <Text layoutX="62.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Résumé des lecons réglée du mois">
+            <ListView fx:id="lvMoniteurResumeLecon" layoutX="65.0" layoutY="86.0" onMouseClicked="#onLvLeconRClicked" prefHeight="299.0" prefWidth="222.0" />
+            <Text layoutX="66.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des leçons réglées du mois :">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <Text layoutX="362.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calcul du revenu total :" />
-            <Text layoutX="362.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calcul du revenu du mois :" />
-            <BarChart layoutX="308.0" layoutY="101.0" prefHeight="299.0" prefWidth="646.0">
+            <Text layoutX="76.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calcul du revenu total :" />
+            <Text layoutX="58.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Calcul du revenu du mois :" />
+            <BarChart layoutX="305.0" layoutY="308.0" prefHeight="156.0" prefWidth="662.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
               </xAxis>
@@ -190,14 +191,127 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <Button fx:id="majRevenu" layoutX="733.0" layoutY="422.0" mnemonicParsing="false" text="Mettre a jour le graphique" />
-            <Text layoutX="334.0" layoutY="81.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revenu par mois sur l'année">
+            <Button fx:id="majRevenu" layoutX="826.0" layoutY="476.0" mnemonicParsing="false" text="Mettre a jour le graphique" />
+            <Text layoutX="326.0" layoutY="293.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Revenu par mois sur l'année">
                <font>
                   <Font size="20.0" />
                </font>
             </Text>
-            <Text fx:id="lblRevenuAnnuel" layoutX="506.0" layoutY="431.0" strokeType="OUTSIDE" strokeWidth="0.0" text="€€" />
-            <Text fx:id="lblRevenuParMois" layoutX="530.0" layoutY="463.0" strokeType="OUTSIDE" strokeWidth="0.0" text="€€" />
+            <Text fx:id="lblRevenuAnnuel" layoutX="231.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="€€" />
+            <Text fx:id="lblRevenuParMois" layoutX="231.0" layoutY="460.0" strokeType="OUTSIDE" strokeWidth="0.0" text="€€" />
+            <VBox layoutX="287.0" layoutY="86.0" prefHeight="156.0" prefWidth="362.0">
+               <children>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="90.0" prefHeight="40.0" prefWidth="396.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Permis : ">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblMoniPermisLecon" strokeType="OUTSIDE" strokeWidth="0.0" text="PermisLecon">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="10.0" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Date : ">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblMoniDateLecon" strokeType="OUTSIDE" strokeWidth="0.0" text="DateLecon">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Heure : ">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblMoniHeureLecon" strokeType="OUTSIDE" strokeWidth="0.0" text="HeureLecon">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Eleve : ">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblNomPrenomEleveLecon" strokeType="OUTSIDE" strokeWidth="0.0" text="NomPrenomEleveLecon">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Marque Véhicule : ">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblMoniMarqueVehiculeLecon" strokeType="OUTSIDE" strokeWidth="0.0" text="MarqueVehiculeLecon">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Modele Véhicule : ">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblMoniModeleVehiculeLecon" strokeType="OUTSIDE" strokeWidth="0.0" text="ModeleVehiculeLecon">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" layoutX="10.0" layoutY="210.0" prefHeight="40.0" prefWidth="100.0" spacing="10.0">
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prix :">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                        <Text fx:id="lblMoniPrixLecon" strokeType="OUTSIDE" strokeWidth="0.0" text="PrixLecon">
+                           <font>
+                              <Font size="15.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Text layoutX="385.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Information sur la leçon :">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
+            <PieChart fx:id="graphLeconRNR" layoutX="682.0" layoutY="80.0" prefHeight="228.0" prefWidth="275.0" />
+            <Text layoutX="674.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pourcentage de leçons réglées/non réglées :">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Text>
          </children>
       </AnchorPane>
    </children>
