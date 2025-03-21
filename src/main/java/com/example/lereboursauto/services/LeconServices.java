@@ -89,4 +89,8 @@ public class LeconServices {
     public ArrayList<Utilisateur> getMoniteurNonDispo(Date date, String heure) throws SQLException {
         return leconRepository.getMoniteurNonDispo(date, heure);
     }
+
+    public HashMap<String, ArrayList<String>> graphLeconElevesByPermis(int idMoniteur) throws SQLException {
+        return leconRepository.graphLeconElevesByPermis(idMoniteur);
+    }
 }

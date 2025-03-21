@@ -11,6 +11,7 @@ import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
+import javafx.scene.chart.BarChart;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
@@ -58,8 +59,6 @@ public class ReglementViewController implements Initializable {
     @javafx.fxml.FXML
     private Text lblRevenuAnnuel;
     @javafx.fxml.FXML
-    private Button majRevenu;
-    @javafx.fxml.FXML
     private AnchorPane apEleve, apMoniteur;
     @javafx.fxml.FXML
     private ListView lvMoniteurResumeLecon, lvResumeLecon;
@@ -72,6 +71,7 @@ public class ReglementViewController implements Initializable {
     VehiculeController vehiculeController;
     Utilisateur u ;
     HashMap<String,Integer> dataGraphiqueLeconRNR;
+    XYChart.Series<String,Number> serieGraph;
 
     @javafx.fxml.FXML
     private Text lblPrixLecon;
@@ -91,6 +91,8 @@ public class ReglementViewController implements Initializable {
     private Text lblMoniMarqueVehiculeLecon;
     @javafx.fxml.FXML
     private PieChart graphLeconRNR;
+    @javafx.fxml.FXML
+    private BarChart graphRevenusParMois;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -201,7 +203,7 @@ public class ReglementViewController implements Initializable {
 
                 /** initialisation du graphique pourcentage de leçons réglées / non réglées **/
 
-                majGraphiqueLeconMoniteur(Session.getCodeEleveActif());
+                graphiqueLeconMoniteur(Session.getCodeEleveActif());
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -306,8 +308,8 @@ public class ReglementViewController implements Initializable {
 
     }
 
-    public void majGraphiqueLeconMoniteur(int idMoniteur) throws SQLException {
-        /** mise a jour du graphique des lecons réglées/non réglées **/
+    public void graphiqueLeconMoniteur(int idMoniteur) throws SQLException {
+        /** graphique des lecons réglées/non réglées **/
 
         graphLeconRNR.getData().clear();
 
@@ -328,6 +330,26 @@ public class ReglementViewController implements Initializable {
             t.setStyle("-fx-background-color:#3D9ADA");
             Tooltip.install(entry.getNode(), t);
         }
+
+    }
+
+    public void graphiqueRevenusParMois(int idMoniteur) throws SQLException
+    {
+        /** graphique des revenus par mois générés par le moniteur **/
+
+        /**
+        graphRevenusParMois.getData().clear();
+
+        serieGraph = new XYChart.Series<>();
+        serieGraph.setName("Mois");
+        for (String valeur : graphRevenusParMois.getDatasGraphique4().keySet())
+        {
+            serieGraph.getData().add(new XYChart.Data<>(valeur,graphRevenusParMois.getDatasGraphique4().get(valeur)));
+        }
+
+        graphRevenusParMois.getData().add(serieGraph);
+
+         **/
 
     }
 

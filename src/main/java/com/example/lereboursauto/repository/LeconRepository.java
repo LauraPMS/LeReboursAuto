@@ -332,4 +332,37 @@ public class LeconRepository {
         return moniteurNomDispo;
     }
 
+
+    public HashMap<String, ArrayList<String>> graphLeconElevesByPermis(int idMoniteur) throws SQLException {
+        HashMap<String, ArrayList<String>> datas = new HashMap();
+        PreparedStatement preparedStatement = connexion.prepareStatement("SELECT permis.libelle, utilisateur.prenom, COUNT(lecon.id) as nblecon " +
+                "FROM lecon " +
+                "JOIN utilisateur on lecon.idEleve = utilisateur.code " +
+                "JOIN permis on lecon.idPermis = permis.id " +
+                "WHERE lecon.idMoniteur = ? " +
+                "GROUP BY permis.libelle, utilisateur.prenom;");
+        preparedStatement.setInt(1, idMoniteur);
+        ResultSet resultSet = preparedStatement.executeQuery();
+        while(resultSet.next())
+        {
+            if(!datas.containsKey(resultSet.getString("libelle")))
+            {
+                ArrayList<String> lesEleves = new ArrayList<>();
+                lesEleves.add(resultSet.getString("prenom"));
+                lesEleves.add(resultSet.getString("nblecon"));
+                datas.put(resultSet.getString("libelle"),lesEleves);
+            }
+            else
+            {
+                datas.get(resultSet.getString("libelle")).add(resultSet.getString("prenom"));
+                datas.get(resultSet.getString("libelle")).add(resultSet.getString("nblecon"));
+            }
+        }
+        preparedStatement.close();
+        resultSet.close();
+        return datas;
+    }
+
+
+
 }

@@ -57,7 +57,7 @@
             </ImageView>
          </children>
       </HBox>
-      <AnchorPane fx:id="apEleve" layoutY="68.0" prefHeight="534.0" prefWidth="999.0">
+      <AnchorPane fx:id="apEleve" layoutY="68.0" prefHeight="534.0" prefWidth="999.0" visible="false">
          <children>
             <ListView fx:id="lvEleveToutPermis" layoutX="93.0" layoutY="50.0" onMouseClicked="#onLvPermisEleve" prefHeight="174.0" prefWidth="200.0" />
             <Text layoutX="63.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Listes des permis que vous avez chez nous">
@@ -106,15 +106,15 @@
             </LineChart>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="apMoniteur" layoutY="68.0" prefHeight="534.0" prefWidth="999.0" visible="false">
+      <AnchorPane fx:id="apMoniteur" layoutY="68.0" prefHeight="534.0" prefWidth="999.0">
          <children>
-            <ListView fx:id="tvMoniteurToutPermis" layoutX="36.0" layoutY="46.0" prefHeight="174.0" prefWidth="254.0" />
-            <Text layoutX="42.0" layoutY="33.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voici toutes les licences que vous pouvez enseigner chez nous">
+            <ListView fx:id="tvMoniteurToutPermis" layoutX="116.0" layoutY="34.0" prefHeight="187.0" prefWidth="220.0" />
+            <Text layoutX="45.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voici toutes les licences que vous pouvez enseigner chez nous">
                <font>
                   <Font size="15.0" />
                </font>
             </Text>
-            <BarChart fx:id="graphMoniteurObtentionPermis" layoutX="28.0" layoutY="303.0" prefHeight="214.0" prefWidth="306.0">
+            <BarChart fx:id="graphMoniteurHeuresEleves" layoutX="28.0" layoutY="303.0" prefHeight="214.0" prefWidth="560.0">
                <xAxis>
                   <CategoryAxis side="BOTTOM" />
                </xAxis>
@@ -122,7 +122,7 @@
                   <NumberAxis side="LEFT" />
                </yAxis>
             </BarChart>
-            <Text layoutX="71.0" layoutY="288.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Combien d'eleve ont obtenu leur permis">
+            <Text layoutX="62.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre d'heures passées par élèves par permis : ">
                <font>
                   <Font size="15.0" />
                </font>
@@ -133,25 +133,17 @@
                   <Image url="@../../../img/p_voiture-removebg-preview.png" />
                </image>
             </ImageView>
-            <Text layoutX="414.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous posséder cette licence, des données seront affichés :" />
-            <Text layoutX="418.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps passé : " />
-            <Text layoutX="420.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des véhicules utilisé :" />
+            <Text layoutX="643.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous posséder cette licence, des données seront affichés :" />
+            <Text layoutX="643.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps passé : " />
             <Text layoutX="650.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste de vos élèves :" />
-            <TableView fx:id="tvMoniteurVehicule" layoutX="412.0" layoutY="402.0" prefHeight="99.0" prefWidth="200.0">
-               <columns>
-                  <TableColumn fx:id="tcMoniteurMarque" maxWidth="997.3324584960938" minWidth="30.0" prefWidth="99.73324584960938" text="Marque" />
-                  <TableColumn fx:id="tcMoniteurModele" maxWidth="1002.667236328125" minWidth="30.0" prefWidth="100.2667236328125" text="Modele" />
-               </columns>
-            </TableView>
             <TableView fx:id="tvMoniteurListeEleve" layoutX="637.0" layoutY="403.0" prefHeight="99.0" prefWidth="329.0">
                <columns>
                   <TableColumn fx:id="tcMoniteurNomPrenomEleve" maxWidth="1541.3330078125" minWidth="30.0" prefWidth="154.13330078125" text="Nom Prenom" />
                   <TableColumn fx:id="tcMoniteurNbLeconPasse" maxWidth="1762.667236328125" minWidth="30.0" prefWidth="176.2667236328125" text="nombre de lecon passé avec" />
                </columns>
             </TableView>
-            <Text fx:id="lblMoniteurTempPasse" layoutX="501.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8h" />
-            <Button layoutX="308.0" layoutY="62.0" mnemonicParsing="false" onAction="#demandeLicence" text="Demander licence" />
-            <Button layoutX="73.0" layoutY="231.0" mnemonicParsing="false" onAction="#suggererLicence" text="Suggérer une nouvelle licence" />
+            <Text fx:id="lblMoniteurTempPasse" layoutX="720.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8h" />
+            <Button layoutX="170.0" layoutY="238.0" mnemonicParsing="false" onAction="#demandeLicence" text="Demander licence" />
          </children>
       </AnchorPane>
    </children>

@@ -31,21 +31,10 @@ import java.util.ResourceBundle;
 
 public class PermisViewController implements Initializable {
 
-    /*
-    *  La partie PermisViewController doit satisfaire ces différents besoins :
-    *  - Le remplissage de la liste view des permis
-    *  - affichage des stats (nb heure du permis si souscrit, graphique, progress bar jusqu'au nombre d'heure requis pour l'examen)
-    *  - permettre la souscription a un permis (ajout dans licence avec une date d'obtention null
-    *  - remplir la table view de l'eleve et du moniteur pour savoir avec qui et quel véhicule il a déja fait des leçons
-    *
-    */
     @javafx.fxml.FXML
-    private BarChart graphMoniteurObtentionPermis;
-
+    private TableView tvEleveVehicule;
     @javafx.fxml.FXML
-    private TableView tvEleveVehicule,tvMoniteurVehicule;
-    @javafx.fxml.FXML
-    private TableColumn tcEleveMarque, tcEleveModele, tcMoniteurMarque, tcMoniteurModele;
+    private TableColumn tcEleveMarque, tcEleveModele;
 
     @javafx.fxml.FXML
     private TableView tvMoniteurListeEleve;
@@ -83,8 +72,8 @@ public class PermisViewController implements Initializable {
     VehiculeController vehiculeController;
     Utilisateur u ;
     ArrayList<AnchorPane> listeAp;
-
-
+    @javafx.fxml.FXML
+    private BarChart graphMoniteurHeuresEleves;
 
 
     @Override
@@ -140,10 +129,15 @@ public class PermisViewController implements Initializable {
                 majGraphique2(permisController.getIdPermisByLibelle(lvEleveToutPermis.getSelectionModel().getSelectedItem().toString()));
 
 
-            } else if (u.getStatut().getId() == 2) {
+            }
+            else if (u.getStatut().getId() == 2)
+            {
                 Session.changeAp(listeAp, apMoniteur);
+
                 // remplir les tableau listeview etc du moniteur ici
                 tvMoniteurToutPermis.setItems(FXCollections.observableList(permisController.getLicence(Session.getCodeEleveActif())));
+                graphiqueMoniteur();
+
             }
         } catch (SQLException e) {
             throw new RuntimeException(e);
@@ -256,6 +250,25 @@ public class PermisViewController implements Initializable {
             Tooltip t = new Tooltip(entry.getYValue().toString()+ " : "+entry.getXValue().toString());
             t.setStyle("-fx-background-color:#3D9ADA");
             Tooltip.install(entry.getNode(), t);
+        }
+    }
+
+    public void graphiqueMoniteur() throws SQLException
+    {
+        graphMoniteurHeuresEleves.getData().clear();
+
+        HashMap<String, ArrayList<String>> datasGraphiqueMoniteur =  leconController.graphLeconElevesByPermis(Session.getCodeEleveActif());
+
+        for (String valeur : datasGraphiqueMoniteur.keySet())
+        {
+            XYChart.Series<Object, Object> serieGraphMoniteur = new XYChart.Series<>();
+            serieGraphMoniteur.setName(valeur);
+            for(int i = 0;i< datasGraphiqueMoniteur.get(valeur).size();i+=2)
+            {
+                serieGraphMoniteur.getData().add(new XYChart.Data<>(datasGraphiqueMoniteur.get(valeur).get(i),Integer.parseInt(datasGraphiqueMoniteur.get(valeur).get(i+1))));
+            }
+            graphMoniteurHeuresEleves.getData().add(serieGraphMoniteur);
+            //serieGraph3 = new XYChart.Series<>();
         }
 
     }
