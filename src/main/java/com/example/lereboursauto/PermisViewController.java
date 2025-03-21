@@ -74,6 +74,8 @@ public class PermisViewController implements Initializable {
     private ListView lvMoniteurToutPermis;
     @javafx.fxml.FXML
     private Text lblMoniteurTempsPasse;
+    @javafx.fxml.FXML
+    private AnchorPane apSouscrirePermis;
 
 
     @Override
@@ -88,6 +90,7 @@ public class PermisViewController implements Initializable {
         listeAp = new ArrayList<>();
         listeAp.add(apEleve);
         listeAp.add(apMoniteur);
+        listeAp.add(apSouscrirePermis);
 
         try {
             u = utilisateurController.findByCode(Session.getCodeEleveActif());
@@ -184,10 +187,6 @@ public class PermisViewController implements Initializable {
     }
 
     @javafx.fxml.FXML
-    public void suggererLicence(ActionEvent actionEvent) {
-    }
-
-    @javafx.fxml.FXML
     public void demandeLicence(ActionEvent actionEvent) {
         // si c'est un moniteur
             // on demande l'autorisation a l'admin (la date est a 01-01-2001 01:01 (sera afficher sur la page admin tt les licence avec cette date d'obtention pourquoi pas)
@@ -267,6 +266,16 @@ public class PermisViewController implements Initializable {
             t.setStyle("-fx-background-color:#3D9ADA");
             Tooltip.install(entry.getNode(), t);
         }
+    }
+
+    @javafx.fxml.FXML
+    public void onNvPermisClicked(Event event) {
+        Session.changeAp(listeAp, apSouscrirePermis);
+    }
+
+    @javafx.fxml.FXML
+    public void onBtnRetourClicked(Event event) {
+        Session.changeAp(listeAp, apEleve);
     }
 
     /**--------------- FIN PARTIE ELEVE -------------------**/

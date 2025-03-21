@@ -5,6 +5,7 @@
 <?import javafx.scene.chart.LineChart?>
 <?import javafx.scene.chart.NumberAxis?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -12,6 +13,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
@@ -57,6 +59,123 @@
             </ImageView>
          </children>
       </HBox>
+      <AnchorPane fx:id="apSouscrirePermis" layoutY="68.0" prefHeight="534.0" prefWidth="1000.0">
+         <children>
+            <HBox layoutX="149.0" layoutY="42.0" prefHeight="230.0" prefWidth="800.0">
+               <children>
+                  <Pane prefHeight="300.0" prefWidth="250.0" style="-fx-border-color: black;">
+                     <children>
+                        <ImageView fitHeight="99.0" fitWidth="246.0" layoutX="7.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/p_voiture-removebg-preview.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="16.0" layoutY="104.0" text="Permis automobile">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="69.0" layoutY="139.0" prefHeight="35.0" prefWidth="77.0" text="45.00 €">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="83.0" layoutY="191.0" mnemonicParsing="false" text="Souscrire" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="207.0" prefWidth="250.0" style="-fx-border-color: black;">
+                     <children>
+                        <ImageView fitHeight="107.0" fitWidth="158.0" layoutX="69.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/p_moto-removebg-preview.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="58.0" layoutY="107.0" text="Permis moto">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="87.0" layoutY="142.0" prefHeight="35.0" prefWidth="77.0" text="30.00 €">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="93.0" layoutY="191.0" mnemonicParsing="false" text="Souscrire" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="207.0" prefWidth="250.0" style="-fx-border-color: black;">
+                     <children>
+                        <ImageView fitHeight="107.0" fitWidth="171.0" layoutX="52.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/p_camion-removebg-preview.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="21.0" layoutY="107.0" text="Permis poids lourds">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="87.0" layoutY="142.0" prefHeight="35.0" prefWidth="77.0" text="45.00 €">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="93.0" layoutY="191.0" mnemonicParsing="false" text="Souscrire" />
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <HBox layoutX="300.0" layoutY="290.0" prefHeight="230.0" prefWidth="497.0">
+               <children>
+                  <Pane prefHeight="207.0" prefWidth="250.0" style="-fx-border-color: black;">
+                     <children>
+                        <ImageView fitHeight="107.0" fitWidth="171.0" layoutX="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/p_train-removebg-preview.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="2.0" layoutY="107.0" text="Permis transport public">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="86.0" layoutY="142.0" prefHeight="35.0" prefWidth="77.0" text="45.00 €">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="92.0" layoutY="191.0" mnemonicParsing="false" text="Souscrire" />
+                     </children>
+                  </Pane>
+                  <Pane prefHeight="207.0" prefWidth="250.0" style="-fx-border-color: black;">
+                     <children>
+                        <ImageView fitHeight="107.0" fitWidth="171.0" layoutX="53.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@../../../img/p_bateau-removebg-preview.png" />
+                           </image>
+                        </ImageView>
+                        <Label layoutX="49.0" layoutY="107.0" text="Permis bateau">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="86.0" layoutY="138.0" prefHeight="35.0" prefWidth="77.0" text="45.00 €">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Label>
+                        <Button layoutX="92.0" layoutY="191.0" mnemonicParsing="false" text="Souscrire" />
+                     </children>
+                  </Pane>
+               </children>
+            </HBox>
+            <Button layoutX="834.0" layoutY="375.0" mnemonicParsing="false" onMouseClicked="#onBtnRetourClicked" prefHeight="60.0" prefWidth="143.0" style="-fx-background-color: black;" text="Retour" textFill="WHITE">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Button>
+         </children>
+      </AnchorPane>
       <AnchorPane fx:id="apEleve" layoutY="68.0" prefHeight="534.0" prefWidth="999.0" visible="false">
          <children>
             <ListView fx:id="lvEleveToutPermis" layoutX="93.0" layoutY="50.0" onMouseClicked="#onLvPermisEleve" prefHeight="174.0" prefWidth="200.0" />
@@ -95,7 +214,7 @@
               </columns>
             </TableView>
             <Text fx:id="lblEleveTempsPermis" layoutX="501.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" />
-            <Button layoutX="105.0" layoutY="237.0" mnemonicParsing="false" onAction="#suggererLicence" text="Demander un nouveau permis" />
+            <Button layoutX="105.0" layoutY="237.0" mnemonicParsing="false" onMouseClicked="#onNvPermisClicked" text="Demander un nouveau permis" />
             <LineChart fx:id="graphEleveHeuresMoniteurs" layoutX="628.0" layoutY="370.0" prefHeight="151.0" prefWidth="343.0">
               <xAxis>
                 <CategoryAxis side="BOTTOM" />
@@ -106,7 +225,7 @@
             </LineChart>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="apMoniteur" layoutY="68.0" prefHeight="534.0" prefWidth="999.0">
+      <AnchorPane fx:id="apMoniteur" layoutY="68.0" prefHeight="534.0" prefWidth="999.0" visible="false">
          <children>
             <ListView fx:id="lvMoniteurToutPermis" layoutX="116.0" layoutY="34.0" onMouseClicked="#onLvPermisMoniteurClicked" prefHeight="187.0" prefWidth="220.0" />
             <Text layoutX="45.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voici toutes les licences que vous pouvez enseigner chez nous">
