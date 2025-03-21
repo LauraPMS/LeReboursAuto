@@ -18,7 +18,7 @@ Ce projet est développé dans le cadre du BTS SIO. Le Rebours Auto est une auto
   java -version
   git --version
   ```
-- Un IDE ou compilateur (IntelliJ, Eclipse...)
+- Un IDE ou compilateur (IntelliJ)
 - Un serveur local (Wamp, XAMPP...)
 
 ### Étapes
@@ -36,11 +36,14 @@ Ce projet est développé dans le cadre du BTS SIO. Le Rebours Auto est une auto
 
 ### 1️⃣ Connexion / Inscription
 
+![Interface utilisateur](docImg/eleveReadme/eleveConexion.png)
+
+
 
 
 - Connexion test :
-  - **Élève** : `testEleve`
-  - **Moniteur** : `testMoniteur`
+  - **Élève** : `elelog`
+  - **Moniteur** : `elepass`
 
 ### 2️⃣ Profil & Tableau de bord
 
@@ -48,6 +51,7 @@ Ce projet est développé dans le cadre du BTS SIO. Le Rebours Auto est une auto
 
 - Affichage des leçons, informations personnelles et permis souscrits.
 - Modification possible des coordonnées (adresse, téléphone...)
+- Possibilité de prendre une leçon en cliquant sur le bouton "prendre une leçon"
 
 ### 3️⃣ Planning
 
