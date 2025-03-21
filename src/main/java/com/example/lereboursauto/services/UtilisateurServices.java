@@ -41,4 +41,8 @@ public class UtilisateurServices {
     public String getEleveLecon(String idLecon) throws SQLException {
         return utilisateurRepository.getEleveLecon(idLecon);
     }
+
+    public int findIdByName(String nom) throws SQLException {
+        return utilisateurRepository.findIdByName(nom);
+    }
 }

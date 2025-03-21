@@ -114,7 +114,7 @@ public class UtilisateurRepository {
     public ArrayList<Utilisateur> getALlMoniteurAvecLicence(int idPremis) throws SQLException {
         PreparedStatement ps = connexion.prepareStatement("SELECT code FROM utilisateur " +
                 "JOIN licence ON licence.idUser = utilisateur.code " +
-                "WHERE statut = ? AND licence.codeCategorie = ? ");
+                "WHERE utilisateur.idStatut = ? AND licence.codeCategorie = ? ");
         ps.setInt(1, 2);
         ps.setInt(2, idPremis);
         ResultSet rs = ps.executeQuery();
@@ -145,6 +145,15 @@ public class UtilisateurRepository {
         rs.next();
         String nomPrenomEleve = rs.getString("nom") + " " + rs.getString("prenom");
         return nomPrenomEleve;
+    }
+
+    public int findIdByName(String nom) throws SQLException {
+        PreparedStatement ps = connexion.prepareStatement("SELECT code FROM utilisateur WHERE nom = ?");
+        ps.setString(1, nom);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        int code = rs.getInt("code");
+        return code;
     }
 
 }

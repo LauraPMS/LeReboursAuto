@@ -4,10 +4,8 @@ import com.example.lereboursauto.models.Permis;
 import com.example.lereboursauto.models.Vehicule;
 import com.example.lereboursauto.tools.ConnexionBDD;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class VehiculeRepository {
@@ -69,5 +67,41 @@ public class VehiculeRepository {
         rs.next();
         String modeleVehicule = rs.getString("modele");
         return modeleVehicule;
+    }
+
+    public ArrayList<Vehicule> getAllVehiculeByIdPermis(int idPermis) throws SQLException{
+        ArrayList<Vehicule> vehicules = new ArrayList<>();
+        PreparedStatement ps = connexion.prepareStatement("Select immatriculation, annee, codePermis, marque, modele from vehicule where codePermis = ?");
+        ps.setInt(1, idPermis);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Permis p = permisRepository.findByCode(rs.getInt("codePermis"));
+            Vehicule v = new Vehicule(rs.getString("immatriculation"), rs.getString("annee"), p, rs.getString("marque"), rs.getString("modele") );
+            vehicules.add(v);
+
+        }
+        return vehicules;
+    }
+
+    public ArrayList<String> getVehiculeNonDispo(Date date, String string) throws SQLException {
+        ArrayList<String> vehicules = new ArrayList<>();
+        PreparedStatement ps = connexion.prepareStatement("SELECT v.modele FROM lecon JOIN vehicule v ON v.immatriculation = lecon.immatriculation WHERE date = ? AND heure = ?");
+        ps.setDate(1, date);
+        ps.setString(2, string);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            vehicules.add(rs.getString("v.modele"));
+        }
+        return vehicules;
+
+    }
+
+    public String getIdByModele (String modele) throws SQLException {
+        PreparedStatement ps = connexion.prepareStatement("SELECT id FROM vehicule WHERE modele = ?");
+        ps.setString(1, modele);
+        ResultSet rs = ps.executeQuery();
+        rs.next();
+        String id = rs.getString("id");
+        return id;
     }
 }

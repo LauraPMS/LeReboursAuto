@@ -319,4 +319,17 @@ public class LeconRepository {
         return datas;
     }
 
+    public ArrayList<Utilisateur> getMoniteurNonDispo(Date date, String heure) throws SQLException {
+        ArrayList<Utilisateur> moniteurNomDispo = new ArrayList<>();
+        PreparedStatement ps;
+        ps = connexion.prepareStatement("SELECT idMoniteur FROM lecon WHERE date = ? AND heure = ?;");
+        ps.setDate(1, date);
+        ps.setString(2, heure);
+        ResultSet rs = ps.executeQuery();
+        while(rs.next()){
+            moniteurNomDispo.add(utilisateurRepository.findByCode(rs.getInt("idMoniteur")));
+        }
+        return moniteurNomDispo;
+    }
+
 }

@@ -1,14 +1,13 @@
 package com.example.lereboursauto;
 
 import com.example.lereboursauto.controllers.*;
-import com.example.lereboursauto.models.Licence;
-import com.example.lereboursauto.models.Permis;
-import com.example.lereboursauto.models.Utilisateur;
+import com.example.lereboursauto.models.*;
 import com.example.lereboursauto.services.Session;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 
@@ -47,6 +46,8 @@ public class LeconViewController implements Initializable {
 
     ArrayList<Licence> licences;
     int idPermisConcernee = 0;
+    String immatriculationConcernee = "";
+    int idMoniteurConcernee = 0;
 
 
 
@@ -76,14 +77,38 @@ public class LeconViewController implements Initializable {
     }
 
     @javafx.fxml.FXML
-    public void prendreLecon(ActionEvent actionEvent) {
-        int idPermis = 0;
-        int idEleve = Session.getCodeEleveActif();
-        int idMoniteur = 0;
-        Date date = null;
-        String heure = null;
-        int reglee = 0;
-        String immatriculation = null;
+    public void prendreLecon(ActionEvent actionEvent) throws SQLException {
+//        int idPermis = idPermisConcernee;
+//        Utilisateur idEleve = utilisateurController.findByCode(Session.getCodeEleveActif());
+//        Utilisateur idMoniteur = utilisateurController.findByCode(idMoniteurConcernee);
+//        Date date = null;
+//        String heure = null;
+//        int reglee = 0;
+//        String immatriculation = null;
+//        if(lvPermis.getSelectionModel().getSelectedItem() != null) {
+//            idPermis = idPermisConcernee;
+//        }
+//        else {
+//            Session.creerAlert(Alert.AlertType.ERROR, "A", "Veuillez selectionner un permis");
+//        }
+//
+//        if(lvVehiculeDispo.getSelectionModel().getSelectedItem() != null) {
+//            immatriculation = immatriculationConcernee;
+//        }
+//        else {
+//            Session.creerAlert(Alert.AlertType.ERROR, "A", "Veuillez selectionner un véhicule");
+//        }
+//
+//        if(lvMoniteurDispo.getSelectionModel().getSelectedItem() != null) {
+//            idMoniteur = idMoniteurConcernee;
+//        }
+//        else {
+//            Session.creerAlert(Alert.AlertType.ERROR, "A", "Veuillez selectionner un moniteur");
+//        }
+//
+//        if(lvHorraire.getSelectionModel().getSelectedItem() != null) {
+//
+//        }
 
     }
 
@@ -117,10 +142,30 @@ public class LeconViewController implements Initializable {
 
     @javafx.fxml.FXML
     public void updateMoniteur_Vehicule(Event event) throws SQLException {
+
+        // Partie affichage des monniteurs
         System.out.println(lvHorraire.getSelectionModel().getSelectedItem());
         ArrayList<Utilisateur> moniteurs = utilisateurController.getALlMoniteurAvecLicence(idPermisConcernee);
+        moniteurs.removeAll(leconController.getMoniteurNonDispo(Date.valueOf(dpDate.getValue()), lvHorraire.getSelectionModel().getSelectedItem().toString()));
+        System.out.println("Contenue de moniteur après extraction : " + moniteurs.toString());
+        ArrayList<String> nomMoniteur = new ArrayList<>();
+        for (Utilisateur moniteur : moniteurs){
+            System.out.println(moniteur.getNom());
+            nomMoniteur.add(moniteur.getNom());
+        }
 
+        lvMoniteurDispo.setItems(FXCollections.observableList(nomMoniteur));
 
+        // Partie affichage des véhicules
+
+        ArrayList<Vehicule> vehicules = vehiculeController.getAllVehiculeByIdPermis(idPermisConcernee);
+        ArrayList<String> modeleNonDispo = vehiculeController.getVehiculeNonDispo(Date.valueOf(dpDate.getValue()), lvHorraire.getSelectionModel().getSelectedItem().toString());
+        ArrayList<String> allModeleVehicule = new ArrayList<>();
+        for (Vehicule vehicule : vehicules){
+            allModeleVehicule.add(vehicule.getModele());
+        }
+        allModeleVehicule.removeAll(modeleNonDispo);
+        lvVehiculeDispo.setItems(FXCollections.observableList(allModeleVehicule));
 
     }
 
@@ -138,8 +183,18 @@ public class LeconViewController implements Initializable {
         int idPermis = permisController.getIdPermisByLibelle(lvPermis.getSelectionModel().getSelectedItem().toString());
         idPermisConcernee = idPermis;
 
-        horraires.removeAll(leconController.getHorrairesNonDispo(idPermis, date));
+        // horraires.removeAll(leconController.getHorrairesNonDispo(idPermis, date));
         lvHorraire.setItems(FXCollections.observableList(horraires));
 
+    }
+
+    @javafx.fxml.FXML
+    public void updateMoniteurConcernee(Event event) throws SQLException {
+        immatriculationConcernee = vehiculeController.getIdByModele(lvVehiculeDispo.getSelectionModel().getSelectedItem().toString());
+    }
+
+    @javafx.fxml.FXML
+    public void updateVehiculeConcernee(Event event) throws SQLException {
+        idMoniteurConcernee = utilisateurController.findIdByName(lvMoniteurDispo.getSelectionModel().getSelectedItem().toString());
     }
 }

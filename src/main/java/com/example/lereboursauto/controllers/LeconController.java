@@ -1,10 +1,13 @@
 package com.example.lereboursauto.controllers;
 
 import com.example.lereboursauto.models.Lecon;
+import com.example.lereboursauto.models.Utilisateur;
 import com.example.lereboursauto.services.LeconServices;
 
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 
 public class LeconController {
@@ -90,5 +93,9 @@ public class LeconController {
 
     public HashMap<String, Integer> getDataGraphiqueLeconRNR(int idmoniteur) throws SQLException {
         return leconServices.getDataGraphiqueLeconRNR(idmoniteur);
+    }
+
+    public ArrayList<Utilisateur> getMoniteurNonDispo(Date date, String heure) throws SQLException {
+        return leconServices.getMoniteurNonDispo(date, heure);
     }
 }

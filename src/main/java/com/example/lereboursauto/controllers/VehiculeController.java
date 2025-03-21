@@ -1,9 +1,12 @@
 package com.example.lereboursauto.controllers;
 
 
+import com.example.lereboursauto.models.Vehicule;
 import com.example.lereboursauto.services.VehiculeServices;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class VehiculeController {
@@ -29,4 +32,16 @@ public class VehiculeController {
     public String getModeleVehiculeLecon(String idLecon) throws SQLException {
         return vehiculeServices.getModeleVehiculeLecon(idLecon);
     }
-}
+
+    public ArrayList<Vehicule> getAllVehiculeByIdPermis(int idPermis) throws SQLException{
+        return vehiculeServices.getAllVehiculeByIdPermis(idPermis);
+    }
+
+    public ArrayList<String> getVehiculeNonDispo(Date date, String string) throws SQLException {
+        return vehiculeServices.getVehiculeNonDispo(date, string);
+    }
+    public String getIdByModele (String modele) throws SQLException {
+        return vehiculeServices.getIdByModele(modele);
+    }
+
+    }

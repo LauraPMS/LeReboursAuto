@@ -37,4 +37,8 @@ public class UtilisateurController {
     public String getEleveLecon(String idLecon) throws SQLException {
         return utilisateurService.getEleveLecon(idLecon);
     }
+
+    public int findIdByName(String nom) throws SQLException {
+        return utilisateurService.findIdByName(nom);
+    }
 }

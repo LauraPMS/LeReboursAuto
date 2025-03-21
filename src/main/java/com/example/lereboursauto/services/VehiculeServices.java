@@ -1,7 +1,10 @@
 package com.example.lereboursauto.services;
+import com.example.lereboursauto.models.Vehicule;
 import com.example.lereboursauto.repository.VehiculeRepository;
 
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class VehiculeServices {
@@ -26,5 +29,17 @@ public class VehiculeServices {
 
     public String getModeleVehiculeLecon(String idLecon) throws SQLException {
         return vehiculeRepository.getModeleVehiculeLecon(idLecon);
+    }
+
+    public ArrayList<Vehicule> getAllVehiculeByIdPermis(int idPermis) throws SQLException{
+        return vehiculeRepository.getAllVehiculeByIdPermis(idPermis);
+    }
+
+    public ArrayList<String> getVehiculeNonDispo(Date date, String string) throws SQLException {
+        return vehiculeRepository.getVehiculeNonDispo(date, string);
+    }
+
+    public String getIdByModele (String modele) throws SQLException {
+        return vehiculeRepository.getIdByModele(modele);
     }
 }
