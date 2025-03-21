@@ -101,4 +101,9 @@ public class LeconServices {
     public HashMap<String, ArrayList<String>> graphLeconElevesByPermis(int idMoniteur) throws SQLException {
         return leconRepository.graphLeconElevesByPermis(idMoniteur);
     }
-}
+
+    public void create(Date date, String heure, String immatriculation, int reglee, int idEleve, int idMoniteur, int idPermis)throws SQLException{
+        leconRepository.create(date, heure, immatriculation, reglee, idEleve, idMoniteur, idPermis);
+    }
+
+    }

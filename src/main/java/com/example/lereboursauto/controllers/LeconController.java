@@ -106,4 +106,8 @@ public class LeconController {
     public HashMap<String, ArrayList<String>> graphLeconElevesByPermis(int idMoniteur) throws SQLException {
         return leconServices.graphLeconElevesByPermis(idMoniteur);
     }
+
+    public void create(Date date, String heure, String immatriculation, int reglee, int idEleve, int idMoniteur, int idPermis)throws SQLException{
+        leconServices.create(date, heure, immatriculation, reglee, idEleve, idMoniteur, idPermis);
+    }
 }

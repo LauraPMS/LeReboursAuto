@@ -378,5 +378,17 @@ public class LeconRepository {
         return datas;
     }
 
+    public void create(Date date, String heure, String immatriculation, int reglee, int idEleve, int idMoniteur, int idPermis)throws SQLException{
+        PreparedStatement ps = connexion.prepareStatement("INSERT INTO lecon VALUES (?, ?, ?, ?, ?, ?, ?, ?);");
+        ps.setDate(1, date);
+        ps.setString(2, heure);
+        ps.setString(3, immatriculation);
+        ps.setInt(4, reglee);
+        ps.setInt(5, idEleve);
+        ps.setInt(6, idMoniteur);
+        ps.setInt(7, idPermis);
+        ps.executeUpdate();
+    }
+
 
 }
