@@ -54,6 +54,9 @@ Ce projet est développé dans le cadre du BTS SIO. Le Rebours Auto est une auto
 ![Interface utilisateur](/docImg/eleveReadMe/elevePlaning.png)
 
 - Élèves : affichage des leçons à venir
+
+![Interface utilisateur](/docImg/moniteurReadMe/moniteurPlaning.png)
+
 - Moniteurs : affichage hebdomadaire des cours
 
 ### 4️⃣ Réserver une leçon (Élève uniquement)
@@ -66,11 +69,11 @@ Ce projet est développé dans le cadre du BTS SIO. Le Rebours Auto est une auto
 ### 5️⃣ Souscription à un permis
 ![Interface utilisateur](/docImg/eleveReadMe/souscrirePermis.png)
 
-
 - Un élève ne peut souscrire qu’à un permis à la fois
 
 ### 6️⃣ Statistiques & Gestion financière
 ![Interface utilisateur](/docImg/eleveReadMe/eleveReglement.png)
+![Interface utilisateur](/docImg/moniteurReadMe/moniteurRglmt.png)
 
 
 - Élèves : suivi des paiements
