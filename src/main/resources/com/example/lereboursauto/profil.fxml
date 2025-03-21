@@ -187,11 +187,6 @@
                   <Font name="System Italic" size="12.0" />
                </font>
             </Text>
-            <Button layoutX="252.0" layoutY="424.0" mnemonicParsing="false" onAction="#changeApToLecon" prefHeight="26.0" prefWidth="193.0" style="-fx-background-color: #006383; -fx-background-radius: 20;" text="Prendre une leçon" textFill="WHITE">
-               <font>
-                  <Font size="15.0" />
-               </font>
-            </Button>
             <Text layoutX="34.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour plus d'informations sur les données de vos permis, veuillez double-cliquer sur l'icône correspondante." wrappingWidth="592.0">
                <font>
                   <Font name="System Italic" size="12.0" />
