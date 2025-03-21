@@ -39,42 +39,38 @@ Ce projet est développé dans le cadre du BTS SIO. Le Rebours Auto est une auto
 ![Interface utilisateur](/docImg/eleveReadMe/eleveConexion.png)
 
 
-
-
 - Connexion test :
   - **Élève** : `elelog`
   - **Moniteur** : `elepass`
 
 ### 2️⃣ Profil & Tableau de bord
-
-
+![Interface utilisateur](/docImg/eleveReadMe/eleveProfil.png)
 
 - Affichage des leçons, informations personnelles et permis souscrits.
 - Modification possible des coordonnées (adresse, téléphone...)
 - Possibilité de prendre une leçon en cliquant sur le bouton "prendre une leçon"
 
 ### 3️⃣ Planning
-
-
+![Interface utilisateur](/docImg/eleveReadMe/elevePlaning.png)
 
 - Élèves : affichage des leçons à venir
 - Moniteurs : affichage hebdomadaire des cours
 
 ### 4️⃣ Réserver une leçon (Élève uniquement)
-
+![Interface utilisateur](/docImg/eleveReadMe/eleveLecon.png)
 
 
 - Choix de la date, de l’horaire et du moniteur
 - Vérification des disponibilités
 
 ### 5️⃣ Souscription à un permis
-
+![Interface utilisateur](/docImg/eleveReadMe/souscrirePermis.png)
 
 
 - Un élève ne peut souscrire qu’à un permis à la fois
 
 ### 6️⃣ Statistiques & Gestion financière
-
+![Interface utilisateur](/docImg/eleveReadMe/eleveReglement.png)
 
 
 - Élèves : suivi des paiements
