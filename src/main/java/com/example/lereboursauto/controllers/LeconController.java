@@ -51,8 +51,12 @@ public class LeconController {
 
     // utilisé pour les stats
 
-    public int getTotalHeuresByLicence(int statutCompte, int licenceUser) throws SQLException {
-        return leconServices.getTotalHeuresByLicence(statutCompte, licenceUser);
+    public int getTotalHeuresEleveByPermis(int statutCompte, int licenceUser) throws SQLException {
+        return leconServices.getTotalHeuresEleveByPermis(statutCompte, licenceUser);
+    }
+
+    public int getTotalHeuresMoniteurByPermis(int statutCompte, int licenceUser) throws SQLException {
+        return leconServices.getTotalHeuresMoniteurByPermis(statutCompte, licenceUser);
     }
 
     public HashMap<String,Integer> getDataGraphiquePermisVehicules(int idUser, int idPermis) throws SQLException {

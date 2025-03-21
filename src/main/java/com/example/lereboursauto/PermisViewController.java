@@ -2,22 +2,18 @@ package com.example.lereboursauto;
 
 import com.example.lereboursauto.controllers.*;
 import com.example.lereboursauto.models.Utilisateur;
-import com.example.lereboursauto.repository.UtilisateurRepository;
 import com.example.lereboursauto.services.Session;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
-import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.Tooltip;
-import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -40,13 +36,13 @@ public class PermisViewController implements Initializable {
     private TableView tvMoniteurListeEleve;
 
     @javafx.fxml.FXML
-    private Text lblEleveTempsPermis, lblMoniteurTempPasse;
+    private Text lblEleveTempsPermis;
 
     @javafx.fxml.FXML
     private AnchorPane apEleve, apMoniteur;
 
     @javafx.fxml.FXML
-    private ListView lvEleveToutPermis, tvMoniteurToutPermis;
+    private ListView lvEleveToutPermis;
 
     @javafx.fxml.FXML
     private ImageView imgMoniteurVehicule;
@@ -74,6 +70,10 @@ public class PermisViewController implements Initializable {
     ArrayList<AnchorPane> listeAp;
     @javafx.fxml.FXML
     private BarChart graphMoniteurHeuresEleves;
+    @javafx.fxml.FXML
+    private ListView lvMoniteurToutPermis;
+    @javafx.fxml.FXML
+    private Text lblMoniteurTempsPasse;
 
 
     @Override
@@ -108,7 +108,7 @@ public class PermisViewController implements Initializable {
 
                 /** initialisation du label nombreHeuresTotal au lancement de la session **/
 
-                majLabelHeuresByPermis(permisController.getIdPermisByLibelle(lvEleveToutPermis.getSelectionModel().getSelectedItem().toString()));
+                majLabelEleveHeuresByPermis(permisController.getIdPermisByLibelle(lvEleveToutPermis.getSelectionModel().getSelectedItem().toString()));
 
                 /** initialisation du listView liste des véhicules utilisés au lancement de la session **/
 
@@ -133,9 +133,25 @@ public class PermisViewController implements Initializable {
             else if (u.getStatut().getId() == 2)
             {
                 Session.changeAp(listeAp, apMoniteur);
+                /**
+                 *
+                 * remplir la vue Permis eleve ici
+                 *
+                 */
 
-                // remplir les tableau listeview etc du moniteur ici
-                tvMoniteurToutPermis.setItems(FXCollections.observableList(permisController.getLicence(Session.getCodeEleveActif())));
+                /** initialisation de la  listeView des licences du moniteur **/
+
+                lvMoniteurToutPermis.setItems(FXCollections.observableList(permisController.getLicence(Session.getCodeEleveActif())));
+
+                lvMoniteurToutPermis.getSelectionModel().selectFirst();
+
+
+                /** initialisation du label des heuresTotales du moniteur au lancement de la session **/
+
+                majLabelMoniteurHeuresByPermis(permisController.getIdPermisByLibelle(lvMoniteurToutPermis.getSelectionModel().getSelectedItem().toString()));
+
+                /** initialisation du graphique des heures/lecon par élèves par permis au lancement de la session **/
+
                 graphiqueMoniteur();
 
             }
@@ -184,6 +200,7 @@ public class PermisViewController implements Initializable {
         Session.changerScene("permis.fxml", "Le Rebours Auto - Permis", actionEvent);
     }
 
+    /**--------------- PARTIE ELEVE -------------------**/
 
     @javafx.fxml.FXML
     public void onLvPermisEleve(Event event) throws SQLException {
@@ -194,20 +211,19 @@ public class PermisViewController implements Initializable {
 
         majGraphique1(Session.getCodeEleveActif(), numeroPermis);
 
-        majLabelHeuresByPermis(numeroPermis);
+        majLabelEleveHeuresByPermis(numeroPermis);
 
         majGraphique2(numeroPermis);
 
     }
 
-    public void majLabelHeuresByPermis(int numPermisEleve) throws SQLException {
+    public void majLabelEleveHeuresByPermis(int numPermisEleve) throws SQLException {
 
         /** mise à jour du label nombreHeuresTotal**/
 
-        int totalHorraire = leconController.getTotalHeuresByLicence(Session.getCodeEleveActif(), numPermisEleve);
+        int totalHorraire = leconController.getTotalHeuresEleveByPermis(Session.getCodeEleveActif(), numPermisEleve);
 
         lblEleveTempsPermis.setText(String.valueOf(totalHorraire)+ " heures");
-
         /** ---------------------------------------------------------------------------- **/
 
     }
@@ -253,6 +269,32 @@ public class PermisViewController implements Initializable {
         }
     }
 
+    /**--------------- FIN PARTIE ELEVE -------------------**/
+
+    /**---------------  PARTIE MONITEUR -------------------**/
+
+    @javafx.fxml.FXML
+    public void onLvPermisMoniteurClicked(Event event) throws SQLException {
+
+        String libellePermisMoniteur = lvMoniteurToutPermis.getSelectionModel().getSelectedItem().toString();
+
+        int numeroPermisMoniteur = permisController.getIdPermisByLibelle(libellePermisMoniteur);
+
+        majLabelMoniteurHeuresByPermis(numeroPermisMoniteur);
+
+    }
+
+    public void majLabelMoniteurHeuresByPermis(int numPermisMoniteur) throws SQLException {
+
+        /** mise à jour du label nombreHeuresTotal**/
+
+        int totalHorraireMoniteur = leconController.getTotalHeuresMoniteurByPermis(Session.getCodeEleveActif(), numPermisMoniteur);
+
+        lblMoniteurTempsPasse.setText(String.valueOf(totalHorraireMoniteur)+ " heures");
+        /** ---------------------------------------------------------------------------- **/
+
+    }
+
     public void graphiqueMoniteur() throws SQLException
     {
         graphMoniteurHeuresEleves.getData().clear();
@@ -272,6 +314,8 @@ public class PermisViewController implements Initializable {
         }
 
     }
+
+    /**--------------- FIN PARTIE MONITEUR -------------------**/
 
 
 }

@@ -5,7 +5,6 @@ import com.example.lereboursauto.models.Utilisateur;
 import com.example.lereboursauto.repository.LeconRepository;
 
 import java.sql.Date;
-import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -39,13 +38,22 @@ public class LeconServices {
 
     // utilisé pour les stats
 
-    public int getTotalHeuresByLicence(int idUser, int licenceUser) throws SQLException {
+    public int getTotalHeuresEleveByPermis(int idUser, int licenceUser) throws SQLException {
         /**
          * Fonction qui va rechercher la liste des permis de l'élève
          **/
 
-        return leconRepository.getTotalHeuresByLicence(idUser, licenceUser);
+        return leconRepository.getTotalHeuresEleveByPermis(idUser, licenceUser);
     }
+
+    public int getTotalHeuresMoniteurByPermis(int idUser, int licenceUser) throws SQLException {
+        /**
+         * Fonction qui va rechercher la liste des permis de l'élève
+         **/
+
+        return leconRepository.getTotalHeuresMoniteurByPermis(idUser, licenceUser);
+    }
+
     public HashMap<String,Integer> getDataGraphiquePermisVehicules(int idUser, int idPermis) throws SQLException {
         return leconRepository.getDataGraphiquePermisVehicules(idUser, idPermis);
     }
