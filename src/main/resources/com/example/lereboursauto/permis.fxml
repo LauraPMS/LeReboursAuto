@@ -59,7 +59,7 @@
             </ImageView>
          </children>
       </HBox>
-      <AnchorPane fx:id="apSouscrirePermis" layoutY="68.0" prefHeight="534.0" prefWidth="1000.0">
+      <AnchorPane fx:id="apSouscrirePermis" layoutY="68.0" prefHeight="534.0" prefWidth="1000.0" visible="false">
          <children>
             <HBox layoutX="149.0" layoutY="42.0" prefHeight="230.0" prefWidth="800.0">
                <children>
@@ -179,7 +179,7 @@
       <AnchorPane fx:id="apEleve" layoutY="68.0" prefHeight="534.0" prefWidth="999.0" visible="false">
          <children>
             <ListView fx:id="lvEleveToutPermis" layoutX="93.0" layoutY="50.0" onMouseClicked="#onLvPermisEleve" prefHeight="174.0" prefWidth="200.0" />
-            <Text layoutX="63.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Listes des permis que vous avez chez nous">
+            <Text layoutX="50.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des permis que vous possédez chez nous">
                <font>
                   <Font size="15.0" />
                </font>
@@ -192,7 +192,7 @@
                 <NumberAxis side="LEFT" />
               </yAxis>
             </BarChart>
-            <Text layoutX="64.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombres d'heures passées par véhicules : ">
+            <Text layoutX="72.0" layoutY="303.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre d'heures passées par véhicule :">
                <font>
                   <Font size="15.0" />
                </font>
@@ -203,10 +203,10 @@
                   <Image url="@../../../img/p_voiture-removebg-preview.png" />
                </image>
             </ImageView>
-            <Text layoutX="418.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous passez actuellement ce permis, vous pouvez retrouver vos statistiques ici" />
+            <Text layoutX="418.0" layoutY="330.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous êtes en train de passer ce permis, vous pouvez consulter vos statistiques ici :" />
             <Text layoutX="418.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps passé : " />
             <Text layoutX="418.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des véhicules utilisés :" />
-            <Text layoutX="690.0" layoutY="361.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombres d'heures passées par moniteur :" />
+            <Text layoutX="670.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre d'heures passées par moniteur :" />
             <TableView fx:id="tvEleveVehicule" layoutX="412.0" layoutY="402.0" prefHeight="99.0" prefWidth="200.0">
               <columns>
                 <TableColumn fx:id="tcEleveMarque" maxWidth="997.3324584960938" minWidth="30.0" prefWidth="99.73324584960938" text="Marque" />
@@ -225,10 +225,10 @@
             </LineChart>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="apMoniteur" layoutY="68.0" prefHeight="534.0" prefWidth="999.0" visible="false">
+      <AnchorPane fx:id="apMoniteur" layoutY="68.0" prefHeight="534.0" prefWidth="999.0">
          <children>
             <ListView fx:id="lvMoniteurToutPermis" layoutX="116.0" layoutY="34.0" onMouseClicked="#onLvPermisMoniteurClicked" prefHeight="187.0" prefWidth="220.0" />
-            <Text layoutX="45.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voici toutes les licences que vous pouvez enseigner chez nous">
+            <Text layoutX="17.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voici la liste des licences que vous pouvez enseigner chez nous">
                <font>
                   <Font size="15.0" />
                </font>
@@ -241,7 +241,7 @@
                   <NumberAxis side="LEFT" />
                </yAxis>
             </BarChart>
-            <Text layoutX="62.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre d'heures passées par élèves par permis : ">
+            <Text layoutX="62.0" layoutY="298.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Nombre d'heures passées par élève pour chaque permis :">
                <font>
                   <Font size="15.0" />
                </font>
@@ -252,9 +252,9 @@
                   <Image url="@../../../img/p_voiture-removebg-preview.png" />
                </image>
             </ImageView>
-            <Text layoutX="643.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous posséder cette licence, des données seront affichés :" />
+            <Text layoutX="643.0" layoutY="331.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous possédez cette licence, des données seront affichées :" />
             <Text layoutX="643.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps passé : " />
-            <Text layoutX="650.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste de vos élèves :" />
+            <Text layoutX="643.0" layoutY="391.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste de vos élèves :" />
             <TableView fx:id="tvMoniteurListeEleve" layoutX="637.0" layoutY="403.0" prefHeight="99.0" prefWidth="329.0">
                <columns>
                   <TableColumn fx:id="tcMoniteurNomPrenomEleve" maxWidth="1541.3330078125" minWidth="30.0" prefWidth="154.13330078125" text="Nom Prenom" />
@@ -262,7 +262,7 @@
                </columns>
             </TableView>
             <Text fx:id="lblMoniteurTempsPasse" layoutX="720.0" layoutY="360.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8h" />
-            <Button layoutX="170.0" layoutY="238.0" mnemonicParsing="false" onAction="#demandeLicence" text="Demander licence" />
+            <Button layoutX="159.0" layoutY="241.0" mnemonicParsing="false" onAction="#demandeLicence" text="Demander une licence" />
          </children>
       </AnchorPane>
    </children>

@@ -8,7 +8,6 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.lereboursauto.PlanningViewController">
    <children>
@@ -51,24 +50,24 @@
             </ImageView>
          </children>
       </HBox>
-      <AnchorPane fx:id="apEleve" layoutX="1.0" layoutY="76.0" prefHeight="526.0" prefWidth="998.0">
+      <AnchorPane fx:id="apEleve" layoutX="1.0" layoutY="76.0" prefHeight="526.0" prefWidth="998.0" visible="false">
          <children>
             <TableView fx:id="tvPlanningEleve" layoutX="118.0" layoutY="32.0" prefHeight="351.0" prefWidth="780.0">
               <columns>
                 <TableColumn fx:id="tcPermisEleve" maxWidth="922.6664161682129" minWidth="30.0" prefWidth="128.79998779296875" text="Permis" />
                 <TableColumn fx:id="tcDateEleve" maxWidth="647.9996490478516" minWidth="28.799972534179688" prefWidth="116.79997253417969" text="Date" />
-                  <TableColumn fx:id="tcHorraireEleve" maxWidth="864.0007019042969" minWidth="30.0" prefWidth="116.800048828125" text="Horraire" />
+                  <TableColumn fx:id="tcHorraireEleve" maxWidth="864.0007019042969" minWidth="30.0" prefWidth="116.800048828125" text="Horaire" />
                   <TableColumn fx:id="tcMoniteurEleve" maxWidth="1133.3340454101562" minWidth="30.0" prefWidth="152.800048828125" text="Moniteur" />
-                  <TableColumn fx:id="tcModeleVehiculeEleve" maxWidth="1026.6659545898438" minWidth="30.0" prefWidth="190.4000244140625" text="Modele Vehicule" />
-                  <TableColumn fx:id="tcRegleeEleve" maxWidth="1290.66650390625" minWidth="30.0" prefWidth="77.60003662109375" text="Réglée ?" />
+                  <TableColumn fx:id="tcModeleVehiculeEleve" maxWidth="1026.6659545898438" minWidth="30.0" prefWidth="190.4000244140625" text="Modèle Véhicule" />
+                  <TableColumn fx:id="tcRegleeEleve" maxWidth="1290.66650390625" minWidth="30.0" prefWidth="77.60003662109375" text="Réglée" />
               </columns>
             </TableView>
             <Button layoutX="433.0" layoutY="433.0" mnemonicParsing="false" onAction="#changeToApLecon" text="Prendre une nouvelle leçon" />
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="apMoniteur" layoutX="1.0" layoutY="76.0" prefHeight="523.0" prefWidth="998.0" visible="false">
+      <AnchorPane fx:id="apMoniteur" layoutX="1.0" layoutY="76.0" prefHeight="523.0" prefWidth="998.0">
          <children>
-            <TableView fx:id="tvPlanningMoniteur" layoutX="28.0" layoutY="59.0" prefHeight="412.0" prefWidth="581.0">
+            <TableView fx:id="tvPlanningMoniteur" layoutX="208.0" layoutY="56.0" prefHeight="412.0" prefWidth="581.0">
               <columns>
                 <TableColumn fx:id="tcPermisMoniteur" maxWidth="997.3331832885742" minWidth="30.0" prefWidth="99.73331832885742" text="Permis" />
                 <TableColumn fx:id="tcModeleVehiculeMoniteur" maxWidth="1210.66650390625" minWidth="30.0" prefWidth="121.066650390625" text="Modèle Véhicule" />
@@ -78,11 +77,6 @@
                   <TableColumn fx:id="tcImmatriculationMoniteur" maxWidth="1303.9998779296877" minWidth="30.0" prefWidth="130.39998779296877" text="Immatriculation" />
               </columns>
             </TableView>
-            <Text layoutX="738.0" layoutY="165.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Graphique ? ">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Text>
          </children>
       </AnchorPane>
    </children>

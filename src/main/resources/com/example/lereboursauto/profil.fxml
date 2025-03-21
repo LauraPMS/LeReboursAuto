@@ -111,7 +111,7 @@
       </HBox>
       <AnchorPane fx:id="apProfil" layoutX="278.0" layoutY="77.0" prefHeight="526.0" prefWidth="722.0">
          <children>
-            <Text layoutX="34.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des permis / licence souscrit">
+            <Text layoutX="34.0" layoutY="38.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des permis / licences souscrits :">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
@@ -177,12 +177,12 @@
                   <TableColumn fx:id="tcHorraireProchaine" maxWidth="824.000244140625" minWidth="30.0" prefWidth="82.4000244140625" text="Horaire" />
               </columns>
             </TableView>
-            <Text layoutX="32.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aperçu des prochaines leçons.">
+            <Text layoutX="32.0" layoutY="292.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Aperçu des prochaines leçons">
                <font>
                   <Font name="System Bold" size="18.0" />
                </font>
             </Text>
-            <Text layoutX="34.0" layoutY="323.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour plus d'informations sur le moniteur et le véhicule désigné, veuillez double cliquez sur la leçon concerné" wrappingWidth="275.99999999999994">
+            <Text layoutX="34.0" layoutY="310.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour plus d'informations sur le moniteur et le véhicule désigné, veuillez double-cliquer sur la leçon concernée" wrappingWidth="249.4072265624999">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>
@@ -192,12 +192,12 @@
                   <Font size="15.0" />
                </font>
             </Button>
-            <Text layoutX="56.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour plus d'informations sur les données de vos permis, veuillez double-cliquer sur l'icone correspondant." wrappingWidth="592.0">
+            <Text layoutX="34.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Pour plus d'informations sur les données de vos permis, veuillez double-cliquer sur l'icône correspondante." wrappingWidth="592.0">
                <font>
                   <Font name="System Italic" size="12.0" />
                </font>
             </Text>
-            <Button layoutX="62.0" layoutY="174.0" mnemonicParsing="false" onAction="#changeApToPermis" prefHeight="31.0" prefWidth="302.0" style="-fx-background-color: #d9fbff; -fx-background-radius: 20;" text="S'inscrire à une nouvelle categorie">
+            <Button layoutX="62.0" layoutY="174.0" mnemonicParsing="false" onAction="#changeApToPermis" prefHeight="31.0" prefWidth="302.0" style="-fx-background-color: #d9fbff; -fx-background-radius: 20;" text="S'inscrire à une nouvelle catégorie">
                <font>
                   <Font size="15.0" />
                </font>
