@@ -7,6 +7,7 @@ Ce projet est développé dans le cadre du BTS SIO. Le Rebours Auto est une auto
 ## 🛠️ Technologies utilisées
 
 - Java
+- JavaFX
 - MySQL
 
 ## 🚀 Installation
@@ -25,12 +26,12 @@ Ce projet est développé dans le cadre du BTS SIO. Le Rebours Auto est une auto
 
 1. Cloner le projet :
    ```bash
-   git clone https://github.com/LauraPMS/projetAutoEcole
+   git clone https://github.com/LauraPMS/LeReboursAuto
    ```
-2. Créer une base de données `autoecole` sur phpMyAdmin
-3. Importer `autoecole.sql` depuis le dossier `BDD`
+2. Créer une base de données `lereboursauto` sur phpMyAdmin
+3. Importer `lereboursauto.sql` depuis le dossier `SQL`
 4. Ouvrir le projet dans un IDE
-5. Configurer l'application pour exécuter la classe `sio.projetautoecole.HelloApplication`
+5. Configurer l'application pour exécuter la classe `com.example.projetautoecole.HelloApplication`
 
 ## 🎯 Fonctionnalités principales
 
@@ -40,8 +41,8 @@ Ce projet est développé dans le cadre du BTS SIO. Le Rebours Auto est une auto
 
 
 - Connexion test :
-  - **Élève** : `elelog`
-  - **Moniteur** : `elepass`
+  - **Élève** : `elelog` `elepass`
+  - **Moniteur** : `monlog` `monpass`
 
 ### 2️⃣ Profil & Tableau de bord
 ![Interface utilisateur](/docImg/eleveReadMe/eleveProfil.png)
