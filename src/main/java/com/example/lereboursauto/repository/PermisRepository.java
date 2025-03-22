@@ -33,9 +33,9 @@ public class PermisRepository {
         ArrayList<String> libelleLicenceEleve = new ArrayList<>();
         PreparedStatement ps;
         ps = connexion.prepareStatement("SELECT permis.libelle\n" +
-                "FROM permis\n" +
-                "JOIN licence on permis.id = licence.codeCategorie\n" +
-                "WHERE idUser = ?;");
+                "FROM licence\n" +
+                "JOIN permis ON licence.codeCategorie = permis.id\n" +
+                "WHERE licence.idUser = ?;\n");
         ps.setInt(1, statutUser);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {

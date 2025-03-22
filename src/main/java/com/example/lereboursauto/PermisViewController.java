@@ -1,6 +1,8 @@
 package com.example.lereboursauto;
 
 import com.example.lereboursauto.controllers.*;
+import com.example.lereboursauto.models.Licence;
+import com.example.lereboursauto.models.Permis;
 import com.example.lereboursauto.models.Utilisateur;
 import com.example.lereboursauto.services.Session;
 import javafx.collections.FXCollections;
@@ -10,10 +12,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.ListView;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.Tooltip;
+import javafx.scene.control.*;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.text.Text;
@@ -53,6 +52,7 @@ public class PermisViewController implements Initializable {
     LeconController leconController;
     VehiculeController vehiculeController;
     Utilisateur u ;
+    LicenceController licenceController;
     ArrayList<AnchorPane> listeAp;
     @javafx.fxml.FXML
     private BarChart graphMoniteurHeuresEleves;
@@ -74,6 +74,22 @@ public class PermisViewController implements Initializable {
     private ImageView imgMoniteurCamion;
     @javafx.fxml.FXML
     private ImageView imgMoniteurTrain1;
+    @javafx.fxml.FXML
+    private Button btnCamion;
+    @javafx.fxml.FXML
+    private ImageView imgMoniteurBateau1;
+    @javafx.fxml.FXML
+    private ImageView imgMoniteurMoto1;
+    @javafx.fxml.FXML
+    private ImageView imgMoniteurAuto;
+    @javafx.fxml.FXML
+    private Button btnTrain;
+    @javafx.fxml.FXML
+    private Button btnMoto;
+    @javafx.fxml.FXML
+    private Button btnAuto;
+    @javafx.fxml.FXML
+    private Button btnBateau;
 
 
     @Override
@@ -84,6 +100,7 @@ public class PermisViewController implements Initializable {
         permisController = new PermisController();
         leconController = new LeconController();
         vehiculeController = new VehiculeController();
+        licenceController = new LicenceController();
 
         listeAp = new ArrayList<>();
         listeAp.add(apEleve);
@@ -211,7 +228,52 @@ public class PermisViewController implements Initializable {
         majLabelEleveHeuresByPermis(numeroPermis);
 
         majGraphique2(numeroPermis);
+        if (numeroPermis == 1){
+            afficherImage1(imgVehicule);
+        } else if (numeroPermis == 2){
+            afficherImage1(imgMoniteurMoto1);
+        } else if (numeroPermis == 3){
+            afficherImage1(imgMoniteurCamion1);
+        } else if (numeroPermis == 4){
+            afficherImage1(imgMoniteurTrain1);
+        } else if (numeroPermis == 5){
+            afficherImage1(imgMoniteurBateau1);
+        }
 
+    }
+
+    public void afficherImage1 (ImageView imageView){
+        if (imgVehicule == imageView){
+            imgVehicule.setVisible(true);
+            imgMoniteurBateau1.setVisible(false);
+            imgMoniteurCamion1.setVisible(false);
+            imgMoniteurTrain1.setVisible(false);
+            imgMoniteurMoto1.setVisible(false);
+        }  else if (imgMoniteurMoto1 == imageView){
+            imgVehicule.setVisible(false);
+            imgMoniteurBateau1.setVisible(false);
+            imgMoniteurCamion1.setVisible(false);
+            imgMoniteurTrain1.setVisible(false);
+            imgMoniteurMoto1.setVisible(true);
+        } else if (imgMoniteurCamion1 == imageView) {
+            imgVehicule.setVisible(false);
+            imgMoniteurBateau1.setVisible(false);
+            imgMoniteurCamion1.setVisible(true);
+            imgMoniteurTrain1.setVisible(false);
+            imgMoniteurMoto1.setVisible(false);
+        } else if (imgMoniteurTrain1 == imageView) {
+            imgVehicule.setVisible(false);
+            imgMoniteurBateau1.setVisible(false);
+            imgMoniteurCamion1.setVisible(false);
+            imgMoniteurTrain1.setVisible(true);
+            imgMoniteurMoto1.setVisible(false);
+        } else if (imgMoniteurBateau1 == imageView) {
+            imgVehicule.setVisible(false);
+            imgMoniteurBateau1.setVisible(true);
+            imgMoniteurCamion1.setVisible(false);
+            imgMoniteurTrain1.setVisible(false);
+            imgMoniteurMoto1.setVisible(false);
+        }
     }
 
     public void majLabelEleveHeuresByPermis(int numPermisEleve) throws SQLException {
@@ -267,14 +329,34 @@ public class PermisViewController implements Initializable {
     }
 
     @javafx.fxml.FXML
-    public void onNvPermisClicked(Event event) {
+    public void onNvPermisClicked(Event event) throws SQLException {
         Session.changeAp(listeAp, apSouscrirePermis);
+        ArrayList<Licence> licences = licenceController.getAllLicencesEleve(Session.getCodeEleveActif());
+        for (Licence licence : licences){
+
+            if (licence.getIdCategorie().getId() == 1){
+                btnAuto.setDisable(true);
+            } else if (licence.getIdCategorie().getId() == 2) {
+                btnMoto.setDisable(true);
+            } else if (licence.getIdCategorie().getId() == 3) {
+                btnCamion.setDisable(true);
+            } else if (licence.getIdCategorie().getId() == 4) {
+                btnTrain.setDisable(true);
+            } else if (licence.getIdCategorie().getId() == 5) {
+                btnBateau.setDisable(true);
+            }
+
+        }
+
     }
 
-    @javafx.fxml.FXML
+    @Deprecated
     public void onBtnRetourClicked(Event event) {
         Session.changeAp(listeAp, apEleve);
     }
+
+
+
 
     /**--------------- FIN PARTIE ELEVE -------------------**/
 
@@ -289,6 +371,52 @@ public class PermisViewController implements Initializable {
 
         majLabelMoniteurHeuresByPermis(numeroPermisMoniteur);
 
+        if (numeroPermisMoniteur == 1){
+            afficherImage(imgMoniteurAuto);
+        } else if (numeroPermisMoniteur == 2){
+            afficherImage(imgMoniteurMoto);
+        } else if (numeroPermisMoniteur == 3){
+            afficherImage(imgMoniteurCamion);
+        } else if (numeroPermisMoniteur == 4){
+            afficherImage(imgMoniteurTrain);
+        } else if (numeroPermisMoniteur == 5){
+            afficherImage(imgMoniteurBateau);
+        }
+
+    }
+
+    public void afficherImage (ImageView imageView){
+        if (imgMoniteurAuto == imageView){
+            imgMoniteurAuto.setVisible(true);
+            imgMoniteurBateau.setVisible(false);
+            imgMoniteurCamion.setVisible(false);
+            imgMoniteurTrain.setVisible(false);
+            imgMoniteurMoto.setVisible(false);
+        }  else if (imgMoniteurMoto == imageView){
+            imgMoniteurAuto.setVisible(false);
+            imgMoniteurBateau.setVisible(false);
+            imgMoniteurCamion.setVisible(false);
+            imgMoniteurTrain.setVisible(false);
+            imgMoniteurMoto.setVisible(true);
+        } else if (imgMoniteurCamion == imageView) {
+            imgMoniteurAuto.setVisible(false);
+            imgMoniteurBateau.setVisible(false);
+            imgMoniteurCamion.setVisible(true);
+            imgMoniteurTrain.setVisible(false);
+            imgMoniteurMoto.setVisible(false);
+        } else if (imgMoniteurTrain == imageView) {
+            imgMoniteurAuto.setVisible(false);
+            imgMoniteurBateau.setVisible(false);
+            imgMoniteurCamion.setVisible(false);
+            imgMoniteurTrain.setVisible(true);
+            imgMoniteurMoto.setVisible(false);
+        } else if (imgMoniteurBateau == imageView) {
+            imgMoniteurAuto.setVisible(false);
+            imgMoniteurBateau.setVisible(true);
+            imgMoniteurCamion.setVisible(false);
+            imgMoniteurTrain.setVisible(false);
+            imgMoniteurMoto.setVisible(false);
+        }
     }
 
     public void majLabelMoniteurHeuresByPermis(int numPermisMoniteur) throws SQLException {
@@ -322,7 +450,53 @@ public class PermisViewController implements Initializable {
 
     }
 
-    /**--------------- FIN PARTIE MONITEUR -------------------**/
+    @javafx.fxml.FXML
+    public void souscrireAuto(ActionEvent actionEvent) throws SQLException {
 
+        Utilisateur u = utilisateurController.findByCode(Session.getCodeEleveActif());
+        Permis p = new Permis(1, "h", 10F);
+        Licence l = new Licence(0, p, u, null);
+        licenceController.createLicence(l);
+        onNvPermisClicked(actionEvent);
+
+    }
+
+    @javafx.fxml.FXML
+    public void souscrireCamion(ActionEvent actionEvent) throws SQLException {
+        Utilisateur u = utilisateurController.findByCode(Session.getCodeEleveActif());
+        Permis p = new Permis(3, "h", 10F);
+        Licence l = new Licence(0, p, u, null);
+        licenceController.createLicence(l);
+        onNvPermisClicked(actionEvent);
+    }
+
+    @javafx.fxml.FXML
+    public void souscrireTrain(ActionEvent actionEvent) throws SQLException {
+        Utilisateur u = utilisateurController.findByCode(Session.getCodeEleveActif());
+        Permis p = new Permis(4, "h", 10F);
+        Licence l = new Licence(0, p, u, null);
+        licenceController.createLicence(l);
+        onNvPermisClicked(actionEvent);
+    }
+
+    @javafx.fxml.FXML
+    public void souscrireMoto(ActionEvent actionEvent) throws SQLException {
+        Utilisateur u = utilisateurController.findByCode(Session.getCodeEleveActif());
+        Permis p = new Permis(2, "h", 10F);
+        Licence l = new Licence(0, p, u, null);
+        licenceController.createLicence(l);
+        onNvPermisClicked(actionEvent);
+    }
+
+    @javafx.fxml.FXML
+    public void souscrireBateau(ActionEvent actionEvent) throws SQLException {
+        Utilisateur u = utilisateurController.findByCode(Session.getCodeEleveActif());
+        Permis p = new Permis(5, "h", 10F);
+        Licence l = new Licence(0, p, u, null);
+        licenceController.createLicence(l);
+        onNvPermisClicked(actionEvent);
+    }
+
+    /** --------------- FIN PARTIE MONITEUR ------------------- **/
 
 }

@@ -57,9 +57,9 @@
             </ImageView>
          </children>
       </HBox>
-      <AnchorPane fx:id="apSouscrirePermis" layoutY="68.0" prefHeight="534.0" prefWidth="1000.0" visible="false">
+      <AnchorPane fx:id="apSouscrirePermis" layoutY="68.0" prefHeight="534.0" prefWidth="1000.0">
          <children>
-            <HBox layoutX="149.0" layoutY="42.0" prefHeight="230.0" prefWidth="800.0">
+            <HBox layoutX="114.0" layoutY="42.0" prefHeight="230.0" prefWidth="800.0">
                <children>
                   <Pane prefHeight="300.0" prefWidth="250.0" style="-fx-border-color: black;">
                      <children>
@@ -78,7 +78,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Button layoutX="83.0" layoutY="191.0" mnemonicParsing="false" text="Souscrire" />
+                        <Button fx:id="btnAuto" layoutX="83.0" layoutY="191.0" mnemonicParsing="false" onAction="#souscrireAuto" text="Souscrire" />
                      </children>
                   </Pane>
                   <Pane prefHeight="207.0" prefWidth="250.0" style="-fx-border-color: black;">
@@ -98,7 +98,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Button layoutX="93.0" layoutY="191.0" mnemonicParsing="false" text="Souscrire" />
+                        <Button fx:id="btnMoto" layoutX="93.0" layoutY="191.0" mnemonicParsing="false" onAction="#souscrireMoto" text="Souscrire" />
                      </children>
                   </Pane>
                   <Pane prefHeight="207.0" prefWidth="250.0" style="-fx-border-color: black;">
@@ -118,12 +118,12 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Button layoutX="93.0" layoutY="191.0" mnemonicParsing="false" text="Souscrire" />
+                        <Button fx:id="btnCamion" layoutX="93.0" layoutY="191.0" mnemonicParsing="false" onAction="#souscrireCamion" text="Souscrire" />
                      </children>
                   </Pane>
                </children>
             </HBox>
-            <HBox layoutX="300.0" layoutY="290.0" prefHeight="230.0" prefWidth="497.0">
+            <HBox layoutX="239.0" layoutY="290.0" prefHeight="230.0" prefWidth="497.0">
                <children>
                   <Pane prefHeight="207.0" prefWidth="250.0" style="-fx-border-color: black;">
                      <children>
@@ -142,7 +142,7 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Button layoutX="92.0" layoutY="191.0" mnemonicParsing="false" text="Souscrire" />
+                        <Button fx:id="btnTrain" layoutX="92.0" layoutY="191.0" mnemonicParsing="false" onAction="#souscrireTrain" text="Souscrire" />
                      </children>
                   </Pane>
                   <Pane prefHeight="207.0" prefWidth="250.0" style="-fx-border-color: black;">
@@ -162,19 +162,19 @@
                               <Font size="24.0" />
                            </font>
                         </Label>
-                        <Button layoutX="92.0" layoutY="191.0" mnemonicParsing="false" text="Souscrire" />
+                        <Button fx:id="btnBateau" layoutX="92.0" layoutY="191.0" mnemonicParsing="false" onAction="#souscrireBateau" text="Souscrire" />
                      </children>
                   </Pane>
                </children>
             </HBox>
-            <Button layoutX="834.0" layoutY="375.0" mnemonicParsing="false" onMouseClicked="#onBtnRetourClicked" prefHeight="60.0" prefWidth="143.0" style="-fx-background-color: black;" text="Retour" textFill="WHITE">
+            <Button layoutX="796.0" layoutY="411.0" mnemonicParsing="false" onAction="#changeToApPermis" prefHeight="44.0" prefWidth="146.0" style="-fx-background-color: black;" text="Retour" textFill="WHITE">
                <font>
                   <Font size="24.0" />
                </font>
             </Button>
          </children>
       </AnchorPane>
-      <AnchorPane fx:id="apEleve" layoutY="68.0" prefHeight="534.0" prefWidth="999.0">
+      <AnchorPane fx:id="apEleve" layoutY="68.0" prefHeight="534.0" prefWidth="999.0" visible="false">
          <children>
             <ListView fx:id="lvEleveToutPermis" layoutX="93.0" layoutY="50.0" onMouseClicked="#onLvPermisEleve" prefHeight="174.0" prefWidth="200.0" />
             <Text layoutX="50.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des permis que vous possédez chez nous">
@@ -266,7 +266,7 @@
             <Text layoutX="643.0" layoutY="400.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Si vous possédez cette licence, des données seront affichées :" />
             <Text layoutX="643.0" layoutY="429.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Temps passé : " />
             <Text fx:id="lblMoniteurTempsPasse" layoutX="722.0" layoutY="427.0" strokeType="OUTSIDE" strokeWidth="0.0" text="8h" />
-            <Button layoutX="159.0" layoutY="241.0" mnemonicParsing="false" onAction="#demandeLicence" text="Demander une licence" />
+            <Button layoutX="159.0" layoutY="241.0" mnemonicParsing="false" onAction="#onNvPermisClicked" text="Demander une licence" />
             <ImageView fx:id="imgMoniteurMoto" fitHeight="230.0" fitWidth="230.0" layoutX="511.0" layoutY="24.0" pickOnBounds="true" preserveRatio="true" visible="false">
                <image>
                   <Image url="@../../../img/p_moto-removebg-preview.png" />

@@ -8,6 +8,7 @@ import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.ListView;
 
@@ -48,7 +49,8 @@ public class LeconViewController implements Initializable {
     int idPermisConcernee = 0;
     String immatriculationConcernee = "";
     int idMoniteurConcernee = 0;
-
+    @javafx.fxml.FXML
+    private Button btnPrendreLecon;
 
 
     @Override
@@ -59,6 +61,7 @@ public class LeconViewController implements Initializable {
         leconController = new LeconController();
         permisController = new PermisController();
         licences = new ArrayList<>();
+
 
         // Récupérer tt les licences auquels l'utilisateur a souscrit
         try {
@@ -78,17 +81,22 @@ public class LeconViewController implements Initializable {
 
     @javafx.fxml.FXML
     public void prendreLecon(ActionEvent actionEvent) throws SQLException {
-        Date date = Date.valueOf(dpDate.getValue().toString());
-        String heure = lvHorraire.getSelectionModel().getSelectedItem().toString();
-        String immatriculation = immatriculationConcernee;
-        int reglee = 0;
-        int idEleve = Session.getCodeEleveActif();
-        int idMoniteur = idMoniteurConcernee;
-        int idPermis = idPermisConcernee;
+        if (idMoniteurConcernee!=0 && immatriculationConcernee != "" && idPermisConcernee !=0 && lvHorraire.getSelectionModel().getSelectedItem() != null ) {
+            Date date = Date.valueOf(dpDate.getValue().toString());
+            String heure = lvHorraire.getSelectionModel().getSelectedItem().toString();
+            String immatriculation = immatriculationConcernee;
+            int reglee = 0;
+            int idEleve = Session.getCodeEleveActif();
+            int idMoniteur = idMoniteurConcernee;
+            int idPermis = idPermisConcernee;
 
-        leconController.create(date, heure, immatriculation, reglee, idEleve, idMoniteur, idPermis);
-        Session.creerAlert(Alert.AlertType.INFORMATION, "Information", "La lecon a bien été prise en compte");
-        viderChampsLecon();
+            leconController.create(date, heure, immatriculation, reglee, idEleve, idMoniteur, idPermis);
+            Session.creerAlert(Alert.AlertType.INFORMATION, "Information", "La lecon a bien été prise en compte");
+            viderChampsLecon();
+        } else {
+            Session.creerAlert(Alert.AlertType.ERROR, "Attention", "Veuillez prendre le temps de remplir le formulaire");
+        }
+
 
     }
 
@@ -165,24 +173,34 @@ public class LeconViewController implements Initializable {
             String h = String.format("%02d:00:00", heure);
             horraires.add(h);
         }
+        if (dpDate.getValue() != null && lvPermis.getSelectionModel().getSelectedItem() != null) {
+            String date = dpDate.getValue().toString();
+            int idPermis = permisController.getIdPermisByLibelle(lvPermis.getSelectionModel().getSelectedItem().toString());
+            idPermisConcernee = idPermis;
 
-        String date = dpDate.getValue().toString();
-        int idPermis = permisController.getIdPermisByLibelle(lvPermis.getSelectionModel().getSelectedItem().toString());
-        idPermisConcernee = idPermis;
+            // horraires.removeAll(leconController.getHorrairesNonDispo(idPermis, date));
+            lvHorraire.setItems(FXCollections.observableList(horraires));
+        } else {
+            Session.creerAlert(Alert.AlertType.ERROR, "Erreur de saisie", "Veuillez remplir les champs permis et la date");
+        }
 
-        // horraires.removeAll(leconController.getHorrairesNonDispo(idPermis, date));
-        lvHorraire.setItems(FXCollections.observableList(horraires));
 
     }
 
     @javafx.fxml.FXML
     public void updateMoniteurConcernee(Event event) throws SQLException {
-        idMoniteurConcernee = utilisateurController.findIdByName(lvMoniteurDispo.getSelectionModel().getSelectedItem().toString());
+        if (lvMoniteurDispo.getSelectionModel().getSelectedItem() != null) {
+            idMoniteurConcernee = utilisateurController.findIdByName(lvMoniteurDispo.getSelectionModel().getSelectedItem().toString());
+        }
     }
 
     @javafx.fxml.FXML
     public void updateVehiculeConcernee(Event event) throws SQLException {
-        immatriculationConcernee = vehiculeController.getIdByModele(lvVehiculeDispo.getSelectionModel().getSelectedItem().toString());
+        if (lvVehiculeDispo.getSelectionModel().getSelectedItem() != null) {
+            immatriculationConcernee = vehiculeController.getIdByModele(lvVehiculeDispo.getSelectionModel().getSelectedItem().toString());
+        }
+
+
     }
 
 }

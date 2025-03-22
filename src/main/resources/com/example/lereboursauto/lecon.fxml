@@ -61,7 +61,7 @@
       <ListView fx:id="lvHorraire" layoutX="301.0" layoutY="160.0" onMouseClicked="#updateMoniteur_Vehicule" prefHeight="334.0" prefWidth="198.0" />
       <ListView fx:id="lvMoniteurDispo" layoutX="528.0" layoutY="159.0" onMouseClicked="#updateMoniteurConcernee" prefHeight="334.0" prefWidth="200.0" />
       <ListView fx:id="lvVehiculeDispo" layoutX="753.0" layoutY="159.0" onMouseClicked="#updateVehiculeConcernee" prefHeight="334.0" prefWidth="200.0" />
-      <Button layoutX="826.0" layoutY="508.0" mnemonicParsing="false" onAction="#prendreLecon" prefHeight="42.0" prefWidth="131.0" text="Prendre une leçon" />
+      <Button fx:id="btnPrendreLecon" layoutX="826.0" layoutY="508.0" mnemonicParsing="false" onAction="#prendreLecon" prefHeight="42.0" prefWidth="131.0" text="Prendre une leçon" />
       <Button layoutX="62.0" layoutY="90.0" mnemonicParsing="false" onAction="#changeToApPlanning" text="Retour au planning" />
       <Button layoutX="37.0" layoutY="422.0" mnemonicParsing="false" onAction="#updateHoraire" text="Afficher les horaires restants disponibles" />
    </children>

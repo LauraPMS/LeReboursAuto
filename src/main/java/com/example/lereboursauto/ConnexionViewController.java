@@ -41,7 +41,7 @@ public class ConnexionViewController implements Initializable {
     @FXML
     private TextField txtInscriptionTelephone, txtInscriptionNom,txtInscriptionAdresse, txtInscriptionLogin,txtInscriptionPassword, txtInscriptionVille,txtInscriptionPrenom, txtInscriptionCP;
     @FXML
-    private TextField txtConnexionPassword, txtConnexionLogin;
+    private TextField txtConnexionLogin;
     @FXML
     private ToggleGroup rdoStaut, rdoGenre;
     @FXML
@@ -56,6 +56,8 @@ public class ConnexionViewController implements Initializable {
 
     ArrayList<AnchorPane> listeAp;
     HashMap<Integer, Integer> nbLeconPermis;
+    @FXML
+    private PasswordField txtConnexionPassword;
 
 
     @Override
